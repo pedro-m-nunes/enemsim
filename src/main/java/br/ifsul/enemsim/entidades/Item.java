@@ -18,9 +18,9 @@ import lombok.Setter;
 @Builder // só para testes?
 @Getter
 @Setter
-@NoArgsConstructor // ?
+@NoArgsConstructor
 @AllArgsConstructor // ?
-@EqualsAndHashCode // ? // considerar id?
+@EqualsAndHashCode // considerar id?
 @Entity
 public class Item {
 
@@ -39,20 +39,22 @@ public class Item {
 	
 //	private Disciplina disciplina; // nullable
 	
-	private Integer tentativas; // default = 0 // (0, inf) // talvez faça mais sentido ser relacionado ao usuário
+	private Integer tentativas; // not null, default = 0 // (0, inf) // talvez faça mais sentido ser relacionado ao usuário
 	
-	private Integer tentativasCertas; // default = 0 // (0, attempts] // // talvez faça mais sentido ser relacionado ao usuário
-	
-	@Column(precision = 6, scale = 5)
-	private BigDecimal discriminacao; // a // (0, inf) // (0, 3]
+	private Integer tentativasCertas; // not null, default = 0 // (0, attempts] // // talvez faça mais sentido ser relacionado ao usuário
 	
 	@Column(precision = 6, scale = 5)
-	private BigDecimal dificuldade; // b // (-inf, inf) // [-3, 3], [-4, 4]
+	private BigDecimal discriminacao; // a // (0, inf) // (0, 3] // nullable
 	
 	@Column(precision = 6, scale = 5)
-	private BigDecimal chanceAcertoCasual; // c // [0, 1]
+	private BigDecimal dificuldade; // b // (-inf, inf) // [-3, 3], [-4, 4] // nullable
 	
-	// set ProvaItem
+	@Column(precision = 6, scale = 5)
+	private BigDecimal chanceAcertoCasual; // Probabilidade? // c // [0, 1] // nullable
+	
+	// Set<ProvaItem>
+
+	// construtor?
 	
 	// construtor com restrições?
 	

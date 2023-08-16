@@ -1,12 +1,11 @@
 package br.ifsul.enemsim.entidades;
 
-import java.util.Set;
+import java.math.BigDecimal;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -17,9 +16,9 @@ import lombok.Setter;
 @Builder // só para testes?
 @Getter
 @Setter
-@NoArgsConstructor // ?
+@NoArgsConstructor
 @AllArgsConstructor // ?
-@EqualsAndHashCode // precisa? acho que não... // considerar id? // sem para não dar StackOverflow com SimuladoItem (?)
+@EqualsAndHashCode // considerar id?
 @Entity
 public class Simulado {
 
@@ -29,13 +28,15 @@ public class Simulado {
 	
 //	private Estudante estudante;
 	
-//	private Boolean finalizado; // ?
+	private Boolean finalizado; // not null, default = false
 	
-//	private BigDecimal escore; // "pontuacao"?
+	private BigDecimal escore; // "pontuacao"?
 	
 //	private Adaptacao adaptacao; // enum
 	
-	@OneToMany(mappedBy = "simulado")
-	private Set<SimuladoItem> itens;
+//	@OneToMany(mappedBy = "simulado")
+//	private Set<SimuladoItem> itens; // causa alguns problemas (StackOverflow...)
+
+	// construtor?
 	
 }

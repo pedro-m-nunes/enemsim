@@ -9,5 +9,9 @@ COISAS A FAZER:
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
 
 PROBLEMAS ENCONTRADOS:
-- Quando Simulado e SimuladoItem possuem um método equals(), ocorre StackOverflow. A dúvida é como fazer com que ambos tenham equals(), sem que ocorra o erro.
-- As questões de um simulado não estão sendo inseridas no banco. Algo em SimuladoItem ou no seu uso. Talvez possa ser resolvido com algum cascade.
+- O gerador insere as questões de um mesmo simulado como sendo de simulados diferentes. É criado um simulado para cada item inserido.
+
+DÚVIDAS/IDEIAS:
+- Fazer construtores só com o id? Aí seria buscado no banco.
+- Qual a melhor forma de deixar valores padrão para os atributos?
+- Como usar cascade nos relacionamentos?

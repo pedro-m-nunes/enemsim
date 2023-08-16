@@ -13,14 +13,27 @@ import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.SimuladoItem;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.ItemRepository;
+import br.ifsul.enemsim.repositories.SimuladoItemRepository;
+import br.ifsul.enemsim.repositories.SimuladoRepository;
 
 @Component
-public class GeradorSimulados { // ""? "Gerador"? // testar
+public class Gerador { // ""?
+	
+	// boolean usaItemAnulado, boolean usaItemJaRespondido (por estudante)
+	
+	@Autowired
+	private SimuladoRepository simuladoRepository;
 	
 	@Autowired
 	private ItemRepository itemRepository;
+	
+	@Autowired
+	private SimuladoItemRepository simuladoItemRepository;
 
 	private Set<Item> selecionarItens(int quantidade, List<Item> /*Set?*/ itens) throws DadosInsuficientesException {
+		if(quantidade <= 0)
+			throw new IllegalArgumentException("Não se pode gerar um simulado com menos de um item."); // exception própria?
+		
 		if(quantidade > itens.size())
 			throw new DadosInsuficientesException("O banco de dados não possui itens o suficiente para selecionar a quantidade especificada.");
 			// ou fazer outra coisa
@@ -29,7 +42,7 @@ public class GeradorSimulados { // ""? "Gerador"? // testar
 		
 		Random random = new Random();
 		
-		while(itensSelecionados.size() < quantidade) { // pode rodar pra sempre? se não houverem questões diferentes o suficiente no banco...
+		while(itensSelecionados.size() < quantidade) { // pode rodar pra sempre? se não houverem questões diferentes o suficiente no banco... (Set como parâmetro resolveria?)
 			itensSelecionados.add(itens.get(random.nextInt(itens.size())));
 		}
 		
@@ -52,31 +65,25 @@ public class GeradorSimulados { // ""? "Gerador"? // testar
 		}
 	}
 	
-	private Set<SimuladoItem> relacionarSimuladoItem(Simulado simulado, Set<Item> itens) {
-		Set<SimuladoItem> itensSimulado = new HashSet<>(); // ""?
+	// GERAÇÃO
+	
+	private List<SimuladoItem> gerarSimulado(/*para instanciar simulado, ou o próprio simulado*/ Set<Item> itensSelecionados) {
+		Simulado simulado = simuladoRepository.save(new Simulado()); // parâmetros/atributos
 		
-		for(Item item : itens)
-			itensSimulado.add(SimuladoItem.builder().simulado(simulado).item(item).build());
+		Set<SimuladoItem> simuladoItens = new HashSet<>(); // Set? List?
 		
-		return itensSimulado;
+		for(Item item : itensSelecionados)
+			simuladoItens.add(new SimuladoItem(simulado, item));
+		
+		return simuladoItemRepository.saveAll(simuladoItens);
 	}
 	
-	private Simulado gerarSimulado(Set<Item> itens) { // ""?
-		Simulado simulado = new Simulado();
-		
-		Set<SimuladoItem> itensSimulado = relacionarSimuladoItem(simulado, itens);
-		
-		return Simulado.builder().itens(itensSimulado).build();
+	public List<SimuladoItem> gerarSimulado(int quantidade) throws DadosInsuficientesException {
+		return gerarSimulado(selecionarItens(quantidade, itemRepository.findAll()));
 	}
 	
-	// save já nos gerar? não sei...
+	// quantidade, filtro
 	
 	// passando o estudante
-	
-	public Simulado gerar/*Simulado?*/(int quantidade) { // retornar somente o set de questões? para poder juntar diferentes gerações
-		List<Item> itensBD = itemRepository.findAll(); // ""?
-		
-		return gerarSimulado(selecionarItensPorQuantidadeOuMaximo(quantidade, itensBD));
-	}
 	
 }

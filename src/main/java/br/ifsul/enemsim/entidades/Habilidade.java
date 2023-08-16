@@ -14,9 +14,9 @@ import lombok.Setter;
 @Builder // só para testes?
 @Getter
 @Setter
-@NoArgsConstructor // ?
+@NoArgsConstructor
 @AllArgsConstructor // ?
-@EqualsAndHashCode // ? // considerar id?
+@EqualsAndHashCode // considerar id?
 @Entity
 public class Habilidade {
 
@@ -28,6 +28,13 @@ public class Habilidade {
 	
 	private Short numero;
 	
-//	private Competencia competencia;
+//	private Competencia competencia; // cascade persist?
+	
+//	public Habilidade(String descricao, Short numero) { // ?
+//		super();
+//		this.descricao = descricao;
+//		this.numero = numero;
+//		// atributos comentados
+//	}
 	
 }
