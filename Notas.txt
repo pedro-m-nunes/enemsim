@@ -1,8 +1,5 @@
 Algumas anotações.
 
-- Ver quais métodos/anotações do Lombok precisam realmente ser utilizados.
-
-
 COISAS FEITAS:
 - Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
 
@@ -15,9 +12,15 @@ COISAS A FAZER:
 - Testes unitários.
 
 PROBLEMAS ENCONTRADOS:
+- (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
 - Fazer construtores só com o id? Aí seria buscado no banco.
 - Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?
 - Remover os @Builder no sistema final?
+- Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
+- Colocar alguns atributos como final (Simulado.adaptacao)?
+
+TESTAR:
+- Se os itens são removidos quando se remove um simulado (não devem).

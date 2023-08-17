@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ifsul.enemsim.entidades.Competencia;
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.SimuladoItem;
+import br.ifsul.enemsim.repositories.CompetenciaRepository;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import br.ifsul.enemsim.repositories.SimuladoItemRepository;
@@ -21,6 +23,19 @@ import br.ifsul.enemsim.repositories.SimuladoRepository;
 @RequestMapping("/select")
 public class Select {
 
+	@Autowired
+	private CompetenciaRepository competenciaRepository;
+	
+	@GetMapping("/competencias")
+	public List<Competencia> competencias() {
+		return competenciaRepository.findAll();
+	}
+	
+	@GetMapping("/competencia={id}")
+	public Competencia competencias(@PathVariable Byte id) {
+		return competenciaRepository.findById(id).get();
+	}
+	
 	@Autowired
 	private HabilidadeRepository habilidadeRepository;
 	
@@ -71,6 +86,11 @@ public class Select {
 	@GetMapping("/simuladoitens/simulado={simuladoId}")
 	public List<SimuladoItem> simuladoItens(@PathVariable Integer simuladoId) {
 		return simuladoItemRepository.findByIdSimuladoId(simuladoId);
+	}
+	
+	@GetMapping("/temp") // temp
+	public Object temp() {
+		return "Temp";
 	}
 	
 }

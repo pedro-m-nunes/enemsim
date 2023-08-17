@@ -21,8 +21,6 @@ import br.ifsul.enemsim.repositories.SimuladoRepository;
 @Component
 public class Gerador { // ""?
 	
-	// boolean usaItemAnulado, boolean usaItemJaRespondido (por estudante)
-	
 	@Autowired
 	private SimuladoRepository simuladoRepository;
 	
@@ -43,6 +41,8 @@ public class Gerador { // ""?
 			throw new DadosInsuficientesException("O banco de dados não possui itens o suficiente para selecionar a quantidade especificada.");
 			// ou fazer outra coisa
 		
+		// transformar List em Set?
+		
 		Set<Item> itensSelecionados = new HashSet<>();
 		
 		Random random = new Random();
@@ -54,21 +54,21 @@ public class Gerador { // ""?
 		return itensSelecionados;
 	}
 	
-	private Set<Item> selecionarItensPorQuantidadeOuMaximo(int quantidade, List<Item> itens) { // não oficial (na aplicação, ter algo que trate melhor as exceções, que dê opções ao usuário)
-		try {
-			if(quantidade <= itens.size())
-				return selecionarItens(quantidade, itens);
-			else
-				return selecionarItens(quantidade, itens);
-		} catch (DadosInsuficientesException e) {
-			try {
-				return selecionarItens(itens.size(), itens);
-			} catch (DadosInsuficientesException e1) {
-				e1.printStackTrace();
-				return null;
-			}
-		}
-	}
+//	private Set<Item> selecionarItensPorQuantidadeOuMaximo(int quantidade, List<Item> itens) { // não oficial (na aplicação, ter algo que trate melhor as exceções, que dê opções ao usuário)
+//		try {
+//			if(quantidade <= itens.size())
+//				return selecionarItens(quantidade, itens);
+//			else
+//				return selecionarItens(quantidade, itens);
+//		} catch (DadosInsuficientesException e) {
+//			try {
+//				return selecionarItens(itens.size(), itens);
+//			} catch (DadosInsuficientesException e1) {
+//				e1.printStackTrace();
+//				return null;
+//			}
+//		}
+//	}
 	
 	// GERAÇÃO
 	
@@ -112,11 +112,13 @@ public class Gerador { // ""?
 			itensSelecionados.addAll(selecionarItens(distribuicao.getQuantidades()[i], distribuicao.getFiltros()[i]));
 		}
 		
-		// embaralhar? aparentemente não precisa
-		
 		return gerarSimulado(itensSelecionados);
 	}
 	
 	// passando o estudante
+	
+	// como atributos do gerador ou parâmetros dos métodos?
+	// usarItensAnulados = false => findByRespostaNotNull()
+	// usarItensJaRespondidos = false => findByIdNotIn(jaRespondidos)
 	
 }

@@ -2,23 +2,20 @@ package br.ifsul.enemsim.entidades;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Builder // só para testes?
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor // ?
-@EqualsAndHashCode // considerar id?
+@EqualsAndHashCode
 @Entity
 public class Simulado {
 
@@ -26,17 +23,27 @@ public class Simulado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	// many to one
+//	@JoinColumn(nullable = false)
 //	private Estudante estudante;
 	
-	private Boolean finalizado; // not null, default = false
+	@Column(nullable = false)
+	private Boolean finalizado = false; // default = false
 	
 	private BigDecimal escore; // "pontuacao"?
 	
-//	private Adaptacao adaptacao; // enum
+//	@Enumerated(EnumType.STRING)
+//	private Adaptacao adaptacao;
 	
-//	@OneToMany(mappedBy = "simulado")
-//	private Set<SimuladoItem> itens; // causa alguns problemas (StackOverflow...)
-
-	// construtor?
+//	public Simulado(Estudante estudante, Adaptacao adaptacao) {
+//		super();
+//		this.estudante = estudante;
+//		this.adaptacao = adaptacao;
+//	}
+	
+	public Simulado(Integer id) {
+		super();
+		this.id = id;
+	}
 	
 }

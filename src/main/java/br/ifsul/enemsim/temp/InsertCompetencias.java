@@ -20,11 +20,11 @@ public class InsertCompetencias {
 	@PostConstruct
 	public void run() {
 		List<Competencia> competencias = new ArrayList<>();
-		
-		competencias.add(Competencia.builder().area(Area.MT).numero((byte) 1).descricao("Construir significados para os números naturais, inteiros, racionais e reais.").build());
-		competencias.add(Competencia.builder().area(Area.MT).numero((byte) 2).descricao("Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.").build());
-		competencias.add(Competencia.builder().area(Area.MT).numero((byte) 3).descricao("Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.").build());
-		
+				
+//		competencias.add(new Competencia("Construir significados para os números naturais, inteiros, racionais e reais.", (byte) 1, Area.MT));
+		competencias.add(new Competencia("Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.", (byte) 2, Area.MT));
+		competencias.add(new Competencia("Construir noções de grandezas e medidas para a compreensão da realidade e a solução de problemas do cotidiano.", (byte) 3, Area.MT));
+
 		competenciaRepository.saveAll(competencias);
 	}
 	

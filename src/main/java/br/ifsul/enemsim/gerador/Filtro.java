@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-//@Setter // ?
 @AllArgsConstructor
 public class Filtro {
 

@@ -18,10 +18,8 @@ import lombok.Setter;
 @Embeddable
 public class SimuladoItemId implements Serializable {
 
-	// not null?
 	private Integer simuladoId;
 	
-	// not null?
 	private Integer itemId;
 	
 }

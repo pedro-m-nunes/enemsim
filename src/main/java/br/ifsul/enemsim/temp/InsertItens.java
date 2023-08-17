@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
+import br.ifsul.enemsim.enums.Resposta;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import jakarta.annotation.PostConstruct;
@@ -27,27 +28,25 @@ public class InsertItens {
 
 	@PostConstruct
 	public void run() {
-		List<Item> itens = gerarItensAleatorios(400);
-		
-		List<Habilidade> habilidades = habilidadeRepository.findAll();
-		
-		for(int i = 0; i < itens.size(); i++)
-			itens.get(i).setHabilidade(habilidades.get(i % habilidades.size()));
-		
-		itemRepository.saveAll(itens);
+		itemRepository.saveAll(gerarItensAleatorios(400));
 	}
 	
 	private List<Item> gerarItensAleatorios(int quantidade) {
 		Item[] itens = new Item[quantidade];
 
 		Random random = new Random();
+		
+		List<Habilidade> habilidades = habilidadeRepository.findAll();
 
 		for(int i = 0; i < quantidade; i++)
-			itens[i] = Item.builder()
-					.discriminacao(BigDecimal.valueOf(random.nextDouble(3)))
-					.dificuldade(BigDecimal.valueOf(random.nextDouble(-3, 3)))
-					.chanceAcertoCasual(BigDecimal.valueOf(random.nextDouble(0.15, 0.25)))
-					.build();
+			itens[i] = new Item(
+					"PLACEHOLDER_IMG_SRC", 
+					Resposta.values()[random.nextInt(Resposta.values().length)], 
+					habilidades.get(i % habilidades.size()), 
+					BigDecimal.valueOf(random.nextDouble(3)), 
+					BigDecimal.valueOf(random.nextDouble(-3, 3)), 
+					BigDecimal.valueOf(random.nextDouble(0.15, 0.25))
+					);
 
 		return Arrays.asList(itens);
 	}
