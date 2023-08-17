@@ -1,17 +1,23 @@
 Algumas anotações.
 
+- Ver quais métodos/anotações do Lombok precisam realmente ser utilizados.
+
+
+COISAS FEITAS:
+- Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
+
 COISAS EM PROCESSO:
 - Fazendo o gerador de simulados.
 
 COISAS A FAZER:
-- Sistema de seleção de questões usando os atributos dos itens (habilidade e parâmetros da TRI).
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
+- Testes unitários.
 
 PROBLEMAS ENCONTRADOS:
-- O gerador insere as questões de um mesmo simulado como sendo de simulados diferentes. É criado um simulado para cada item inserido.
 
 DÚVIDAS/IDEIAS:
 - Fazer construtores só com o id? Aí seria buscado no banco.
 - Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?
+- Remover os @Builder no sistema final?

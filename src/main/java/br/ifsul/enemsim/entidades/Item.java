@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,7 +35,7 @@ public class Item {
 //	private Resposta respostaCerta;
 	
 	@ManyToOne // cascade?
-	// not null
+	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 	
 //	private Disciplina disciplina; // nullable

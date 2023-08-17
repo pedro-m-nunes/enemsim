@@ -1,11 +1,24 @@
 package br.ifsul.enemsim.gerador;
 
-import br.ifsul.enemsim.entidades.Habilidade;
+import java.math.BigDecimal;
 
+import br.ifsul.enemsim.entidades.Habilidade;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+//@Setter // ?
+@AllArgsConstructor
 public class Filtro {
 
-	private Habilidade[] habilidades;
+	private Habilidade habilidade;
 	
-//	private FaixaDificuldade[] dificuldades; // ?
+	private BigDecimal dificuldadeMinima;
+	
+	private BigDecimal dificuldadeMaxima;
+	
+	public boolean isNull() {
+		return habilidade == null && dificuldadeMinima == null && dificuldadeMaxima == null;
+	}
 	
 }

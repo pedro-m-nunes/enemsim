@@ -1,5 +1,6 @@
 package br.ifsul.enemsim.gerador;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -8,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.SimuladoItem;
@@ -33,6 +35,9 @@ public class Gerador { // ""?
 	private Set<Item> selecionarItens(int quantidade, List<Item> /*Set?*/ itens) throws DadosInsuficientesException {
 		if(quantidade <= 0)
 			throw new IllegalArgumentException("Não se pode gerar um simulado com menos de um item."); // exception própria?
+		
+		if(itens == null)
+			throw new IllegalArgumentException("Não há como selecionar itens de uma lista nula."); // exception própria?
 		
 		if(quantidade > itens.size())
 			throw new DadosInsuficientesException("O banco de dados não possui itens o suficiente para selecionar a quantidade especificada.");
@@ -82,7 +87,35 @@ public class Gerador { // ""?
 		return gerarSimulado(selecionarItens(quantidade, itemRepository.findAll()));
 	}
 	
-	// quantidade, filtro
+	// USANDO FILTROS
+	
+	private Set<Item> selecionarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
+		List<Item> itensBanco;
+		
+		Habilidade habilidade = filtro.getHabilidade();
+		BigDecimal dificuldadeMinima = filtro.getDificuldadeMinima() != null ? filtro.getDificuldadeMinima() : BigDecimal.valueOf(-Double.MAX_VALUE); // desempenho?
+		BigDecimal dificuldadeMaxima = filtro.getDificuldadeMaxima() != null ? filtro.getDificuldadeMaxima() : BigDecimal.valueOf(Double.MAX_VALUE); // desempenho?
+		
+		// dá pra mehorar...
+		if(filtro.isNull())
+			throw new IllegalArgumentException("Um filtro totalmente nulo não pode ser usado para selecionar itens.");
+		else
+			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(habilidade, dificuldadeMinima, dificuldadeMaxima);
+		
+		return selecionarItens(quantidade, itensBanco);
+	}
+	
+	public List<SimuladoItem> gerarSimulado(Distribuicao distribuicao) throws DadosInsuficientesException {
+		Set<Item> itensSelecionados = new HashSet<>();
+		
+		for(int i = 0; i < distribuicao.size(); i++) {
+			itensSelecionados.addAll(selecionarItens(distribuicao.getQuantidades()[i], distribuicao.getFiltros()[i]));
+		}
+		
+		// embaralhar? aparentemente não precisa
+		
+		return gerarSimulado(itensSelecionados);
+	}
 	
 	// passando o estudante
 	

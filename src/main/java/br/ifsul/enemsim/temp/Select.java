@@ -30,7 +30,7 @@ public class Select {
 	}
 	
 	@GetMapping("/habilidade={id}")
-	public Habilidade habilidade(@PathVariable Integer id) {
+	public Habilidade habilidade(@PathVariable Byte id) {
 		return habilidadeRepository.findById(id).get();
 	}
 	
@@ -68,6 +68,9 @@ public class Select {
 		return simuladoItemRepository.findAll();
 	}
 	
-	// SimuladoItem byId
+	@GetMapping("/simuladoitens/simulado={simuladoId}")
+	public List<SimuladoItem> simuladoItens(@PathVariable Integer simuladoId) {
+		return simuladoItemRepository.findByIdSimuladoId(simuladoId);
+	}
 	
 }

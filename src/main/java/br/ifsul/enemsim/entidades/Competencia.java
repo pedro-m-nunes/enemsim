@@ -1,10 +1,12 @@
 package br.ifsul.enemsim.entidades;
 
+import br.ifsul.enemsim.enums.Area;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -19,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor // ?
 @EqualsAndHashCode // considerar id?
 @Entity
-public class Habilidade {
+public class Competencia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,20 +30,8 @@ public class Habilidade {
 	private String descricao;
 	
 	private Byte numero;
-	
-	@ManyToOne // cascade persist?
-	private Competencia competencia;
-	
-//	public Habilidade(String descricao, Short numero) { // ?
-//		super();
-//		this.descricao = descricao;
-//		this.numero = numero;
-//		// atributos comentados
-//	}
-	
-	public Habilidade(Byte id) { // só para testes?
-		super();
-		this.id = id;
-	}
+
+	@Enumerated(EnumType.STRING)
+	private Area area;
 	
 }
