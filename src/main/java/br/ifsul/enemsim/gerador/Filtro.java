@@ -13,10 +13,6 @@ public class Filtro {
 	private BigDecimal dificuldadeMin;
 	
 	private BigDecimal dificuldadeMax;
-	
-	public boolean isNull() {
-		return habilidade == null && dificuldadeMin == null && dificuldadeMax == null;
-	}
 
 	public Filtro(Habilidade habilidade, BigDecimal dificuldadeMin, BigDecimal dificuldadeMax) {
 		super();

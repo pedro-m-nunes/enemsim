@@ -90,9 +90,7 @@ public class Gerador { // ""?
 	private Set<Item> selecionarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		List<Item> itensBanco;
 		
-		if(filtro.isNull())
-			throw new IllegalArgumentException("Um filtro totalmente nulo não pode ser usado para selecionar itens."); // exception própria?
-		else if(filtro.getHabilidade() == null) // usar mesmo null para o padrão? acho que sim...
+		if(filtro.getHabilidade() == null) // dificuldade null...?
 			itensBanco = itemRepository.findByDificuldadeBetween(filtro.getDificuldadeMin(), filtro.getDificuldadeMax());
 		else
 			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(filtro.getHabilidade(), filtro.getDificuldadeMin(), filtro.getDificuldadeMax());

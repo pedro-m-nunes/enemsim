@@ -15,7 +15,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 @DependsOn("insertItens")
-public class InsertSimulados {
+public class InsertSimulados { // teste?
 
 	@Autowired
 	private Gerador gerador;
@@ -35,7 +35,7 @@ public class InsertSimulados {
 						new Filtro(new Habilidade((byte) 3), BigDecimal.ONE, null), 
 						new Filtro(new Habilidade((byte) 4), null, BigDecimal.ONE)
 				}, 
-				new int[] {5, 5, 5, 5}
+				new Integer[] {5, 5, 5, 5}
 				));
 		
 		gerador.gerarSimulado(5);
@@ -45,7 +45,7 @@ public class InsertSimulados {
 						new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(-1), BigDecimal.valueOf(2)), 
 						new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(2), null)
 				}, 
-				new int[] {7, 3}
+				new Integer[] {7, 3}
 				));
 		
 		gerador.gerarSimulado(new Distribuicao(
@@ -54,7 +54,7 @@ public class InsertSimulados {
 						new Filtro(null, null, BigDecimal.ZERO), 
 						new Filtro(null, BigDecimal.ONE, null)
 				}, 
-				new int[] {3, 3, 3}
+				new Integer[] {3, 3, 3}
 				));
 		
 	}

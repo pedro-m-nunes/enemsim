@@ -5,20 +5,18 @@ COISAS FEITAS:
 
 COISAS EM PROCESSO:
 - Fazendo o gerador de simulados.
+- Testes unitários.
 
 COISAS A FAZER:
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
-- Testes unitários.
 
 PROBLEMAS ENCONTRADOS:
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
-- Fazer construtores só com o id? Aí seria buscado no banco.
 - Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?
-- Remover os @Builder no sistema final?
 - Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
 - Colocar alguns atributos como final (Simulado.adaptacao)?
 
