@@ -3,21 +3,26 @@ package br.ifsul.enemsim.gerador;
 import java.math.BigDecimal;
 
 import br.ifsul.enemsim.entidades.Habilidade;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-@AllArgsConstructor
 public class Filtro {
 
 	private Habilidade habilidade;
 	
-	private BigDecimal dificuldadeMinima;
+	private BigDecimal dificuldadeMin;
 	
-	private BigDecimal dificuldadeMaxima;
+	private BigDecimal dificuldadeMax;
 	
 	public boolean isNull() {
-		return habilidade == null && dificuldadeMinima == null && dificuldadeMaxima == null;
+		return habilidade == null && dificuldadeMin == null && dificuldadeMax == null;
+	}
+
+	public Filtro(Habilidade habilidade, BigDecimal dificuldadeMin, BigDecimal dificuldadeMax) {
+		super();
+		this.habilidade = habilidade;
+		this.dificuldadeMin = dificuldadeMin != null ? dificuldadeMin : BigDecimal.valueOf(-Double.MAX_VALUE); // desempenho?
+		this.dificuldadeMax = dificuldadeMax != null ? dificuldadeMax : BigDecimal.valueOf(Double.MAX_VALUE); // desempenho?
 	}
 	
 }

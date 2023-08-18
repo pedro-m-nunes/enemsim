@@ -1,6 +1,6 @@
 package br.ifsul.enemsim.entidades;
 
-import br.ifsul.enemsim.enums.Area;
+import br.ifsul.enemsim.entidades.auxiliar.Area;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

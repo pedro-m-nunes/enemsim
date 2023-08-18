@@ -2,7 +2,7 @@ package br.ifsul.enemsim.entidades;
 
 import java.math.BigDecimal;
 
-import br.ifsul.enemsim.enums.Resposta;
+import br.ifsul.enemsim.entidades.auxiliar.Resposta;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

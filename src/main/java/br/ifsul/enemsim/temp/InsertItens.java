@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.enums.Resposta;
+import br.ifsul.enemsim.entidades.auxiliar.Resposta;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import jakarta.annotation.PostConstruct;

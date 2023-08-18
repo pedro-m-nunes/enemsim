@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.enums;
+package br.ifsul.enemsim.entidades.auxiliar;
 
 import lombok.AllArgsConstructor;
 

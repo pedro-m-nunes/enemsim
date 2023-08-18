@@ -28,27 +28,35 @@ public class InsertSimulados {
 //		gerador.gerarSimulado(45);
 //		gerador.gerarSimulado(400);
 		
-		gerador.gerarSimulado(
-				new Distribuicao(
-						new Filtro[] {
-								new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(-1), BigDecimal.valueOf(2)), 
-								new Filtro(new Habilidade((byte) 2), null, null), 
-								new Filtro(new Habilidade((byte) 3), BigDecimal.ONE, null), 
-								new Filtro(new Habilidade((byte) 4), null, BigDecimal.ONE)
-						}, 
-						new int[] {5, 5, 5, 5}
-						));
+		gerador.gerarSimulado(new Distribuicao(
+				new Filtro[] {
+						new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(-1), BigDecimal.valueOf(2)), 
+						new Filtro(new Habilidade((byte) 2), null, null), 
+						new Filtro(new Habilidade((byte) 3), BigDecimal.ONE, null), 
+						new Filtro(new Habilidade((byte) 4), null, BigDecimal.ONE)
+				}, 
+				new int[] {5, 5, 5, 5}
+				));
 		
 		gerador.gerarSimulado(5);
 		
-		gerador.gerarSimulado(
-				new Distribuicao(
-						new Filtro[] {
-								new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(-1), BigDecimal.valueOf(2)), 
-								new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(2), null), 
-						}, 
-						new int[] {7, 3}
-						));
+		gerador.gerarSimulado(new Distribuicao(
+				new Filtro[] {
+						new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(-1), BigDecimal.valueOf(2)), 
+						new Filtro(new Habilidade((byte) 1), BigDecimal.valueOf(2), null)
+				}, 
+				new int[] {7, 3}
+				));
+		
+		gerador.gerarSimulado(new Distribuicao(
+				new Filtro[] {
+						new Filtro(null, BigDecimal.ZERO, BigDecimal.ONE), 
+						new Filtro(null, null, BigDecimal.ZERO), 
+						new Filtro(null, BigDecimal.ONE, null)
+				}, 
+				new int[] {3, 3, 3}
+				));
+		
 	}
 	
 }

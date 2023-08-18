@@ -1,6 +1,5 @@
 package br.ifsul.enemsim.gerador;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +8,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.SimuladoItem;
@@ -72,7 +70,7 @@ public class Gerador { // ""?
 	
 	// GERAÇÃO
 	
-	private List<SimuladoItem> gerarSimulado(/*para instanciar simulado, ou o próprio simulado*/ Set<Item> itensSelecionados) {
+	private List<SimuladoItem> gerarSimulado(/*coisas para instanciar simulado, ou o próprio simulado*/ Set<Item> itensSelecionados) {
 		Simulado simulado = simuladoRepository.save(new Simulado()); // parâmetros/atributos
 		
 		Set<SimuladoItem> simuladoItens = new HashSet<>(); // Set? List?
@@ -92,20 +90,20 @@ public class Gerador { // ""?
 	private Set<Item> selecionarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		List<Item> itensBanco;
 		
-		Habilidade habilidade = filtro.getHabilidade();
-		BigDecimal dificuldadeMinima = filtro.getDificuldadeMinima() != null ? filtro.getDificuldadeMinima() : BigDecimal.valueOf(-Double.MAX_VALUE); // desempenho?
-		BigDecimal dificuldadeMaxima = filtro.getDificuldadeMaxima() != null ? filtro.getDificuldadeMaxima() : BigDecimal.valueOf(Double.MAX_VALUE); // desempenho?
-		
-		// dá pra mehorar...
 		if(filtro.isNull())
-			throw new IllegalArgumentException("Um filtro totalmente nulo não pode ser usado para selecionar itens.");
+			throw new IllegalArgumentException("Um filtro totalmente nulo não pode ser usado para selecionar itens."); // exception própria?
+		else if(filtro.getHabilidade() == null) // usar mesmo null para o padrão? acho que sim...
+			itensBanco = itemRepository.findByDificuldadeBetween(filtro.getDificuldadeMin(), filtro.getDificuldadeMax());
 		else
-			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(habilidade, dificuldadeMinima, dificuldadeMaxima);
+			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(filtro.getHabilidade(), filtro.getDificuldadeMin(), filtro.getDificuldadeMax());
 		
 		return selecionarItens(quantidade, itensBanco);
 	}
 	
 	public List<SimuladoItem> gerarSimulado(Distribuicao distribuicao) throws DadosInsuficientesException {
+		if(distribuicao == null)
+			throw new IllegalArgumentException("Uma distribuição nula não pode ser usada para gerar um simulado."); // exception própria?
+		
 		Set<Item> itensSelecionados = new HashSet<>();
 		
 		for(int i = 0; i < distribuicao.size(); i++) {
@@ -114,6 +112,8 @@ public class Gerador { // ""?
 		
 		return gerarSimulado(itensSelecionados);
 	}
+	
+	// passando filtro(s) e quantidade(s)?
 	
 	// passando o estudante
 	

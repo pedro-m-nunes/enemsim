@@ -9,5 +9,9 @@ class EnemsimApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	
+	// https://www.baeldung.com/spring-boot-testing
+	// criar outras classes
+	// fazer uma estrutura igual ao main?
 
 }

@@ -9,13 +9,9 @@ import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
-
-//	public List<Item> findByHabilidade(Habilidade habilidade);
-	
-//	public List<Item> findByHabilidadeAndDificuldadeLessThanEqual(Habilidade habilidade, BigDecimal dificuldadeMaxima);
-	
-//	public List<Item> findByHabilidadeAndDificuldadeGreaterThanEqual(Habilidade habilidade, BigDecimal dificuldadeMinima);
 	
 	public List<Item> findByHabilidadeAndDificuldadeBetween(Habilidade habilidade, BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
+	
+	public List<Item> findByDificuldadeBetween(BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
 	
 }
