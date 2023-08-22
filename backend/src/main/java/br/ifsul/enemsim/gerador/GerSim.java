@@ -17,7 +17,7 @@ import br.ifsul.enemsim.repositories.SimuladoItemRepository;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
 
 @Component
-public class Gerador { // ""?
+public class GerSim { // ""?
 	
 	@Autowired
 	private SimuladoRepository simuladoRepository;
@@ -73,7 +73,7 @@ public class Gerador { // ""?
 	private List<SimuladoItem> gerarSimulado(/*coisas para instanciar simulado, ou o próprio simulado*/ Set<Item> itensSelecionados) {
 		Simulado simulado = simuladoRepository.save(new Simulado()); // parâmetros/atributos
 		
-		Set<SimuladoItem> simuladoItens = new HashSet<>(); // Set? List?
+		Set<SimuladoItem> simuladoItens = new HashSet<>();
 		
 		for(Item item : itensSelecionados)
 			simuladoItens.add(new SimuladoItem(simulado, item));
@@ -90,7 +90,7 @@ public class Gerador { // ""?
 	private Set<Item> selecionarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		List<Item> itensBanco;
 		
-		if(filtro.getHabilidade() == null) // dificuldade null...?
+		if(filtro.getHabilidade() == null) // considerar os casos de dificuldade null, ao invés de atribuir um valor padrão
 			itensBanco = itemRepository.findByDificuldadeBetween(filtro.getDificuldadeMin(), filtro.getDificuldadeMax());
 		else
 			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(filtro.getHabilidade(), filtro.getDificuldadeMin(), filtro.getDificuldadeMax());

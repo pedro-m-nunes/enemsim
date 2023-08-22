@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 
 @SpringBootTest
-public class GeradorTest {
+public class GerSimTest {
 
 	@Autowired
-	Gerador gerador;
+	private GerSim gerador;
 	
 	@Test
 	public void geradorDeveGerarUmaListaComAQuantidadeCorreta() throws DadosInsuficientesException {

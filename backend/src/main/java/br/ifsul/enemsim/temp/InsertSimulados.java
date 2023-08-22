@@ -10,7 +10,7 @@ import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.gerador.Distribuicao;
 import br.ifsul.enemsim.gerador.Filtro;
-import br.ifsul.enemsim.gerador.Gerador;
+import br.ifsul.enemsim.gerador.GerSim;
 import jakarta.annotation.PostConstruct;
 
 @Component
@@ -18,7 +18,7 @@ import jakarta.annotation.PostConstruct;
 public class InsertSimulados { // teste?
 
 	@Autowired
-	private Gerador gerador;
+	private GerSim gerador;
 	
 	@PostConstruct
 	public void run() throws DadosInsuficientesException {

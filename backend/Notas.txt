@@ -5,11 +5,12 @@ COISAS FEITAS:
 
 COISAS EM PROCESSO:
 - Fazendo o gerador de simulados.
-- Testes unitários.
+- Testes unitários do gerador de simulados.
 
 COISAS A FAZER:
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
+- Testes unitários do CRUD das entidades.
 
 PROBLEMAS ENCONTRADOS:
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.

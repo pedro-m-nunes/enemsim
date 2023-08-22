@@ -30,6 +30,8 @@ public class Simulado {
 	@Column(nullable = false)
 	private Boolean finalizado = false; // default = false
 	
+	// data de criação e finalização? // tempo para finalizar? tempo levado para finalizar?
+	
 	private BigDecimal escore; // "pontuacao"?
 	
 //	@Enumerated(EnumType.STRING)
