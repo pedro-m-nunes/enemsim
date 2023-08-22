@@ -2,13 +2,14 @@ Algumas anotações.
 
 COISAS FEITAS:
 - Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
+- Testes unitários do gerador de simulados (a princípio feito).
 
 COISAS EM PROCESSO:
 - Fazendo o gerador de simulados.
-- Testes unitários do gerador de simulados.
+- Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
+- Rest Controllers.
 
 COISAS A FAZER:
-- Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
 - Testes unitários do CRUD das entidades.
 
@@ -20,6 +21,10 @@ DÚVIDAS/IDEIAS:
 - Como usar cascade nos relacionamentos?
 - Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
 - Colocar alguns atributos como final (Simulado.adaptacao)?
+- Usar fetch?
+- Usar javax.validation.constraints?
+- Qual a melhor forma de fazer perfis de usuário?
+- Usar Postgres ou MySQL?
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).

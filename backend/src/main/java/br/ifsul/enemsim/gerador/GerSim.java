@@ -90,7 +90,7 @@ public class GerSim { // ""?
 	private Set<Item> selecionarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		List<Item> itensBanco;
 		
-		if(filtro.getHabilidade() == null) // considerar os casos de dificuldade null, ao invés de atribuir um valor padrão
+		if(filtro.getHabilidade() == null) // considerar os casos de dificuldade null ao invés de atribuir um valor padrão? (baixa prioridade, funciona assim)
 			itensBanco = itemRepository.findByDificuldadeBetween(filtro.getDificuldadeMin(), filtro.getDificuldadeMax());
 		else
 			itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(filtro.getHabilidade(), filtro.getDificuldadeMin(), filtro.getDificuldadeMax());

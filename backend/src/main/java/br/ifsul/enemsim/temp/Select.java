@@ -21,6 +21,7 @@ import br.ifsul.enemsim.repositories.SimuladoRepository;
 
 @RestController
 @RequestMapping("/select")
+@Deprecated
 public class Select {
 
 	@Autowired
@@ -86,11 +87,6 @@ public class Select {
 	@GetMapping("/simuladoitens/simulado={simuladoId}")
 	public List<SimuladoItem> simuladoItens(@PathVariable Integer simuladoId) {
 		return simuladoItemRepository.findByIdSimuladoId(simuladoId);
-	}
-	
-	@GetMapping("/temp") // temp
-	public Object temp() {
-		return "Temp";
 	}
 	
 }
