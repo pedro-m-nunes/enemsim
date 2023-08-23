@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Usuario {
+public class Usuario { // usar Spring Security? provavelmente sim...
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

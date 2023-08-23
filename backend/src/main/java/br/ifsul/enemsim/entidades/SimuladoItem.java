@@ -21,8 +21,8 @@ import lombok.Setter;
 @Entity
 public class SimuladoItem {
 	
-	@EmbeddedId
-	private SimuladoItemId id; // @IdClass?
+	@EmbeddedId // @IdClass?
+	private SimuladoItemId id;
 	
 	@ManyToOne // cascade? quando se cria um SimuladoItem, deve criar um Simulado. quando se apaga um Simulado, deve apagar os SimuladoItens associados. // cascade "reverso"?
 	@MapsId("simuladoId")

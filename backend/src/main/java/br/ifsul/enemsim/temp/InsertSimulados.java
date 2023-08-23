@@ -15,7 +15,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 @DependsOn("insertItens")
-public class InsertSimulados {
+public class InsertSimulados { // mover para test?
 
 	@Autowired
 	private GerSim gerador;

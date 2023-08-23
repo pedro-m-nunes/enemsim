@@ -35,12 +35,15 @@ public class Item {
 	@Column(nullable = false)
 	private Resposta respostaCerta;
 	
-	@ManyToOne //(cascade = CascadeType.PERSIST) // cascade?
+	@ManyToOne
 	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 	
-	// many to one
-//	private Disciplina disciplina; // nullable
+//	@ManyToMany
+//	private Set<Disciplina> disciplinas; // LazyInitializationException no momento de pegar o item // ?
+	
+//	@OneToMany
+//	private Set<Resolucao> resolucoes; // LazyInitializationException também // ?
 	
 	@Column(nullable = false)
 	private Integer tentativas = 0; // default = 0 // (0, inf) // talvez faça mais sentido ser relacionado ao usuário

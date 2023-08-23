@@ -9,7 +9,7 @@ import br.ifsul.enemsim.repositories.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class InsertUsuarios {
+public class InsertUsuarios { // mover para test?
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;

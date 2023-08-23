@@ -1,5 +1,6 @@
-package br.ifsul.enemsim.entidades.perfis;
+package br.ifsul.enemsim.entidades;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,20 +15,19 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Estudante /*extends Perfil ?*/ /*implements ...?*/ {
+public class Resolucao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	// simulados? para poder usar cascade...
+	@Column(nullable = false)
+	private String explicacao;
 	
-	// atributos...
+	// autor...
 	
 	// construtor
 	
-	// construtor de Usuario?
-
 	// construtor id
 	
 }

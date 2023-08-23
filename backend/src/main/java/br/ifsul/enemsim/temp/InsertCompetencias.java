@@ -12,7 +12,7 @@ import br.ifsul.enemsim.repositories.CompetenciaRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class InsertCompetencias {
+public class InsertCompetencias { // mover para test?
 
 	@Autowired
 	private CompetenciaRepository competenciaRepository;

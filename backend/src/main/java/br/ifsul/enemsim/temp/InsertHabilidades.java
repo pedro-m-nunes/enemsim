@@ -15,7 +15,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 @DependsOn("insertCompetencias")
-public class InsertHabilidades {
+public class InsertHabilidades { // mover para test?
 
 	@Autowired
 	private HabilidadeRepository habilidadeRepository;

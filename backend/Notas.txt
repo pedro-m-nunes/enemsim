@@ -3,17 +3,25 @@ Algumas anotações.
 COISAS FEITAS:
 - Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
 - Testes unitários do gerador de simulados (a princípio feito).
+- Relacionamento entre Prova e Item.
 
 COISAS EM PROCESSO:
-- Fazendo o gerador de simulados.
-- Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
-- Rest Controllers.
+- (Macro) Fazendo o gerador de simulados.
+- Insert de provas.
 
 COISAS A FAZER:
-- (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
+- Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
+- Rest Controllers das novas entidades (Prova, Disciplina, Resolucao).
 - Testes unitários do CRUD das entidades.
+- (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
+- Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
+
+PRECISA DE PESQUISA:
+- Spring Security (user...).
+- Fetch (lazy, eager).
 
 PROBLEMAS ENCONTRADOS:
+- Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
@@ -21,10 +29,10 @@ DÚVIDAS/IDEIAS:
 - Como usar cascade nos relacionamentos?
 - Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
 - Colocar alguns atributos como final (Simulado.adaptacao)?
-- Usar fetch?
 - Usar javax.validation.constraints?
 - Qual a melhor forma de fazer perfis de usuário?
 - Usar Postgres ou MySQL?
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
+- ...

@@ -18,7 +18,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 @DependsOn("insertHabilidades")
-public class InsertItens {
+public class InsertItens { // mover para test?
 	
 	@Autowired
 	private ItemRepository itemRepository;
@@ -40,7 +40,7 @@ public class InsertItens {
 
 		for(int i = 0; i < quantidade; i++)
 			itens[i] = new Item(
-					"PLACEHOLDER_IMG_SRC", 
+					"PLACEHOLDER", 
 					Resposta.values()[random.nextInt(Resposta.values().length)], 
 					habilidades.get(i % habilidades.size()), 
 					BigDecimal.valueOf(random.nextDouble(3)), 
