@@ -1,7 +1,9 @@
-package br.ifsul.enemsim.entidades;
+package br.ifsul.enemsim.entidades.relacionais;
 
+import br.ifsul.enemsim.entidades.Item;
+import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.auxiliar.Resposta;
-import br.ifsul.enemsim.entidades.auxiliar.SimuladoItemId;
+import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

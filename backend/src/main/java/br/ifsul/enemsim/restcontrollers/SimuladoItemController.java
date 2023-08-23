@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ifsul.enemsim.entidades.SimuladoItem;
+import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.repositories.SimuladoItemRepository;
 
 @RestController

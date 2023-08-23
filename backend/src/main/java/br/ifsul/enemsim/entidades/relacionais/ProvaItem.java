@@ -1,6 +1,8 @@
-package br.ifsul.enemsim.entidades;
+package br.ifsul.enemsim.entidades.relacionais;
 
-import br.ifsul.enemsim.entidades.auxiliar.ProvaItemId;
+import br.ifsul.enemsim.entidades.Item;
+import br.ifsul.enemsim.entidades.Prova;
+import br.ifsul.enemsim.entidades.relacionais.auxiliar.ProvaItemId;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;

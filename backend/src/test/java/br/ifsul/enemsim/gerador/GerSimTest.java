@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.entidades.SimuladoItem;
+import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 
 @SpringBootTest

@@ -1,7 +1,7 @@
 package br.ifsul.enemsim.entidades.perfis;
 
 // entity? acho que não...
-public abstract class Perfil { // ? // interface? // ou usar enum?
+public abstract class Perfil { // ??? // interface? // ou usar enum?
 
 	// construtor de Usuario?
 	

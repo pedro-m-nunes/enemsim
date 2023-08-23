@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.SimuladoItem;
+import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import br.ifsul.enemsim.repositories.SimuladoItemRepository;
