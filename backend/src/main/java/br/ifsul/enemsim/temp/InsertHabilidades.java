@@ -1,7 +1,7 @@
 package br.ifsul.enemsim.temp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
@@ -27,7 +27,7 @@ public class InsertHabilidades { // mover para test?
 	public void run() {
 		Competencia competencia = new Competencia("Construir significados para os números naturais, inteiros, racionais e reais.", (byte) 1, Area.MT); // competenciaRepository.findById((byte) 1).get();
 		
-		List<Habilidade> habilidades = new ArrayList<>();
+		Set<Habilidade> habilidades = new HashSet<>();
 		
 		habilidades.add(new Habilidade("Reconhecer, no contexto social, diferentes significados e representações dos números e operações - naturais, inteiros, racionais ou reais.", (byte) 1, competencia));
 		habilidades.add(new Habilidade("Identificar padrões numéricos ou princípios de contagem.", (byte) 2, competencia));

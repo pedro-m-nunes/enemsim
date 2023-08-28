@@ -1,5 +1,8 @@
 package br.ifsul.enemsim.temp;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,10 +19,14 @@ public class InsertUsuarios { // mover para test?
 	
 	@PostConstruct
 	public void run() {
-		usuarioRepository.save(new Usuario("pedromn", "123", "Pedro", new Estudante()));
-		usuarioRepository.save(new Usuario("joaoguiss", "123", "João", new Estudante()));
-		usuarioRepository.save(new Usuario("MonicaPy", "123", "Mônica", null));
-		usuarioRepository.save(new Usuario("Ping Pong Robert", "123", "Roberto", null));
+		Set<Usuario> usuarios = new LinkedHashSet<>();
+		
+		usuarios.add(new Usuario("pedromn", "123", "Pedro", new Estudante()));
+		usuarios.add(new Usuario("joaoguiss", "123", "João", new Estudante()));
+		usuarios.add(new Usuario("MonicaPy", "123", "Mônica", null));
+		usuarios.add(new Usuario("Ping Pong Robert", "123", "Roberto", null));
+		
+		usuarioRepository.saveAll(usuarios);
 	}
 	
 }

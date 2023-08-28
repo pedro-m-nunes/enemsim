@@ -25,10 +25,10 @@ public class InsertItens { // mover para test?
 	
 	@Autowired
 	private HabilidadeRepository habilidadeRepository;
-
+	
 	@PostConstruct
 	public void run() {
-		itemRepository.saveAll(gerarItensAleatorios(400));
+		itemRepository.saveAll(gerarItensAleatorios(360));
 	}
 	
 	private List<Item> gerarItensAleatorios(int quantidade) {

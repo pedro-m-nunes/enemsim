@@ -1,6 +1,6 @@
 package br.ifsul.enemsim.gerador;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -17,7 +17,7 @@ import br.ifsul.enemsim.repositories.SimuladoItemRepository;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
 
 @Component
-public class GerSim { // ""?
+public class GerSim { // ""? // ao invés de inserir no banco, retornar Map (ou classe própria)? (para inserir em um service)
 	
 	@Autowired
 	private SimuladoRepository simuladoRepository;
@@ -41,7 +41,7 @@ public class GerSim { // ""?
 		
 		// transformar List em Set?
 		
-		Set<Item> itensSelecionados = new HashSet<>();
+		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
 		Random random = new Random();
 		
@@ -73,7 +73,7 @@ public class GerSim { // ""?
 	private List<SimuladoItem> gerarSimulado(/*coisas para instanciar simulado, ou o próprio simulado*/ Set<Item> itensSelecionados) {
 		Simulado simulado = simuladoRepository.save(new Simulado()); // parâmetros/atributos
 		
-		Set<SimuladoItem> simuladoItens = new HashSet<>();
+		Set<SimuladoItem> simuladoItens = new LinkedHashSet<>();
 		
 		for(Item item : itensSelecionados)
 			simuladoItens.add(new SimuladoItem(simulado, item));
@@ -102,7 +102,7 @@ public class GerSim { // ""?
 		if(distribuicao == null)
 			throw new IllegalArgumentException("Uma distribuição nula não pode ser usada para gerar um simulado."); // exception própria?
 		
-		Set<Item> itensSelecionados = new HashSet<>();
+		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
 		for(int i = 0; i < distribuicao.size(); i++) {
 			itensSelecionados.addAll(selecionarItens(distribuicao.getQuantidades()[i], distribuicao.getFiltros()[i]));

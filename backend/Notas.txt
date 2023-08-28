@@ -7,11 +7,12 @@ COISAS FEITAS:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- Insert de provas.
+- Insert de provas e itens de provas.
 
 COISAS A FAZER:
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
 - Rest Controllers das novas entidades (Prova, Disciplina, Resolucao).
+- Services com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).

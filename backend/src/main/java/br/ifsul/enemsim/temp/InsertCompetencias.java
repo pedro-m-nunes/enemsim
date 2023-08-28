@@ -1,7 +1,7 @@
 package br.ifsul.enemsim.temp;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,7 +19,7 @@ public class InsertCompetencias { // mover para test?
 	
 	@PostConstruct
 	public void run() {
-		List<Competencia> competencias = new ArrayList<>();
+		Set<Competencia> competencias = new LinkedHashSet<>();
 				
 //		competencias.add(new Competencia("Construir significados para os números naturais, inteiros, racionais e reais.", (byte) 1, Area.MT));
 		competencias.add(new Competencia("Utilizar o conhecimento geométrico para realizar a leitura e a representação da realidade e agir sobre ela.", (byte) 2, Area.MT));

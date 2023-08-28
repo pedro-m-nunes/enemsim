@@ -3,6 +3,7 @@ package br.ifsul.enemsim.entidades.relacionais;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Prova;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.ProvaItemId;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -24,12 +25,12 @@ public class ProvaItem {
 	@EmbeddedId // @IdClass?
 	private ProvaItemId id;
 	
-	@ManyToOne // cascade?
+	@ManyToOne(cascade = CascadeType.PERSIST) // cascade?
 	@MapsId("provaId")
 	@JoinColumn(nullable = false)
 	private Prova prova;
 	
-	@ManyToOne
+	@ManyToOne // cascade?
 	@MapsId("itemId")
 	@JoinColumn(nullable = false)
 	private Item item;
@@ -39,6 +40,7 @@ public class ProvaItem {
 
 	public ProvaItem(Prova prova, Item item, Short numero) {
 		super();
+		this.id = new ProvaItemId();
 		this.prova = prova;
 		this.item = item;
 		this.numero = numero;
