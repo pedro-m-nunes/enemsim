@@ -7,30 +7,38 @@ COISAS FEITAS:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- Insert de provas e itens de provas.
-
-COISAS A FAZER:
-- Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
-- Rest Controllers das novas entidades (Prova, Disciplina, Resolucao).
-- Services com as operações dos usuários (CRUD...).
-- Testes unitários do CRUD das entidades.
-- (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 
+COISAS A FAZER:
+- EstudanteHabilidade (?)
+- Insert de provas e itens de provas.
+- Services/controllers com as operações dos usuários (CRUD...).
+- Testes unitários do CRUD das entidades.
+- Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
+- (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
+
 PRECISA DE PESQUISA:
-- Spring Security (user...).
-- Fetch (lazy, eager).
+- Spring Security (user...)
+- JWT
+- Fetch (lazy, eager)
+- Web vs Webflux
+- Spring Cloud
+- Flyway (alter table...)
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
+- Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?
+- Qual a melhor forma de manipular as entidades relacionais (SimuladoItem, ProvaItem...)?
 - Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
 - Colocar alguns atributos como final (Simulado.adaptacao)?
 - Usar javax.validation.constraints?
+- Usar @Basic?
+- Usar @Transactional?
 - Qual a melhor forma de fazer perfis de usuário?
 - Usar Postgres ou MySQL?
 

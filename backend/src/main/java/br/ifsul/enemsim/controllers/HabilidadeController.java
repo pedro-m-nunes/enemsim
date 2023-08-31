@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.restcontrollers;
+package br.ifsul.enemsim.controllers;
 
 import java.util.List;
 

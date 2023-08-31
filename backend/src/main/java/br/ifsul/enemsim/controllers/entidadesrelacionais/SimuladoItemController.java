@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.restcontrollers;
+package br.ifsul.enemsim.controllers.entidadesrelacionais;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
-import br.ifsul.enemsim.repositories.SimuladoItemRepository;
+import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
 @RestController
 @RequestMapping("/simuladoitem")

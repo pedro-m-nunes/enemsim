@@ -8,6 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,24 +21,28 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Usuario { // usar Spring Security? provavelmente sim...
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false, unique = true) // length?
-	private String username;
+	@Column(nullable = false, unique = true)
+	@NotNull
+	@Size(min = 6, message = "O nome de usuário deve ter pelo menos 6 caracteres.") // max?
+	private String username; // ""? "login"?
 	
-	@Column(nullable = false) // length?
+	@Column(nullable = false)
+	@NotNull
+	@NotBlank // size?
 	private String senha; // criptografar...
 	
 	@Column(nullable = false)
-	private String nome; // ?
+	@NotNull
+	@NotBlank
+	private String nome; // ? // nome e sobrenome?
 	
-	// nome e sobrenome?
-	
-	// foto?
+	// foto? por ora, não
 	
 	@OneToOne(cascade = CascadeType.ALL) // cascade all?
 	private Estudante estudante;

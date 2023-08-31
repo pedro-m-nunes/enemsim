@@ -13,11 +13,13 @@ import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.repositories.SimuladoItemRepository;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
+import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
 @Component
-public class GerSim { // ""? // ao invés de inserir no banco, retornar Map (ou classe própria)? (para inserir em um service)
+// ao invés de inserir no banco, retornar Map (ou classe própria)? (para inserir em um service/controller)
+// acho que precisa de ajustes...
+public class GerSim { // ""?
 	
 	@Autowired
 	private SimuladoRepository simuladoRepository;

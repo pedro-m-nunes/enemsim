@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.repositories;
+package br.ifsul.enemsim.repositories.entidadesrelacionais;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -22,7 +22,7 @@ import lombok.Setter;
 @Entity
 public class ProvaItem {
 
-	@EmbeddedId // @IdClass?
+	@EmbeddedId
 	private ProvaItemId id;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST) // cascade?

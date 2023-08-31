@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.restcontrollers;
+package br.ifsul.enemsim.controllers;
 
 import java.util.List;
 
@@ -8,24 +8,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.repositories.ItemRepository;
+import br.ifsul.enemsim.entidades.Prova;
+import br.ifsul.enemsim.repositories.ProvaRepository;
 
 @RestController
-@RequestMapping("/item")
-public class ItemController {
+@RequestMapping("/prova")
+public class ProvaController {
 
 	@Autowired
-	private ItemRepository itemRepository;
+	private ProvaRepository provaRepository;
 	
 	@GetMapping
-	public List<Item> findAll() {
-		return itemRepository.findAll();
+	public List<Prova> findAll() {
+		return provaRepository.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public Item findById(@PathVariable Integer id) {
-		return itemRepository.findById(id).get();
+	public Prova findById(@PathVariable Integer id) {
+		return provaRepository.findById(id).get();
 	}
 	
 }

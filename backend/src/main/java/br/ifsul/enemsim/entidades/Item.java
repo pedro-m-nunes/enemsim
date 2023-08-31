@@ -39,17 +39,19 @@ public class Item {
 	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 	
-//	@ManyToMany
-//	private Set<Disciplina> disciplinas; // LazyInitializationException no momento de pegar o item // ?
+//	@ManyToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Disciplina
+//	@JoinTable(name = "item_disciplina")
+//	private Set<Disciplina> disciplinas;
 	
-//	@OneToMany
-//	private Set<Resolucao> resolucoes; // LazyInitializationException também // ?
+//	@OneToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Resolucao
+//	@JoinColumn(name = "item_id")
+//	private Set<Resolucao> resolucoes;
 	
 	@Column(nullable = false)
-	private Integer tentativas = 0; // default = 0 // (0, inf) // talvez faça mais sentido ser relacionado ao usuário
+	private Integer tentativas = 0; // ? // default = 0 // (0, inf)
 	
 	@Column(nullable = false)
-	private Integer tentativasCertas = 0; // default = 0 // (0, attempts] // talvez faça mais sentido ser relacionado ao usuário
+	private Integer tentativasCertas = 0; // ? // default = 0 // (0, attempts]
 	
 	@Column(precision = 6, scale = 5)
 	private BigDecimal discriminacao; // a // (0, inf) // (0, 3]

@@ -21,8 +21,8 @@ public class InsertUsuarios { // mover para test?
 	public void run() {
 		Set<Usuario> usuarios = new LinkedHashSet<>();
 		
-		usuarios.add(new Usuario("pedromn", "123", "Pedro", new Estudante()));
-		usuarios.add(new Usuario("joaoguiss", "123", "João", new Estudante()));
+		usuarios.add(new Usuario("pedromn", "senha", "Pedro", new Estudante()));
+		usuarios.add(new Usuario("joaoguiss", "coxinha110105", "João", new Estudante()));
 		usuarios.add(new Usuario("MonicaPy", "123", "Mônica", null));
 		usuarios.add(new Usuario("Ping Pong Robert", "123", "Roberto", null));
 		

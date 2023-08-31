@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.restcontrollers;
+package br.ifsul.enemsim.controllers;
 
 import java.util.List;
 
@@ -13,9 +13,9 @@ import br.ifsul.enemsim.repositories.CompetenciaRepository;
 
 @RestController
 @RequestMapping("/competencia")
-public class CompetenciaController {
+public class CompetenciaController { // service?
 
-	@Autowired
+	@Autowired // ?
 	private CompetenciaRepository competenciaRepository;
 	
 	@GetMapping

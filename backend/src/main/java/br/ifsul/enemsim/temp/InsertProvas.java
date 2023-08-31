@@ -7,26 +7,16 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Prova;
 import br.ifsul.enemsim.entidades.auxiliar.Cor;
-import br.ifsul.enemsim.entidades.relacionais.ProvaItem;
-import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.repositories.ProvaItemRepository;
 import br.ifsul.enemsim.repositories.ProvaRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class InsertProvas {
+public class InsertProvas { // ProvaItem!!
 
 	@Autowired
 	private ProvaRepository provaRepository;
-	
-	@Autowired
-	private ProvaItemRepository provaItemRepository;
-	
-	@Autowired
-	private ItemRepository itemRepository;
 	
 	@PostConstruct
 	public void run() {

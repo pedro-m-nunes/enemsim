@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.repositories;
+package br.ifsul.enemsim.repositories.entidadesrelacionais;
 
 import java.util.List;
 
