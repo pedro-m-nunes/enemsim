@@ -2,6 +2,7 @@ package br.ifsul.enemsim.gerador;
 
 import java.util.Arrays;
 
+import br.ifsul.enemsim.exceptions.DistribuicaoException;
 import lombok.Getter;
 
 @Getter
@@ -11,15 +12,15 @@ public class Distribuicao {
 	
 	private Integer[] quantidades; // ""?
 
-	public Distribuicao(Filtro[] filtros, Integer[] quantidades) {
+	public Distribuicao(Filtro[] filtros, Integer[] quantidades) throws DistribuicaoException {
 		super();
 		
 		if(filtros.length != quantidades.length)
-			throw new IllegalArgumentException("Deve ser informado o mesmo número de filtros e quantidades de itens."); // ""? // exception própria?
+			throw new DistribuicaoException("Deve ser informado o mesmo número de filtros e quantidades de itens."); // ""?
 		else if(filtros.length == 0)
-			throw new IllegalArgumentException("Os vetores de filtros e quantidades não podem ser vazios."); // ""? // exception própria?
-		else if(Arrays.asList(filtros).contains(null) || Arrays.asList(quantidades).contains(null))
-			throw new IllegalArgumentException("Todos os valores dos vetores de filtros e de quantidades devem ser preenchidos."); // ""? // exception própria?
+			throw new DistribuicaoException("Os vetores de filtros e quantidades não podem ser vazios."); // ""?
+		else if(Arrays.asList(quantidades).contains(null))
+			throw new DistribuicaoException("Todos os valores do vetor de quantidades devem ser preenchidos."); // ""?
 		else {
 			this.filtros = filtros;
 			this.quantidades = quantidades;

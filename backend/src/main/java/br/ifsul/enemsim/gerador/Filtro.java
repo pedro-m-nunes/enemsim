@@ -17,8 +17,8 @@ public class Filtro {
 	public Filtro(Habilidade habilidade, BigDecimal dificuldadeMin, BigDecimal dificuldadeMax) {
 		super();
 		this.habilidade = habilidade;
-		this.dificuldadeMin = dificuldadeMin != null ? dificuldadeMin : BigDecimal.valueOf(-Double.MAX_VALUE); // desempenho?
-		this.dificuldadeMax = dificuldadeMax != null ? dificuldadeMax : BigDecimal.valueOf(Double.MAX_VALUE); // desempenho?
+		this.dificuldadeMin = dificuldadeMin;
+		this.dificuldadeMax = dificuldadeMax;
 	}
 	
 }

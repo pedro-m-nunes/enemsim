@@ -2,15 +2,16 @@ Algumas anotações.
 
 COISAS FEITAS:
 - Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
-- Testes unitários do gerador de simulados (a princípio feito).
 - Relacionamento entre Prova e Item.
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
+- Geração de simulados padrão.
 - Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 
 COISAS A FAZER:
-- EstudanteHabilidade (?)
+- Atualizar testes unitários do gerador de simulados.
+- EstudanteHabilidade (?).
 - Insert de provas e itens de provas.
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.

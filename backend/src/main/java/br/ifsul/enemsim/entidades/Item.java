@@ -10,8 +10,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class Item {
@@ -32,11 +33,9 @@ public class Item {
 	private String imagemSrc; // ""?
 	
 	@Enumerated(EnumType.STRING)
-	@Column(nullable = false)
 	private Resposta respostaCerta;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 	
 //	@ManyToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Disciplina
@@ -79,5 +78,9 @@ public class Item {
 	}
 	
 	// construtor com restrições?
+	
+	public boolean isValido() {
+		return discriminacao != null && dificuldade != null && chanceAcertoCasual != null && respostaCerta != null && habilidade != null;
+	}
 	
 }

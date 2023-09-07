@@ -14,7 +14,7 @@ import br.ifsul.enemsim.repositories.ItemRepository;
 @RestController
 @RequestMapping("/item")
 public class ItemController {
-
+	
 	@Autowired
 	private ItemRepository itemRepository;
 	

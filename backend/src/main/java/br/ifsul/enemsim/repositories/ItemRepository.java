@@ -12,6 +12,16 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	public List<Item> findByHabilidadeAndDificuldadeBetween(Habilidade habilidade, BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
 	
+	public List<Item> findByHabilidadeAndDificuldadeGreaterThanEqual(Habilidade habilidade, BigDecimal dificuldadeMinima);
+	
+	public List<Item> findByHabilidadeAndDificuldadeLessThanEqual(Habilidade habilidade, BigDecimal dificuldadeMaxima);
+
+	public List<Item> findByHabilidade(Habilidade habilidade);
+	
 	public List<Item> findByDificuldadeBetween(BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
+	
+	public List<Item> findByDificuldadeGreaterThanEqual(BigDecimal dificuldadeMinima);
+	
+	public List<Item> findByDificuldadeLessThanEqual(BigDecimal dificuldadeMaxima);
 	
 }
