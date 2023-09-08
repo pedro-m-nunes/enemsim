@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,7 +27,7 @@ public class Simulado {
 	private Integer id;
 	
 	@ManyToOne // cascade? mappedBy?
-//	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false)
 	private Estudante estudante; // precisa fazer estudante e usuário primeiro...
 	
 	@Column(nullable = false)
@@ -48,6 +49,11 @@ public class Simulado {
 	public Simulado(Integer id) {
 		super();
 		this.id = id;
+	}
+
+	public Simulado(Estudante estudante) {
+		super();
+		this.estudante = estudante;
 	}
 	
 }

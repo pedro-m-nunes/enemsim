@@ -4,6 +4,7 @@ import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.auxiliar.Resposta;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,7 +27,7 @@ public class SimuladoItem {
 	@EmbeddedId // @IdClass?
 	private SimuladoItemId id;
 	
-	@ManyToOne // cascade? quando se cria um SimuladoItem, deve criar um Simulado. quando se apaga um Simulado, deve apagar os SimuladoItens associados. // cascade "reverso"?
+	@ManyToOne(cascade = CascadeType.ALL) // cascade? quando se cria um SimuladoItem, deve criar um Simulado. quando se apaga um Simulado, deve apagar os SimuladoItens associados. // cascade "reverso"?
 	@MapsId("simuladoId")
 	@JoinColumn(nullable = false)
 	private Simulado simulado;

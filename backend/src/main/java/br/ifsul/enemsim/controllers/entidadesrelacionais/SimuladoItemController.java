@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.perfis.Estudante;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
@@ -24,8 +26,8 @@ public class SimuladoItemController {
 	}
 	
 	@GetMapping("/{simuladoId}")
-	public List<SimuladoItem> findByIdSimuladoId(@PathVariable Integer simuladoId) {
-		return simuladoItemRepository.findByIdSimuladoId(simuladoId);
+	public List<SimuladoItem> findBySimulado(@PathVariable Integer simuladoId) {
+		return simuladoItemRepository.findBySimulado(new Simulado(simuladoId));
 	}
 	
 }

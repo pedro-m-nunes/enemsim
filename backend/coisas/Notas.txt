@@ -6,8 +6,8 @@ COISAS FEITAS:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
+- Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
 - Geração de simulados padrão.
-- Sistema de seleção usando a classe Estudante (itens já feitos, pontuação nas habilidades, não sei).
 
 COISAS A FAZER:
 - Atualizar testes unitários do gerador de simulados.

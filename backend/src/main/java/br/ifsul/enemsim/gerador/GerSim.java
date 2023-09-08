@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.perfis.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.ItemRepository;
 
@@ -22,24 +23,26 @@ public class GerSim { // ""?
 	@Autowired // ?
 	private ItemRepository itemRepository;
 	
-	// public gerarSimulado(Estudante, Adaptacao)
+	public SimuladoGerado gerarSimulado(Estudante estudante, Distribuicao distribuicao) throws DadosInsuficientesException { // ? // (estudante, adaptacao)
+		return distribuirItens(estudante, distribuicao);
+	}
 	
-	private SimuladoGerado distribuirItens(Distribuicao distribuicao) throws DadosInsuficientesException {
+	private SimuladoGerado distribuirItens(Estudante estudante, Distribuicao distribuicao) throws DadosInsuficientesException {
 		if(distribuicao == null)
 			throw new IllegalArgumentException("Uma distribuição nula não pode ser usada para gerar um simulado."); // exception própria?
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
 		for(int i = 0; i < distribuicao.size(); i++) {
-			itensSelecionados.addAll(filtrarItens(distribuicao.getQuantidades()[i], distribuicao.getFiltros()[i]));
+			itensSelecionados.addAll(filtrarItens(estudante, distribuicao.getQuantidades()[i], distribuicao.getFiltros()[i]));
 		}
 		
-		return instanciarSimulado(itensSelecionados);
+		return instanciarSimulado(estudante, itensSelecionados);
 	}
 	
-	private Set<Item> filtrarItens(int quantidade, Filtro filtro) throws DadosInsuficientesException {
+	private Set<Item> filtrarItens(Estudante estudante, int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		if(filtro == null)
-			return escolherItens(quantidade, new LinkedHashSet<>(itemRepository.findAll()));
+			return escolherItens(quantidade, new LinkedHashSet<>(itemRepository.getItensNaoAcertadosPorEstudante(estudante)));
 		
 		List<Item> itensBanco;
 		
@@ -69,7 +72,7 @@ public class GerSim { // ""?
 				if(dificuldadeMax != null) // FFV
 					itensBanco = itemRepository.findByDificuldadeLessThanEqual(dificuldadeMax);
 				else // FFF
-					itensBanco = itemRepository.findAll();
+					itensBanco = itemRepository.getItensNaoAcertadosPorEstudante(estudante);
 				
 		return escolherItens(quantidade, new LinkedHashSet<>(itensBanco));
 	}
@@ -99,8 +102,8 @@ public class GerSim { // ""?
 		return itensSelecionados;
 	}
 	
-	private SimuladoGerado instanciarSimulado(Set<Item> itensSelecionados) { // "instanciar"?
-		Simulado simulado = new Simulado(); /*coisas para instanciar simulado, ou o próprio simulado*/ // parâmetros/atributos
+	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) { // "instanciar"?
+		Simulado simulado = new Simulado(estudante); /*coisas para instanciar simulado, ou o próprio simulado*/ // parâmetros/atributos
 		
 		return new SimuladoGerado(simulado, itensSelecionados);
 	}
@@ -109,16 +112,16 @@ public class GerSim { // ""?
 	// usarItensAnulados = false => findByRespostaNotNull()
 	// usarItensJaRespondidos = false => findByIdNotIn(jaRespondidos)
 		
-	public SimuladoGerado gerarSimuladoPadronizado(/*Estudante estudante*/) {
-		// selecionar um item aleatório entre os três mais próximos da mediana da dificuldade, de cada uma das 10 habilidades mais frequentes, que o estudante não tenha feito ainda.
-		// eventualmente, todos os estudante irão responder a estes três itens, a aleatorização é para que os simulados não sejam iguais.
-		
-		// pegar os itens por habilidade, calcular a mediana, pegar os três itens mais próximos (com um arredondamento padrão)
-		// vetor com os três itens selecionados de cada habilidade : List<Item>[] itensHabilidade
-		
-		// for(itens : itensHabilidade) itensSelecionados.add(itens.get(random.nextInt))
-		// return new SimuladoGerado()
-	}
+//	public SimuladoGerado gerarSimuladoPadronizado(/*Estudante estudante*/) {
+//		// selecionar um item aleatório entre os três mais próximos da mediana da dificuldade, de cada uma das 10 habilidades mais frequentes, que o estudante não tenha feito ainda.
+//		// eventualmente, todos os estudante irão responder a estes três itens, a aleatorização é para que os simulados não sejam iguais.
+//		
+//		// pegar os itens por habilidade, calcular a mediana, pegar os três itens mais próximos (com um arredondamento padrão)
+//		// vetor com os três itens selecionados de cada habilidade : List<Item>[] itensHabilidade
+//		
+//		// for(itens : itensHabilidade) itensSelecionados.add(itens.get(random.nextInt))
+//		// return new SimuladoGerado()
+//	}
 	
 }
 //private Set<Item> selecionarItensPorQuantidadeOuMaximo(int quantidade, List<Item> itens) { // não oficial (na aplicação, ter algo que trate melhor as exceções, que dê opções ao usuário)

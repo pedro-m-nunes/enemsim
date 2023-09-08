@@ -28,6 +28,9 @@ public class Estudante /*extends Perfil ?*/ /*implements ...?*/ {
 	
 	// construtor de Usuario?
 
-	// construtor id
+	public Estudante(Integer id) {
+		super();
+		this.id = id;
+	}
 	
 }
