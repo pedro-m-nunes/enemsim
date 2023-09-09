@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -60,16 +61,24 @@ public class Item {
 	
 	@Column(precision = 6, scale = 5)
 	private BigDecimal chanceAcertoCasual; // Probabilidade? // c // [0, 1]
-
-	public Item(String imagemSrc, Resposta respostaCerta, Habilidade habilidade, /*disciplina?*/ BigDecimal discriminacao, BigDecimal dificuldade, BigDecimal chanceAcertoCasual) {
+	
+	@ManyToOne // cascade?
+	@JoinColumn(nullable = false)
+	private Prova prova; // temp
+	
+	@Column(nullable = false)
+	private Short numero; // temp
+	
+	public Item(String imagemSrc, Resposta respostaCerta, Habilidade habilidade, BigDecimal discriminacao, BigDecimal dificuldade, BigDecimal chanceAcertoCasual, Prova prova, Short numero) {
 		super();
 		this.imagemSrc = imagemSrc;
 		this.respostaCerta = respostaCerta;
 		this.habilidade = habilidade;
-		// disciplina?
 		this.discriminacao = discriminacao;
 		this.dificuldade = dificuldade;
 		this.chanceAcertoCasual = chanceAcertoCasual;
+		this.prova = prova;
+		this.numero = numero;
 	}
 
 	public Item(Integer id) {

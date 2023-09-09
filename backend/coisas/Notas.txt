@@ -1,8 +1,7 @@
 Algumas anotações.
 
-COISAS FEITAS:
-- Sistema de seleção de questões usando os atributos dos itens (habilidade e dificuldades mínima e máxima).
-- Relacionamento entre Prova e Item.
+IMPORTANTE:
+- Por uma questão de tempo e prioridades, um item poderá ser somente de uma prova por enquanto.
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
@@ -10,6 +9,8 @@ COISAS EM PROCESSO:
 - Geração de simulados padrão.
 
 COISAS A FAZER:
+- (Alta prioridade) Passar as questões dos microdados para esse banco (10 habilidades mais frequentes).
+- Busca e geração usando as questões com dificuldade próximas à mediana.
 - Atualizar testes unitários do gerador de simulados.
 - EstudanteHabilidade (?).
 - Insert de provas e itens de provas.
@@ -17,14 +18,6 @@ COISAS A FAZER:
 - Testes unitários do CRUD das entidades.
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
 - (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
-
-PRECISA DE PESQUISA:
-- Spring Security (user...)
-- JWT
-- Fetch (lazy, eager)
-- Web vs Webflux
-- Spring Cloud
-- Flyway (alter table...)
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
@@ -46,3 +39,11 @@ DÚVIDAS/IDEIAS:
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
 - ...
+
+PRECISA DE PESQUISA:
+- Spring Security (user...)
+- JWT
+- Fetch (lazy, eager)
+- Web vs Webflux
+- Spring Cloud
+- Flyway (alter table...)

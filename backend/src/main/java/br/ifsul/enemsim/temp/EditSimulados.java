@@ -19,7 +19,7 @@ public class EditSimulados {
 	@Autowired
 	private SimuladoItemRepository simuladoItemRepository;
 	
-	@PostConstruct
+//	@PostConstruct
 	public void run() {
 		List<SimuladoItem> simuladoItens = simuladoItemRepository.findBySimulado(new Simulado(1));
 		

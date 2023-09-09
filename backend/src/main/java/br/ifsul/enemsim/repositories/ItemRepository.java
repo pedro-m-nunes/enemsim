@@ -26,7 +26,14 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	public List<Item> findByDificuldadeLessThanEqual(BigDecimal dificuldadeMaxima);
 	
+	@Query("SELECT i FROM Item i WHERE i.id IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s INNER JOIN si.item i WHERE s.estudante = ?1 AND i.respostaCerta = si.resposta AND si.simulado.finalizado = TRUE)")
+	public List<Item> getItensJaAcertadosPorEstudante(Estudante estudante);
+	
 	@Query("SELECT i FROM Item i WHERE i.id NOT IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s INNER JOIN si.item i WHERE s.estudante = ?1 AND i.respostaCerta = si.resposta AND si.simulado.finalizado = TRUE)")
 	public List<Item> getItensNaoAcertadosPorEstudante(Estudante estudante);
+	
+	// itens já/não feitos?
+	
+	public List<Item> findByHabilidadeOrderByDificuldade(Habilidade habilidade); // testar
 	
 }

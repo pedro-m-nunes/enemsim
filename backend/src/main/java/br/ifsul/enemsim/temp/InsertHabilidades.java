@@ -20,9 +20,6 @@ public class InsertHabilidades { // mover para test?
 	@Autowired
 	private HabilidadeRepository habilidadeRepository;
 	
-//	@Autowired
-//	private CompetenciaRepository competenciaRepository;
-	
 	@PostConstruct
 	public void run() {
 		Competencia competencia = new Competencia("Construir significados para os números naturais, inteiros, racionais e reais.", (byte) 1, Area.MT); // competenciaRepository.findById((byte) 1).get();

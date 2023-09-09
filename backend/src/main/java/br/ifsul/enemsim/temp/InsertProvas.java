@@ -13,7 +13,7 @@ import br.ifsul.enemsim.repositories.ProvaRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class InsertProvas { // ProvaItem!!
+public class InsertProvas {
 
 	@Autowired
 	private ProvaRepository provaRepository;
@@ -28,13 +28,5 @@ public class InsertProvas { // ProvaItem!!
 		
 		provaRepository.saveAll(provas);
 	}
-	
-//	private void insertProvaItem() { // não funcionou
-//		Item item = itemRepository.findById(1).get();
-//		
-//		provaItemRepository.save(new ProvaItem(new Prova(Year.of(2022), Cor.AMARELO), item, (short) 146));
-//		provaItemRepository.save(new ProvaItem(new Prova(Year.of(2022), Cor.AZUL), item, (short) 178));
-//		
-//	}
 	
 }

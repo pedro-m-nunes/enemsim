@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.perfis.Estudante;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.perfis.Estudante;
 import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
 @RestController
 @RequestMapping("/temp")
@@ -16,14 +15,6 @@ public class TempController {
 	
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	@Autowired
-	private SimuladoItemRepository simuladoItemRepository;
-	
-	@GetMapping("/itensjaacertados/estudante={id}")
-	public int getItensJaAcertadosPorEstudante(@PathVariable Integer id) {
-		return simuladoItemRepository.getItensJaAcertadosPorEstudante(new Estudante(id)).size();
-	}
 	
 	@GetMapping("/itensnaoacertados/estudante={id}")
 	public int getItensNaoAcertadosPorEstudante(@PathVariable Integer id) {

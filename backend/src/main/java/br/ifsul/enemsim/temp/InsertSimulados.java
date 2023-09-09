@@ -30,7 +30,7 @@ public class InsertSimulados { // mover para test?
 	@Autowired
 	private SimuladoItemRepository simuladoItemRepository;
 	
-	@PostConstruct
+//	@PostConstruct
 	public void run() throws DadosInsuficientesException {
 
 		try {
