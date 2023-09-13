@@ -15,7 +15,7 @@ import jakarta.annotation.PostConstruct;
 
 @Component
 @DependsOn({"insertHabilidades", "insertProvas"})
-public class InsertItens { // mover para test?
+public class InsertItens {
 	
 	@Autowired
 	private ItemController itemController;
@@ -23,21 +23,6 @@ public class InsertItens { // mover para test?
 	@PostConstruct
 	public void run() {
 //		itemRepository.saveAll(gerarItensAleatorios(360));
-		
-		Prova prova2022 = new Prova(1);
-		Prova prova2021 = new Prova(2);
-		Prova prova2020 = new Prova(3);
-		
-		itemController.save(new Item(
-				"https://drive.google.com/file/d/1ItWArfJ0iV796ot2UR4zi9NwjufH9joT/preview", 
-				Resposta.C, 
-				new Habilidade((byte) 3), 
-				new BigDecimal("3.29525"), 
-				new BigDecimal("1.21452"), 
-				new BigDecimal("0.20483"), 
-				prova2021, 
-				(short) 138
-				));
 		
 		// ...
 		

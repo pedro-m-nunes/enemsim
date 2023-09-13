@@ -10,7 +10,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -63,7 +62,7 @@ public class Item {
 	private BigDecimal chanceAcertoCasual; // Probabilidade? // c // [0, 1]
 	
 	@ManyToOne // cascade?
-	@JoinColumn(nullable = false)
+//	@JoinColumn(nullable = false) // por enquanto, nullable
 	private Prova prova; // temp
 	
 	@Column(nullable = false)

@@ -1,3 +1,4 @@
+package br.ifsul.enemsim.foraporenquanto;
 //package br.ifsul.enemsim.tempnot;
 //
 //import org.springframework.data.jpa.repository.JpaRepository;

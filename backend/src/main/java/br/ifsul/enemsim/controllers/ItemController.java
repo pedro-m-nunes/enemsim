@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
+import br.ifsul.enemsim.entidades.perfis.Estudante;
 import br.ifsul.enemsim.repositories.ItemRepository;
 
 @RestController
@@ -36,5 +37,10 @@ public class ItemController {
 	}
 	
 	// saveAll
+	
+	@GetMapping("/itens-nao-acertados/{estudanteId}")
+	public int getItensNaoAcertadosPorEstudante(@PathVariable Integer estudanteId) {
+		return itemRepository.getItensNaoAcertadosPorEstudante(new Estudante(estudanteId)).size();
+	}
 	
 }
