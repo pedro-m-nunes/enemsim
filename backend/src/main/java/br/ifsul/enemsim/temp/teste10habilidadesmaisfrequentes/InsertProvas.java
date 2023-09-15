@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.temp;
+package br.ifsul.enemsim.temp.teste10habilidadesmaisfrequentes;
 
 import java.time.Year;
 import java.util.LinkedHashSet;
@@ -16,7 +16,7 @@ import jakarta.annotation.PostConstruct;
 public class InsertProvas {
 
 	@Autowired
-	private ProvaRepository provaRepository;
+	private ProvaRepository provaRepository; // controller?
 	
 	@PostConstruct
 	public void run() {
@@ -28,7 +28,7 @@ public class InsertProvas {
 			provas.add(new Prova(Year.of(2020), Cor.AMARELO));
 			provas.add(new Prova(Year.of(2019), Cor.AMARELO));
 			provas.add(new Prova(Year.of(2018), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2017), Cor.AMARELO));
+			// sem 2017 mesmo
 			provas.add(new Prova(Year.of(2016), Cor.AMARELO));
 			provas.add(new Prova(Year.of(2015), Cor.AMARELO));
 			

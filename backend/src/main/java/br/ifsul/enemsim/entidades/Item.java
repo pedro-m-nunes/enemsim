@@ -29,7 +29,7 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false) // por enquanto, nullable
 	private String imagemSrc; // ""?
 	
 	@Enumerated(EnumType.STRING)
