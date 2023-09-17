@@ -27,6 +27,8 @@ public class Distribuicao {
 		}
 	}
 	
+	// public Distribuicao(Filtro[] filtros, Integer quantidadeDeCada)
+	
 	public int size() {
 		return filtros.length;
 	}

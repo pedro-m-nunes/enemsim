@@ -27,11 +27,11 @@ public class Simulado {
 	private Integer id;
 	
 	@ManyToOne // cascade? mappedBy?
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false) // nullable?
 	private Estudante estudante; // precisa fazer estudante e usuário primeiro...
 	
 	@Column(nullable = false)
-	private Boolean finalizado = false; // default = false
+	private Boolean finalizado = false;
 	
 	// data de criação e finalização? // tempo para finalizar? tempo levado para finalizar?
 	

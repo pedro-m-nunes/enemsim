@@ -27,6 +27,8 @@ public class InsertItens {
 		if(itemRepository.count() == 0) {
 			Set<Item> itens = new LinkedHashSet<>();
 			
+			// adicionar mesmo itens inválidos?
+			
 			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 6), new BigDecimal("2.15675"), new BigDecimal("0.94349"), new BigDecimal("0.17590"), new Prova(7), (short) 143));
 			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 7), new BigDecimal("3.46951"), new BigDecimal("4.11405"), new BigDecimal("0.12580"), new Prova(7), (short) 145));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 5), new BigDecimal("1.03003"), new BigDecimal("2.09956"), new BigDecimal("0.17070"), new Prova(7), (short) 148));

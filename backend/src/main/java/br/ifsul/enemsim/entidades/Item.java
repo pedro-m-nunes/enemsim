@@ -10,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -36,6 +37,7 @@ public class Item {
 	private Resposta respostaCerta;
 	
 	@ManyToOne
+	@JoinColumn(nullable = false) // nullable?
 	private Habilidade habilidade;
 	
 //	@ManyToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Disciplina
@@ -46,20 +48,20 @@ public class Item {
 //	@JoinColumn(name = "item_id")
 //	private Set<Resolucao> resolucoes;
 	
-	@Column(nullable = false)
-	private Integer tentativas = 0; // ? // default = 0 // (0, inf)
+//	@Column(nullable = false)
+//	private Integer tentativas = 0; // ? // (0, inf)
 	
-	@Column(nullable = false)
-	private Integer tentativasCertas = 0; // ? // default = 0 // (0, attempts]
+//	@Column(nullable = false)
+//	private Integer tentativasCertas = 0; // ? // (0, attempts]
 	
-	@Column(precision = 6, scale = 5)
-	private BigDecimal discriminacao; // a // (0, inf) // (0, 3]
+	@Column(precision = 6, scale = 5) // nullable?
+	private BigDecimal discriminacao;
 	
-	@Column(precision = 6, scale = 5)
-	private BigDecimal dificuldade; // b // (-inf, inf) // [-3, 3], [-4, 4]
+	@Column(precision = 6, scale = 5) // nullable?
+	private BigDecimal dificuldade;
 	
-	@Column(precision = 6, scale = 5)
-	private BigDecimal chanceAcertoCasual; // Probabilidade? // c // [0, 1]
+	@Column(precision = 6, scale = 5) // nullable?
+	private BigDecimal chanceAcertoCasual; // Probabilidade?
 	
 	@ManyToOne // cascade?
 //	@JoinColumn(nullable = false) // por enquanto, nullable
@@ -87,8 +89,8 @@ public class Item {
 	
 	// construtor com restrições?
 	
-	public boolean isValido() {
-		return discriminacao != null && dificuldade != null && chanceAcertoCasual != null && respostaCerta != null && habilidade != null;
-	}
+//	public boolean isValido() {
+//		return discriminacao != null && dificuldade != null && chanceAcertoCasual != null && respostaCerta != null && habilidade != null;
+//	}
 	
 }

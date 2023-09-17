@@ -12,6 +12,13 @@ import br.ifsul.enemsim.entidades.perfis.Estudante;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
+	public List<Item> findByHabilidadeOrderByDificuldade(Habilidade habilidade);
+	
+	@Query("SELECT i FROM Item i WHERE i.respostaCerta IS NOT NULL AND i.discriminacao IS NOT NULL AND i.dificuldade IS NOT NULL AND i.chanceAcertoCasual IS NOT NULL")
+	public List<Item> findAllValidos(); // ? // testar
+	
+	// ver Optional
+	
 	public List<Item> findByHabilidadeAndDificuldadeBetween(Habilidade habilidade, BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
 	
 	public List<Item> findByHabilidadeAndDificuldadeGreaterThanEqual(Habilidade habilidade, BigDecimal dificuldadeMinima);
@@ -32,8 +39,11 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	@Query("SELECT i FROM Item i WHERE i.id NOT IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s INNER JOIN si.item i WHERE s.estudante = ?1 AND i.respostaCerta = si.resposta AND si.simulado.finalizado = TRUE)")
 	public List<Item> getItensNaoAcertadosPorEstudante(Estudante estudante);
 	
-	// itens já/não feitos?
+	// itens já/não feitos? (acertados ou não)
 	
-	public List<Item> findByHabilidadeOrderByDificuldade(Habilidade habilidade); // testar
+//	@Query("SELECT i.id FROM Item i WHERE i.id IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s INNER JOIN si.item i WHERE s.estudante = ?1)")
+//	public List<Integer> getIdsDeItensJaAdicionadosEmAlgumSimulado(Estudante estudante); // para os de nivelamento
+//	
+//	public List<Item> findByIdInAndIdNotIn(Iterable<Integer> ids, Iterable<Integer> idsExcluidos); // ?
 	
 }

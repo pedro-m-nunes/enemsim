@@ -3,15 +3,15 @@ Algumas anotações.
 IMPORTANTE:
 - Por uma questão de tempo e prioridades, um item poderá ser somente de uma prova por enquanto.
 - Na geração de simulados, devem ser ignorados os itens com resposta ou com parâmetros da TRI nulos.
+- (Alta prioridade) Passar as questões dos microdados para esse banco (10 habilidades mais frequentes).
+- Geração de simulados padrão.
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
-- Geração de simulados padrão.
-- (Alta prioridade) Passar as questões dos microdados para esse banco (10 habilidades mais frequentes).
+- Geração de simulado de nivelamento usando os itens já acertados/feitos/adicionados.
 
 COISAS A FAZER:
-- Busca e geração usando as questões com dificuldade próximas à mediana.
+- Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
 - Atualizar testes unitários do gerador de simulados.
 - EstudanteHabilidade (?).
 - Insert de provas e itens de provas.
@@ -25,6 +25,7 @@ PROBLEMAS ENCONTRADOS:
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
+- Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
 - Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?

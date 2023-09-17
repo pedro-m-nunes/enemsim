@@ -30,6 +30,8 @@ public class SimuladoGerado { // ??? // public?
 			simuladoItens.add(new SimuladoItem(simulado, item));
 		
 		simuladoItemRepository.saveAll(simuladoItens);
+		
+		// itens = salvos.getItem() ?
 	}
 	
 //	

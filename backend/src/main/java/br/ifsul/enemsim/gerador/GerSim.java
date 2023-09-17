@@ -18,15 +18,24 @@ import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.ItemRepository;
 
 @Component
+@Deprecated
 public class GerSim { // ""?
 	
-	@Autowired // ?
-	private ItemRepository itemRepository;
+	// boolean usaItensFeitos?
 	
+	// como atributos do gerador ou parâmetros dos métodos?
+	// usarItensAnulados = false => findByRespostaNotNull()
+	// usarItensJaRespondidos = false => findByIdNotIn(jaRespondidos)
+	
+	@Autowired // ?
+	private ItemRepository itemRepository; // controller?
+	
+	// Método que gera o Simulado, chamando os demais métodos.
 	public SimuladoGerado gerarSimulado(Estudante estudante, Distribuicao distribuicao) throws DadosInsuficientesException { // ? // (estudante, adaptacao)
 		return distribuirItens(estudante, distribuicao);
 	}
 	
+	// Seleciona todos os itens, com base na Distribuicao informada.
 	private SimuladoGerado distribuirItens(Estudante estudante, Distribuicao distribuicao) throws DadosInsuficientesException {
 		if(distribuicao == null)
 			throw new IllegalArgumentException("Uma distribuição nula não pode ser usada para gerar um simulado."); // exception própria?
@@ -40,9 +49,10 @@ public class GerSim { // ""?
 		return instanciarSimulado(estudante, itensSelecionados);
 	}
 	
+	// Seleciona o banco de itens a partir de um Filtro.
 	private Set<Item> filtrarItens(Estudante estudante, int quantidade, Filtro filtro) throws DadosInsuficientesException {
 		if(filtro == null)
-			return escolherItens(quantidade, new LinkedHashSet<>(itemRepository.getItensNaoAcertadosPorEstudante(estudante)));
+			return selecionarItens(quantidade, new LinkedHashSet<>(itemRepository.findAll()));
 		
 		List<Item> itensBanco;
 		
@@ -50,34 +60,40 @@ public class GerSim { // ""?
 		BigDecimal dificuldadeMin = filtro.getDificuldadeMin();
 		BigDecimal dificuldadeMax = filtro.getDificuldadeMax();
 		
+		// usar estudante em todos!
+		
 		// que horror... (mas não sei como fazer de outra forma)
-		if(habilidade != null) // V..
-			if(dificuldadeMin != null) // VV.
+		if(habilidade != null) // Vxx
+			if(dificuldadeMin != null) // VVx
 				if(dificuldadeMax != null) // VVV
 					itensBanco = itemRepository.findByHabilidadeAndDificuldadeBetween(habilidade, dificuldadeMin, dificuldadeMax);
 				else // VVF
 					itensBanco = itemRepository.findByHabilidadeAndDificuldadeGreaterThanEqual(habilidade, dificuldadeMin);
-			else // VF.
+			else // VFx
 				if(dificuldadeMax != null) // VFV
 					itensBanco = itemRepository.findByHabilidadeAndDificuldadeLessThanEqual(habilidade, dificuldadeMax);
 				else // VFF
 					itensBanco = itemRepository.findByHabilidade(habilidade);
-		else // F..
-			if(dificuldadeMin != null) // FV.
+		else // Fxx
+			if(dificuldadeMin != null) // FVx
 				if(dificuldadeMax != null) // FVV
 					itensBanco = itemRepository.findByDificuldadeBetween(dificuldadeMin, dificuldadeMax);
 				else // FVF
 					itensBanco = itemRepository.findByDificuldadeGreaterThanEqual(dificuldadeMin);
-			else // FF.
+			else // FFx
 				if(dificuldadeMax != null) // FFV
 					itensBanco = itemRepository.findByDificuldadeLessThanEqual(dificuldadeMax);
 				else // FFF
-					itensBanco = itemRepository.getItensNaoAcertadosPorEstudante(estudante);
-				
-		return escolherItens(quantidade, new LinkedHashSet<>(itensBanco));
+					itensBanco = itemRepository.findAll();
+		
+		// itens válidos
+		// itens já/não feitos
+		
+		return selecionarItens(quantidade, new LinkedHashSet<>(itensBanco));
 	}
 
-	private Set<Item> escolherItens(int quantidade, Set<Item> itens) throws DadosInsuficientesException {
+	// Seleciona aleatoriamente os itens que irão para o Simulado, a partir de um conjunto informado.
+	private Set<Item> selecionarItens(int quantidade, Set<Item> itens) throws DadosInsuficientesException {
 		if(quantidade <= 0)
 			throw new IllegalArgumentException("Não se pode gerar um simulado com menos de um item."); // exception própria?
 		
@@ -102,15 +118,12 @@ public class GerSim { // ""?
 		return itensSelecionados;
 	}
 	
+	// Instancia o simulado gerado, em uma classe própria com o simulado e seus itens.
 	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) { // "instanciar"?
 		Simulado simulado = new Simulado(estudante); /*coisas para instanciar simulado, ou o próprio simulado*/ // parâmetros/atributos
 		
 		return new SimuladoGerado(simulado, itensSelecionados);
 	}
-	
-	// como atributos do gerador ou parâmetros dos métodos?
-	// usarItensAnulados = false => findByRespostaNotNull()
-	// usarItensJaRespondidos = false => findByIdNotIn(jaRespondidos)
 		
 //	public SimuladoGerado gerarSimuladoPadronizado(/*Estudante estudante*/) {
 //		// selecionar um item aleatório entre os três mais próximos da mediana da dificuldade, de cada uma das 10 habilidades mais frequentes, que o estudante não tenha feito ainda.
