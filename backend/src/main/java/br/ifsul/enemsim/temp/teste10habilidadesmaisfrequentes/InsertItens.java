@@ -27,7 +27,7 @@ public class InsertItens {
 		if(itemRepository.count() == 0) {
 			Set<Item> itens = new LinkedHashSet<>();
 			
-			// adicionar mesmo itens inválidos?
+			// adicionar itens inválidos?
 			
 			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 6), new BigDecimal("2.15675"), new BigDecimal("0.94349"), new BigDecimal("0.17590"), new Prova(7), (short) 143));
 			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 7), new BigDecimal("3.46951"), new BigDecimal("4.11405"), new BigDecimal("0.12580"), new Prova(7), (short) 145));
@@ -66,7 +66,7 @@ public class InsertItens {
 			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 4), new BigDecimal("3.05583"), new BigDecimal("1.34943"), new BigDecimal("0.10809"), new Prova(5), (short) 137));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 5), new BigDecimal("2.66415"), new BigDecimal("1.64983"), new BigDecimal("0.09545"), new Prova(5), (short) 139));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 2), new BigDecimal("2.43503"), new BigDecimal("1.63320"), new BigDecimal("0.12168"), new Prova(5), (short) 149));
-			itens.add(new Item(null, null, new Habilidade((byte) 4), null, null, null, new Prova(5), (short) 150));
+//			itens.add(new Item(null, null, new Habilidade((byte) 4), null, null, null, new Prova(5), (short) 150));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 8), new BigDecimal("1.25148"), new BigDecimal("0.88381"), new BigDecimal("0.13308"), new Prova(5), (short) 156));
 			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 9), new BigDecimal("1.47034"), new BigDecimal("3.31311"), new BigDecimal("0.14240"), new Prova(5), (short) 157));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 3), new BigDecimal("2.55414"), new BigDecimal("2.66770"), new BigDecimal("0.22815"), new Prova(5), (short) 159));
@@ -103,7 +103,7 @@ public class InsertItens {
 			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 7), new BigDecimal("2.58330"), new BigDecimal("1.63345"), new BigDecimal("0.16356"), new Prova(4), (short) 180));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 5), new BigDecimal("1.20090"), new BigDecimal("0.84968"), new BigDecimal("0.16359"), new Prova(3), (short) 137));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 7), new BigDecimal("3.29625"), new BigDecimal("2.86173"), new BigDecimal("0.25529"), new Prova(3), (short) 139));
-			itens.add(new Item(null, null, new Habilidade((byte) 10), null, null, null, new Prova(3), (short) 141));
+//			itens.add(new Item(null, null, new Habilidade((byte) 10), null, null, null, new Prova(3), (short) 141));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 3), new BigDecimal("1.78193"), new BigDecimal("3.29884"), new BigDecimal("0.18914"), new Prova(3), (short) 142));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 4), new BigDecimal("0.96583"), new BigDecimal("2.50648"), new BigDecimal("0.20490"), new Prova(3), (short) 143));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 1), new BigDecimal("2.18282"), new BigDecimal("2.31084"), new BigDecimal("0.14885"), new Prova(3), (short) 147));
@@ -150,13 +150,13 @@ public class InsertItens {
 			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 5), new BigDecimal("0.90320"), new BigDecimal("2.45135"), new BigDecimal("0.16170"), new Prova(1), (short) 158));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 1), new BigDecimal("1.18017"), new BigDecimal("1.92189"), new BigDecimal("0.16856"), new Prova(1), (short) 159));
 			itens.add(new Item(null, Resposta.B, new Habilidade((byte) 3), new BigDecimal("1.57712"), new BigDecimal("3.30111"), new BigDecimal("0.16855"), new Prova(1), (short) 161));
-			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 10), null, null, null, new Prova(1), (short) 162));
+//			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 10), null, null, null, new Prova(1), (short) 162));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 5), new BigDecimal("0.79395"), new BigDecimal("2.40685"), new BigDecimal("0.11290"), new Prova(1), (short) 163));
 			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 8), new BigDecimal("2.81078"), new BigDecimal("0.63977"), new BigDecimal("0.16335"), new Prova(1), (short) 168));
 			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 6), new BigDecimal("2.93886"), new BigDecimal("2.57768"), new BigDecimal("0.12028"), new Prova(1), (short) 169));
 			itens.add(new Item(null, Resposta.B, new Habilidade((byte) 2), new BigDecimal("2.17147"), new BigDecimal("2.54230"), new BigDecimal("0.18410"), new Prova(1), (short) 177));
 			
-			itemRepository.saveAll(itens); // ver se não houve nenhum erro ou dado modificado dos microdados do Inep
+			itemRepository.saveAll(itens);
 		}
 	}
 	

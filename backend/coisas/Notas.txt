@@ -8,9 +8,9 @@ IMPORTANTE:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- Geração de simulado de nivelamento usando os itens já acertados/feitos/adicionados.
 
 COISAS A FAZER:
+- (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
 - Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
 - Atualizar testes unitários do gerador de simulados.
 - EstudanteHabilidade (?).

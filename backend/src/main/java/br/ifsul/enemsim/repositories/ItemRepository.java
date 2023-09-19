@@ -41,9 +41,7 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	// itens já/não feitos? (acertados ou não)
 	
-//	@Query("SELECT i.id FROM Item i WHERE i.id IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s INNER JOIN si.item i WHERE s.estudante = ?1)")
-//	public List<Integer> getIdsDeItensJaAdicionadosEmAlgumSimulado(Estudante estudante); // para os de nivelamento
-//	
-//	public List<Item> findByIdInAndIdNotIn(Iterable<Integer> ids, Iterable<Integer> idsExcluidos); // ?
-	
+	@Query("SELECT i FROM Item i WHERE i IN ?1 AND i.id NOT IN (SELECT si.item.id FROM SimuladoItem si INNER JOIN si.simulado s WHERE s.estudante = ?2)")
+	public List<Item> getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(Iterable<Item> conjuntoItens, Estudante estudante);
+
 }
