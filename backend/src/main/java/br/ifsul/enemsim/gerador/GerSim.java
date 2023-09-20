@@ -122,18 +122,31 @@ public class GerSim {
 	 * Instanciar simulado.
 	 */
 	
-	@GetMapping("/itens/abaixo/{id}") // temp
-	private List<Item> pegarOsItensAbaixoDosTresMedianos(@PathVariable byte id) {
-		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(new Habilidade(id));
+	@GetMapping("/itens/abaixo/{id}")
+	private List<Item> pegarOsItensAbaixoDosTresMedianos(Habilidade habilidade) {
+		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
 		
 		return itens.subList(0, itens.size() / 2 - 1);
 	}
 	
-	@GetMapping("/itens/acima/{id}") // temp
-	private List<Item> pegarOsItensAcimaDosTresMedianos(@PathVariable byte id) {
-		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(new Habilidade(id));
+	@GetMapping("/itens/acima/{id}")
+	private List<Item> pegarOsItensAcimaDosTresMedianos(Habilidade habilidade) {
+		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
 		
 		return itens.subList(itens.size() / 2 + 2, itens.size());
 	}
+	
+	// Como se dá a edição do simulado? Respostas do usuário...?
+	
+	/* Itens por desempenho - primeiro simulado adaptado
+	 * 
+	 * 0 acertos: -2 em relação aos medianos; -3 em relação à mediana.
+	 * 1 acerto : -1; -2.
+	 * 2 acertos: +1; +2.
+	 * 3 acertos: +2; +3.
+	 * 
+	 * Usada uma habilidade com 13 itens para chegar nesses números - faz sentido com 12 também.
+	 * Fazer com que esses números dependam do número de itens da habilidade?
+	 */
 	
 }

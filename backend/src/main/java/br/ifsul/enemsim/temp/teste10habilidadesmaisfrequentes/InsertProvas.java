@@ -23,14 +23,14 @@ public class InsertProvas {
 		if(provaRepository.count() == 0) {
 			Set<Prova> provas = new LinkedHashSet<>();
 			
-			provas.add(new Prova(Year.of(2022), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2021), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2020), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2019), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2018), Cor.AMARELO));
+			provas.add(new Prova(Year.of(2022), Cor.AMARELO)); // id = 1
+			provas.add(new Prova(Year.of(2021), Cor.AMARELO)); // id = 2
+			provas.add(new Prova(Year.of(2020), Cor.AMARELO)); // id = 3
+			provas.add(new Prova(Year.of(2019), Cor.AMARELO)); // id = 4
+			provas.add(new Prova(Year.of(2018), Cor.AMARELO)); // id = 5
 			// sem 2017 mesmo
-			provas.add(new Prova(Year.of(2016), Cor.AMARELO));
-			provas.add(new Prova(Year.of(2015), Cor.AMARELO));
+			provas.add(new Prova(Year.of(2016), Cor.AMARELO)); // id = 6
+			provas.add(new Prova(Year.of(2015), Cor.AMARELO)); // id = 7
 			
 			provaRepository.saveAll(provas);
 		}

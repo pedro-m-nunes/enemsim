@@ -31,7 +31,7 @@ public class Item {
 	private Integer id;
 	
 //	@Column(nullable = false) // por enquanto, nullable
-	private String imagemSrc; // ""?
+	private String imagemSrc; // ""? // "driveImgId"...?
 	
 	@Enumerated(EnumType.STRING)
 	private Resposta respostaCerta;
@@ -54,13 +54,13 @@ public class Item {
 //	@Column(nullable = false)
 //	private Integer tentativasCertas = 0; // ? // (0, attempts]
 	
-	@Column(precision = 6, scale = 5) // nullable?
+	@Column(precision = 6, scale = 5, nullable = false) // nullable?
 	private BigDecimal discriminacao;
 	
-	@Column(precision = 6, scale = 5) // nullable?
+	@Column(precision = 6, scale = 5, nullable = false) // nullable?
 	private BigDecimal dificuldade;
 	
-	@Column(precision = 6, scale = 5) // nullable?
+	@Column(precision = 6, scale = 5, nullable = false) // nullable?
 	private BigDecimal chanceAcertoCasual; // Probabilidade?
 	
 	@ManyToOne // cascade?
