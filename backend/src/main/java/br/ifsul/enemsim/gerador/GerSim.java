@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.perfis.Estudante;
+import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;

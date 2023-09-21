@@ -28,15 +28,14 @@ public class InsertItens {
 			Set<Item> itens = new LinkedHashSet<>();
 			
 			// adicionar itens inválidos?
-			// salvar somente o "id" do link?
 			
-			itens.add(new Item("https://drive.google.com/file/d/1B8nxgFiM_p15LadNKj1Brw-1m2TYvD0a/preview", Resposta.A, new Habilidade((byte) 6), new BigDecimal("2.15675"), new BigDecimal("0.94349"), new BigDecimal("0.17590"), new Prova(7), (short) 143));
-			itens.add(new Item("https://drive.google.com/file/d/1WIcRrcIXKyZo7lZzZApeMoQFmfE2F0WS/preview", Resposta.A, new Habilidade((byte) 7), new BigDecimal("3.46951"), new BigDecimal("4.11405"), new BigDecimal("0.12580"), new Prova(7), (short) 145));
-			itens.add(new Item("https://drive.google.com/file/d/15Ah9-EPtcPmJ6YwqnZoqdYfVLWZiLLkn/preview", Resposta.E, new Habilidade((byte) 5), new BigDecimal("1.03003"), new BigDecimal("2.09956"), new BigDecimal("0.17070"), new Prova(7), (short) 148));
-			itens.add(new Item("https://drive.google.com/file/d/1LfxUF60W2UZxGMlFNS1rYkydbW7K4-ZT/preview", Resposta.D, new Habilidade((byte) 10), new BigDecimal("3.41203"), new BigDecimal("3.87930"), new BigDecimal("0.05419"), new Prova(7), (short) 149));
-			itens.add(new Item("https://drive.google.com/file/d/1pXJJtavxGzdKmGaaJzm3mu9joAq1LtRn/preview", Resposta.C, new Habilidade((byte) 8), new BigDecimal("2.15388"), new BigDecimal("2.04178"), new BigDecimal("0.28781"), new Prova(7), (short) 150));
-			itens.add(new Item(null, Resposta.A, new Habilidade((byte) 6), new BigDecimal("1.42194"), new BigDecimal("1.80813"), new BigDecimal("0.27450"), new Prova(7), (short) 151));
-			itens.add(new Item(null, Resposta.D, new Habilidade((byte) 3), new BigDecimal("0.87277"), new BigDecimal("2.82511"), new BigDecimal("0.21108"), new Prova(7), (short) 152));
+			itens.add(new Item("1B8nxgFiM_p15LadNKj1Brw-1m2TYvD0a", Resposta.A, new Habilidade((byte) 6), new BigDecimal("2.15675"), new BigDecimal("0.94349"), new BigDecimal("0.17590"), new Prova(7), (short) 143));
+			itens.add(new Item("1WIcRrcIXKyZo7lZzZApeMoQFmfE2F0WS", Resposta.A, new Habilidade((byte) 7), new BigDecimal("3.46951"), new BigDecimal("4.11405"), new BigDecimal("0.12580"), new Prova(7), (short) 145));
+			itens.add(new Item("15Ah9-EPtcPmJ6YwqnZoqdYfVLWZiLLkn", Resposta.E, new Habilidade((byte) 5), new BigDecimal("1.03003"), new BigDecimal("2.09956"), new BigDecimal("0.17070"), new Prova(7), (short) 148));
+			itens.add(new Item("1LfxUF60W2UZxGMlFNS1rYkydbW7K4-ZT", Resposta.D, new Habilidade((byte) 10), new BigDecimal("3.41203"), new BigDecimal("3.87930"), new BigDecimal("0.05419"), new Prova(7), (short) 149));
+			itens.add(new Item("1pXJJtavxGzdKmGaaJzm3mu9joAq1LtRn", Resposta.C, new Habilidade((byte) 8), new BigDecimal("2.15388"), new BigDecimal("2.04178"), new BigDecimal("0.28781"), new Prova(7), (short) 150));
+			itens.add(new Item("1zCqwRn7DOn8t8xqbrMH3PiJDtpKtRqOb", Resposta.A, new Habilidade((byte) 6), new BigDecimal("1.42194"), new BigDecimal("1.80813"), new BigDecimal("0.27450"), new Prova(7), (short) 151));
+			itens.add(new Item("1T3mRNF2jgA4QhdM-bu2h7yeuMfyh-t8o", Resposta.D, new Habilidade((byte) 3), new BigDecimal("0.87277"), new BigDecimal("2.82511"), new BigDecimal("0.21108"), new Prova(7), (short) 152));
 			itens.add(new Item(null, Resposta.E, new Habilidade((byte) 3), new BigDecimal("1.16472"), new BigDecimal("3.02993"), new BigDecimal("0.10360"), new Prova(7), (short) 155));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 5), new BigDecimal("1.98262"), new BigDecimal("2.01086"), new BigDecimal("0.12481"), new Prova(7), (short) 156));
 			itens.add(new Item(null, Resposta.C, new Habilidade((byte) 4), new BigDecimal("1.74587"), new BigDecimal("2.17499"), new BigDecimal("0.30318"), new Prova(7), (short) 162));

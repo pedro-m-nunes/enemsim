@@ -31,7 +31,7 @@ public class Item {
 	private Integer id;
 	
 //	@Column(nullable = false) // por enquanto, nullable
-	private String imagemSrc; // ""? // "driveImgId"...?
+	private String imagemDriveId;
 	
 	@Enumerated(EnumType.STRING)
 	private Resposta respostaCerta;
@@ -65,14 +65,14 @@ public class Item {
 	
 	@ManyToOne // cascade?
 //	@JoinColumn(nullable = false) // por enquanto, nullable
-	private Prova prova; // temp
+	private Prova prova; // temp, N:N
 	
 	@Column(nullable = false)
-	private Short numero; // temp
+	private Short numero; // temp, N:N
 	
-	public Item(String imagemSrc, Resposta respostaCerta, Habilidade habilidade, BigDecimal discriminacao, BigDecimal dificuldade, BigDecimal chanceAcertoCasual, Prova prova, Short numero) {
+	public Item(String imagemDriveId, Resposta respostaCerta, Habilidade habilidade, BigDecimal discriminacao, BigDecimal dificuldade, BigDecimal chanceAcertoCasual, Prova prova, Short numero) {
 		super();
-		this.imagemSrc = imagemSrc;
+		this.imagemDriveId = imagemDriveId;
 		this.respostaCerta = respostaCerta;
 		this.habilidade = habilidade;
 		this.discriminacao = discriminacao;

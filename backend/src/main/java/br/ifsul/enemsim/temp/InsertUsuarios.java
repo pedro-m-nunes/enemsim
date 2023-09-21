@@ -3,8 +3,9 @@ package br.ifsul.enemsim.temp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Usuario;
-import br.ifsul.enemsim.entidades.perfis.Estudante;
+import br.ifsul.enemsim.entidades.usuarios.Administrador;
+import br.ifsul.enemsim.entidades.usuarios.Estudante;
+import br.ifsul.enemsim.entidades.usuarios.Professor;
 import br.ifsul.enemsim.repositories.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
 
@@ -16,10 +17,12 @@ public class InsertUsuarios {
 
 	@PostConstruct
 	public void run() {
-		usuarioRepository.save(new Usuario("pedromn", "123", "Pedro", new Estudante()));
-		usuarioRepository.save(new Usuario("joaoguiss", "123", "João", new Estudante()));
-		usuarioRepository.save(new Usuario("MonicaPy", "123", "Mônica", null));
-		usuarioRepository.save(new Usuario("Ping Pong Robert", "123", "Roberto", null));
+		usuarioRepository.save(new Estudante("pedromn", "123456", "Pedro"));
+		usuarioRepository.save(new Administrador("ademirP", "654321", "Pedro"));
+		usuarioRepository.save(new Estudante("joaoguiss", "123456", "João"));
+		usuarioRepository.save(new Administrador("ademirJ", "654321", "João"));
+		usuarioRepository.save(new Professor("MonicaPy", "123456", "Mônica"));
+		usuarioRepository.save(new Professor("Ping Pong Robert", "123456", "Roberto"));
 	}
 
 }

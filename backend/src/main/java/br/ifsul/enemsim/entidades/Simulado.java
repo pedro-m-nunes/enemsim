@@ -1,8 +1,6 @@
 package br.ifsul.enemsim.entidades;
 
-import java.math.BigDecimal;
-
-import br.ifsul.enemsim.entidades.perfis.Estudante;
+import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +33,7 @@ public class Simulado {
 	
 	// data de criação e finalização? // tempo para finalizar? tempo levado para finalizar?
 	
-	private BigDecimal escore; // "pontuacao"?
+//	private BigDecimal escore; // "pontuacao"?
 	
 //	@Enumerated(EnumType.STRING)
 //	private Adaptacao adaptacao; // not null? meio que essa modelagem não faz sentido para simulados padronizados

@@ -14,11 +14,11 @@ COISAS A FAZER:
 - Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
 - Atualizar testes unitários do gerador de simulados.
 - EstudanteHabilidade (?).
+- Colocar validation.constraints nas entidades, onde for necessário.
 - Insert de provas e itens de provas.
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
-- (Não nesse sistema) Código para extrair os atributos dos itens dos microdados do Inep.
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
@@ -27,20 +27,15 @@ PROBLEMAS ENCONTRADOS:
 DÚVIDAS/IDEIAS:
 - Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
 - Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
-- Qual a melhor forma de deixar valores padrão para os atributos?
 - Como usar cascade nos relacionamentos?
-- Qual a melhor forma de manipular as entidades relacionais (SimuladoItem, ProvaItem...)?
-- Usar HashSet (sem ordenação) ou LinkedHashSet (com ordenação)?
-- Colocar alguns atributos como final (Simulado.adaptacao)?
-- Usar javax.validation.constraints?
+- Colocar alguns atributos como final? (Simulado.adaptacao)
 - Usar @Basic?
 - Usar @Transactional?
-- Qual a melhor forma de fazer perfis de usuário?
 - Usar Postgres ou MySQL?
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
-- ...
+- ... (bastante coisa)
 
 PRECISA DE PESQUISA:
 - Spring Security (user...)

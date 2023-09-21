@@ -8,16 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.perfis.Estudante;
+import br.ifsul.enemsim.entidades.usuarios.Estudante;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	public List<Item> findByHabilidadeOrderByDificuldade(Habilidade habilidade);
 	
-	@Query("SELECT i FROM Item i WHERE i.respostaCerta IS NOT NULL AND i.discriminacao IS NOT NULL AND i.dificuldade IS NOT NULL AND i.chanceAcertoCasual IS NOT NULL")
-	public List<Item> findAllValidos(); // ? // testar
-	
-	// ver Optional
+//	@Query("SELECT i FROM Item i WHERE i.respostaCerta IS NOT NULL AND i.discriminacao IS NOT NULL AND i.dificuldade IS NOT NULL AND i.chanceAcertoCasual IS NOT NULL")
+//	public List<Item> findAllValidos(); // ? // testar
 	
 	public List<Item> findByHabilidadeAndDificuldadeBetween(Habilidade habilidade, BigDecimal dificuldadeMinima, BigDecimal dificuldadeMaxima);
 	
