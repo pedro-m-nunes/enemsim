@@ -1,3 +1,4 @@
+package br.ifsul.enemsim.foraporenquanto;
 //package br.ifsul.enemsim.entidades.relacionais;
 //
 //import java.math.BigDecimal;

@@ -6,4 +6,7 @@ import br.ifsul.enemsim.entidades.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
+//	@Query(nativeQuery = true, value = "")
+//	public List<Usuario> findByDiscriminatorValue();
+	
 }

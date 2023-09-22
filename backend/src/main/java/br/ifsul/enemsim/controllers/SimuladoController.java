@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.usuarios.Estudante;
+import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
+import br.ifsul.enemsim.gerador.GerSim;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
+import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
 @RestController
 @RequestMapping("/simulado")
@@ -20,6 +24,9 @@ public class SimuladoController {
 
 	@Autowired
 	private SimuladoRepository simuladoRepository;
+	
+	@Autowired
+	private SimuladoItemRepository simuladoItemRepository;
 	
 	@GetMapping
 	public List<Simulado> findAll() {
@@ -31,6 +38,9 @@ public class SimuladoController {
 		return simuladoRepository.findById(id).get();
 	}
 	
+	// save, saveAll
+	// delete, deleteAll
+	
 	@GetMapping("/{id}/itens")
 	public List<Item> getItensDoSimulado(@PathVariable Integer id) {
 		return simuladoRepository.getItensDoSimulado(id);
@@ -41,8 +51,21 @@ public class SimuladoController {
 		return simuladoRepository.findByEstudanteId(estudanteId);
 	}
 	
-	// gerarSimulado
+	// gerarSimulado (?)
+	
+	@Autowired
+	private GerSim gerSim;
+	
 	// gerarSimuladoDeNivelamento
+	@GetMapping("/gerarSimuladoDeNivelamento/estudante={estudanteId}") // ""?
+	public Object gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) { // Object? SimuladoGerado?
+		try {
+			return gerSim.gerarSimuladoDeNivelamento(new Estudante(estudanteId)).save(simuladoRepository, simuladoItemRepository);
+		} catch (DadosInsuficientesException e) {
+			return e.getMessage();
+		}
+	}
+	
 	// gerarSimuladoAdaptado
 	
 }

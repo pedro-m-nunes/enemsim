@@ -1,8 +1,6 @@
 package br.ifsul.enemsim.gerador;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import br.ifsul.enemsim.entidades.Item;
@@ -17,13 +15,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SimuladoGerado { // ??? // public?
+public class SimuladoGerado {
 	
 	private Simulado simulado;
 	
-	private final /* ? */ Set<Item> itens;
+	private Set<Item> itens;
 	
-	public void save(SimuladoRepository simuladoRepository, SimuladoItemRepository simuladoItemRepository) { // boolean? // ?
+	public SimuladoGerado save(SimuladoRepository simuladoRepository, SimuladoItemRepository simuladoItemRepository) { // SimuladoController?
 		simulado = simuladoRepository.save(getSimulado());
 		
 		Set<SimuladoItem> simuladoItens = new LinkedHashSet<>();
@@ -31,15 +29,9 @@ public class SimuladoGerado { // ??? // public?
 		for(Item item : itens)
 			simuladoItens.add(new SimuladoItem(simulado, item));
 		
-//		List<SimuladoItem> simuladoItensSalvos = // ???
 		simuladoItemRepository.saveAll(simuladoItens);
 		
-//		List<Item> itensSalvos = new ArrayList<>();
-//		
-//		for(SimuladoItem simuladoItem : simuladoItensSalvos)
-//			itensSalvos.add(simuladoItem.getItem());
+		return this;
 	}
-	
-//	
 
 }

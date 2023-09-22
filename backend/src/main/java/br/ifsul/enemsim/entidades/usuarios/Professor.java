@@ -18,8 +18,7 @@ public class Professor extends Usuario { // final?
 	
 //	@Transient
 //	public static String getDiscriminatorValue() { // ?
-//	    DiscriminatorValue value = Professor.class.getAnnotation(DiscriminatorValue.class);
-//	    return value.value();
+//	    return Professor.class.getAnnotation(DiscriminatorValue.class).value();
 //	}
 	
 	public Professor(Integer id) {

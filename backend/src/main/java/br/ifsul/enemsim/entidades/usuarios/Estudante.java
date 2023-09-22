@@ -18,8 +18,7 @@ public class Estudante extends Usuario /*implements ...?*/ { // final?
 	
 //	@Transient
 //	public static String getDiscriminatorValue() { // ?
-//	    DiscriminatorValue value = Estudante.class.getAnnotation(DiscriminatorValue.class);
-//	    return value.value();
+//	    return Estudante.class.getAnnotation(DiscriminatorValue.class).value();
 //	}
 	
 	// simulados? para poder usar cascade...

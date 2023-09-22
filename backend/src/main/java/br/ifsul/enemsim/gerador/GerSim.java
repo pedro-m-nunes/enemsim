@@ -9,7 +9,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,8 +19,6 @@ import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.repositories.SimuladoRepository;
-import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
 
 //@Component
 @RestController // temp?
@@ -32,32 +29,28 @@ public class GerSim {
 	private ItemRepository itemRepository; // controller?
 	
 	@Autowired
-	private HabilidadeRepository habilidadeRepository;
+	private HabilidadeRepository habilidadeRepository; // controller?
 	
-	// GERAR 3 SIMULADOS DE NIVELAMENTO PARA O TESTE
-	
-	@Autowired
-	private SimuladoRepository simuladoRepository;
-	
-	@Autowired
-	private SimuladoItemRepository simuladoItemRepository;
-	
-	@GetMapping("/{estudanteId}")
-	public SimuladoGerado salvaSimulado(@PathVariable int estudanteId) throws DadosInsuficientesException {
-		SimuladoGerado simulado = gerarSimuladoDeNivelamento(new Estudante(estudanteId));
-		
-		simulado.save(simuladoRepository, simuladoItemRepository);
-		
-		return simulado;
-	}
+//	@Autowired
+//	private SimuladoRepository simuladoRepository;
+//	
+//	@Autowired
+//	private SimuladoItemRepository simuladoItemRepository;
+//	
+//	@GetMapping("/{estudanteId}")
+//	public SimuladoGerado salvaSimulado(@PathVariable int estudanteId) throws DadosInsuficientesException { // temp?
+//		SimuladoGerado simulado = gerarSimuladoDeNivelamento(new Estudante(estudanteId));
+//		
+//		return simulado.save(simuladoRepository, simuladoItemRepository);
+//	}
 	
 	public SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
 		List<Item> itensSimulado = new ArrayList<>();
 		
-		for(Habilidade habilidade : habilidadeRepository.findAll()) // findAll por enquanto ok
+		for(Habilidade habilidade : habilidadeRepository.findAll()) // findAll por enquanto ok // findByIdIn...
 			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(habilidade)));
 		
-		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado));
+		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado)); // .save?
 	}
 	
 	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) {
@@ -75,23 +68,23 @@ public class GerSim {
 		if(itens == null)
 			throw new IllegalArgumentException("Não há como selecionar itens de uma lista nula."); // exception própria?
 		
-		List<Item> itensPossiveis = itemRepository.getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(Arrays.asList(itens), estudante);
+		List<Item> itensPossiveis = new ArrayList<>(new LinkedHashSet<>(itemRepository.getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(Arrays.asList(itens), estudante)));
 		
-		if(quantidade > itensPossiveis.size()) // ?
-			throw new DadosInsuficientesException("O banco de dados não possui itens o suficiente para selecionar a quantidade especificada.");
+		if(quantidade > itensPossiveis.size())
+			throw new DadosInsuficientesException("Todos os itens informados já foram apresentados ao estudante em outros simulados. O estudante já gerou os simulados de nivelamento disponíveis.");
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
 		Random random = new Random();
 		
-		while(itensSelecionados.size() < quantidade) { // pode rodar pra sempre? se não houverem questões diferentes o suficiente no banco... (Set como parâmetro resolve?)
+		while(itensSelecionados.size() < quantidade) { // pode rodar pra sempre? se não houverem questões diferentes o suficiente no banco... (acho que com Set não...)
 			itensSelecionados.add(itensPossiveis.get(random.nextInt(itensPossiveis.size())));
 		}
 		
 		return itensSelecionados;
 	}
 	
-	private Item[] pegarOsTresItensAoRedorDaDificuldadeMediana(Habilidade habilidade) { // ""?
+	private Item[] pegarOsTresItensAoRedorDaDificuldadeMediana(Habilidade habilidade) {
 		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
 		
 		int posicaoMediana = itens.size() / 2; // itens.size() / 2 - (1 - itens.size() % 2) // usar o valor da mediana para determinar se vai pegar o de cima ou de baixo?

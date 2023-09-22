@@ -18,8 +18,7 @@ public class Administrador extends Usuario { // final?
 	
 //	@Transient
 //	public static String getDiscriminatorValue() { // ?
-//	    DiscriminatorValue value = Administrador.class.getAnnotation(DiscriminatorValue.class);
-//	    return value.value();
+//	    return Administrador.class.getAnnotation(DiscriminatorValue.class).value();
 //	}
 	
 	public Administrador(Integer id) {

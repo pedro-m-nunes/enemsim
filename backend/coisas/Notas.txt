@@ -25,6 +25,9 @@ PROBLEMAS ENCONTRADOS:
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
 
 DÚVIDAS/IDEIAS:
+- Caminhos dos controllers: singular ou plural?
+- Cores das provas: masculino ou feminino?
+- Usar Repository ou Controller nos @Component?
 - Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
 - Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Como usar cascade nos relacionamentos?
@@ -32,6 +35,7 @@ DÚVIDAS/IDEIAS:
 - Usar @Basic?
 - Usar @Transactional?
 - Usar Postgres ou MySQL?
+- Como disponibilizar?
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
