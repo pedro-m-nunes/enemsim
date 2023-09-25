@@ -31,16 +31,16 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id; // precisa? nome de usuário como id?
 	
-	@Column(nullable = false, unique = true)
 	@NotNull
 	@NotBlank
 	@Size(min = 6, message = "O nome de usuário deve ter pelo menos 6 caracteres.") // max?
+	@Column(nullable = false, unique = true)
 	private String username; // ""? "login"?
 	
-	@Column(nullable = false)
 	@NotNull
 	@NotBlank
 	@Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres.") // max?
+	@Column(nullable = false)
 	private String senha; // criptografar...
 	
 	@NotBlank

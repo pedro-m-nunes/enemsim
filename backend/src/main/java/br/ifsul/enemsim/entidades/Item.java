@@ -12,6 +12,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,20 +29,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @EqualsAndHashCode
 @Entity
-public class Item {
+public class Item { // usar jakarta.validation.constraints?
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-//	@Column(nullable = false) // por enquanto, nullable
+	@NotNull
+	@NotBlank
+	@Column(nullable = false)
 	private String imagemDriveId;
 	
 	@Enumerated(EnumType.STRING)
 	private Resposta respostaCerta;
 	
+	@NotNull
 	@ManyToOne
-	@JoinColumn(nullable = false) // nullable?
+	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 	
 //	@ManyToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Disciplina
@@ -48,25 +56,37 @@ public class Item {
 //	@JoinColumn(name = "item_id")
 //	private Set<Resolucao> resolucoes;
 	
-//	@Column(nullable = false)
+//	@Column(nullable = false) // @PositiveOrZero
 //	private Integer tentativas = 0; // ? // (0, inf)
 	
-//	@Column(nullable = false)
+//	@Column(nullable = false) // @PositiveOrZero // @Max(tentativas)
 //	private Integer tentativasCertas = 0; // ? // (0, attempts]
 	
-	@Column(precision = 6, scale = 5, nullable = false) // nullable?
+	@NotNull
+	// Digits?
+	@Positive
+	@Column(precision = 6, scale = 5, nullable = false)
 	private BigDecimal discriminacao;
 	
-	@Column(precision = 6, scale = 5, nullable = false) // nullable?
+	@NotNull
+	// Digits?
+	@Column(precision = 6, scale = 5, nullable = false)
 	private BigDecimal dificuldade;
 	
-	@Column(precision = 6, scale = 5, nullable = false) // nullable?
-	private BigDecimal chanceAcertoCasual; // Probabilidade?
+	@NotNull
+	// Digits?
+	@Min(0)
+	@Max(1)
+	@Column(precision = 6, scale = 5, nullable = false)
+	private BigDecimal chanceAcertoCasual;
 	
+	@NotNull
 	@ManyToOne // cascade?
-//	@JoinColumn(nullable = false) // por enquanto, nullable
+	@JoinColumn(nullable = false)
 	private Prova prova; // temp, N:N
 	
+	@NotNull
+	@Positive
 	@Column(nullable = false)
 	private Short numero; // temp, N:N
 	

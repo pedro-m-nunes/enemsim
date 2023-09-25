@@ -8,17 +8,17 @@ IMPORTANTE:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
+- Colocando validation.constraints nas entidades.
+- (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
 
 COISAS A FAZER:
-- (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
-- Sistema de seleção usando a classe Estudante (itens já acertados, já feitos).
+- Como conciliar validation.constraints e @Column?
 - Atualizar testes unitários do gerador de simulados.
 - EstudanteHabilidade (?).
-- Colocar validation.constraints nas entidades, onde for necessário.
-- Insert de provas e itens de provas.
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
+- Insert de provas e itens de provas.
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
@@ -35,10 +35,11 @@ DÚVIDAS/IDEIAS:
 - Usar @Basic?
 - Usar @Transactional?
 - Usar Postgres ou MySQL?
-- Como disponibilizar?
+- Como disponibilizar o sistema?
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
+- Quando um estudante for deletado, todos os seus simulados devem ser deletados também. (Mas estudante pode ser deletado? Ou apenas será inativado? Se for inativado, manter os simulados salvos)
 - ... (bastante coisa)
 
 PRECISA DE PESQUISA:

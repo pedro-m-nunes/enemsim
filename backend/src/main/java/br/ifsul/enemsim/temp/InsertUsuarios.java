@@ -16,7 +16,7 @@ public class InsertUsuarios {
 	private UsuarioRepository usuarioRepository;
 
 	@PostConstruct
-	public void run() {
+	public void run() { // tirar quando teste10habilidadesmaisfrequentes tiver insertUsuarios...
 		usuarioRepository.save(new Estudante("pedromn", "123456", "Pedro"));
 		usuarioRepository.save(new Administrador("ademirP", "654321", "Pedro"));
 		usuarioRepository.save(new Estudante("joaoguiss", "123456", "João"));

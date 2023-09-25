@@ -9,5 +9,5 @@ public enum Area { // como enum mesmo?
 	CN("Ciências da Natureza e suas Tecnologias"), 
 	MT("Matemática e suas Tecnologias");
 	
-	public final String nome; // public? não é em caps?
+	public final String nome; // ? // public? não é em caps?
 }

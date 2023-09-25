@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,9 +39,6 @@ public class SimuladoController {
 		return simuladoRepository.findById(id).get();
 	}
 	
-	// save, saveAll
-	// delete, deleteAll
-	
 	@GetMapping("/{id}/itens")
 	public List<Item> getItensDoSimulado(@PathVariable Integer id) {
 		return simuladoRepository.getItensDoSimulado(id);
@@ -51,13 +49,15 @@ public class SimuladoController {
 		return simuladoRepository.findByEstudanteId(estudanteId);
 	}
 	
+	// save, saveAll?
+	
 	// gerarSimulado (?)
 	
 	@Autowired
 	private GerSim gerSim;
-	
+
 	// gerarSimuladoDeNivelamento
-	@GetMapping("/gerarSimuladoDeNivelamento/estudante={estudanteId}") // ""?
+	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Get?
 	public Object gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) { // Object? SimuladoGerado?
 		try {
 			return gerSim.gerarSimuladoDeNivelamento(new Estudante(estudanteId)).save(simuladoRepository, simuladoItemRepository);
@@ -65,7 +65,15 @@ public class SimuladoController {
 			return e.getMessage();
 		}
 	}
-	
+
 	// gerarSimuladoAdaptado
+	
+	// delete, deleteAll
+//	@DeleteMapping("/delete/{id}/{confirmation}")
+//	public boolean deleteById(@PathVariable Integer id, @PathVariable String confirmation) { // ?
+//		if(confirmation.equals("aham"))
+//			simuladoRepository.deleteById(id);
+//		return true;
+//	}
 	
 }

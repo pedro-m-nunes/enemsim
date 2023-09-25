@@ -23,7 +23,10 @@ import br.ifsul.enemsim.repositories.ItemRepository;
 //@Component
 @RestController // temp?
 @RequestMapping("/gersim")
+//@CrossOrigin(origins = "*")
 public class GerSim {
+	
+	// Usar somente os itens que tem id do Drive cadastrado. Se imagemDriveId nullable = false, não precisa se preocupar.
 
 	@Autowired // ?
 	private ItemRepository itemRepository; // controller?
