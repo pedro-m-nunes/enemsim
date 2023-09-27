@@ -8,13 +8,13 @@ IMPORTANTE:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- Colocando validation.constraints nas entidades.
 - (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
+- Registro de respostas aos simulados.
 
 COISAS A FAZER:
-- Como conciliar validation.constraints e @Column?
+- Sistema de login do teste.
+- Colocar validation.constraints nas entidades (e conciliar com @Column).
 - Atualizar testes unitários do gerador de simulados.
-- EstudanteHabilidade (?).
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
@@ -40,6 +40,8 @@ DÚVIDAS/IDEIAS:
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
 - Quando um estudante for deletado, todos os seus simulados devem ser deletados também. (Mas estudante pode ser deletado? Ou apenas será inativado? Se for inativado, manter os simulados salvos)
+- Quando um estudante for deletado, deletar também suas relações com as habilidades? Dados podem ser usados para estatísticas...
+- Criar/cadastrar um estudante deve criar também seus relacionamentos com as habilidades (EstudanteHabilidade).
 - ... (bastante coisa)
 
 PRECISA DE PESQUISA:

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,11 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.auxiliar.Resposta;
+import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.gerador.GerSim;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
-import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
+import br.ifsul.enemsim.repositories.relacionais.SimuladoItemRepository;
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/simulado")
@@ -41,7 +43,7 @@ public class SimuladoController {
 	
 	@GetMapping("/{id}/itens")
 	public List<Item> getItensDoSimulado(@PathVariable Integer id) {
-		return simuladoRepository.getItensDoSimulado(id);
+		return simuladoRepository.getItens(id);
 	}
 	
 	@GetMapping("/estudante/{estudanteId}")
@@ -67,6 +69,28 @@ public class SimuladoController {
 	}
 
 	// gerarSimuladoAdaptado
+	
+	// salvarResposta (só alterar o simulado se ele não tiver sido entregue!) // Post?
+	// entregarSimulado -> salvar respostas, marcar como finalizado, contabilizar acertos e erros // Post?
+	
+//	@Deprecated
+//	@Transactional
+//	@GetMapping("/{simuladoId}/responder/{itemId}={resposta}") // ""?
+//	public int salvarResposta(@PathVariable Integer simuladoId, @PathVariable Integer itemId, @PathVariable Resposta resposta) { // temp?
+//		return simuladoItemRepository.salvarResposta(new SimuladoItemId(simuladoId, itemId), resposta);
+//		// findById, setResposta, save?
+//	}
+	
+//	@Deprecated
+//	@Transactional
+//	@GetMapping("/{simuladoId}/finalizar") // Post // ""?
+//	public void finalizarSimulado(@PathVariable Integer simuladoId) { // temp?
+//		// salvar respostas
+//		
+//		// marcar como finalizado
+//		
+//		// contabilizar acertos e erros
+//	}
 	
 	// delete, deleteAll
 //	@DeleteMapping("/delete/{id}/{confirmation}")

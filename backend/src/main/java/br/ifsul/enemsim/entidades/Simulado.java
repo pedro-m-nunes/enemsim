@@ -1,8 +1,11 @@
 package br.ifsul.enemsim.entidades;
 
+import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,23 +38,23 @@ public class Simulado {
 	
 //	private BigDecimal escore; // "pontuacao"?
 	
-//	@Enumerated(EnumType.STRING)
-//	private Adaptacao adaptacao; // not null? meio que essa modelagem não faz sentido para simulados padronizados
-	
-//	public Simulado(Estudante estudante, Adaptacao adaptacao) {
-//		super();
-//		this.estudante = estudante;
-//		this.adaptacao = adaptacao;
-//	}
+	@Enumerated(EnumType.STRING)
+	private Adaptacao adaptacao;
 	
 	public Simulado(Integer id) {
 		super();
 		this.id = id;
 	}
-
+	
 	public Simulado(Estudante estudante) {
 		super();
 		this.estudante = estudante;
 	}
-	
+
+	public Simulado(Estudante estudante, Adaptacao adaptacao) {
+		super();
+		this.estudante = estudante;
+		this.adaptacao = adaptacao;
+	}
+
 }

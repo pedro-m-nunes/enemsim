@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.foraporenquanto;
+package br.ifsul.enemsim.entidades.relacionais.auxiliar;
 
 import java.io.Serializable;
 

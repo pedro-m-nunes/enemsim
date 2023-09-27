@@ -2,8 +2,10 @@ package br.ifsul.enemsim.gerador;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -21,7 +23,7 @@ import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
 
 //@Component
-@RestController // temp?
+@RestController // temp
 @RequestMapping("/gersim")
 //@CrossOrigin(origins = "*")
 public class GerSim {
@@ -34,26 +36,13 @@ public class GerSim {
 	@Autowired
 	private HabilidadeRepository habilidadeRepository; // controller?
 	
-//	@Autowired
-//	private SimuladoRepository simuladoRepository;
-//	
-//	@Autowired
-//	private SimuladoItemRepository simuladoItemRepository;
-//	
-//	@GetMapping("/{estudanteId}")
-//	public SimuladoGerado salvaSimulado(@PathVariable int estudanteId) throws DadosInsuficientesException { // temp?
-//		SimuladoGerado simulado = gerarSimuladoDeNivelamento(new Estudante(estudanteId));
-//		
-//		return simulado.save(simuladoRepository, simuladoItemRepository);
-//	}
-	
 	public SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
 		List<Item> itensSimulado = new ArrayList<>();
 		
 		for(Habilidade habilidade : habilidadeRepository.findAll()) // findAll por enquanto ok // findByIdIn...
-			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(habilidade)));
+			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(itemRepository.findByHabilidadeOrderByDificuldade(habilidade))));
 		
-		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado)); // .save?
+		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado));
 	}
 	
 	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) {
@@ -62,7 +51,7 @@ public class GerSim {
 		return new SimuladoGerado(simulado, itensSelecionados);
 	}
 	
-	private Set<Item> selecionarItensAleatoriamente(Estudante estudante, int quantidade, Item[] itens) throws DadosInsuficientesException {
+	private Set<Item> selecionarItensAleatoriamente(Estudante estudante, int quantidade, List<Item> itens) throws DadosInsuficientesException {
 		// usar somente itens válidos... (?)
 		
 		if(quantidade <= 0)
@@ -71,10 +60,10 @@ public class GerSim {
 		if(itens == null)
 			throw new IllegalArgumentException("Não há como selecionar itens de uma lista nula."); // exception própria?
 		
-		List<Item> itensPossiveis = new ArrayList<>(new LinkedHashSet<>(itemRepository.getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(Arrays.asList(itens), estudante)));
+		List<Item> itensPossiveis = new ArrayList<>(new LinkedHashSet<>(itemRepository.getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(itens, estudante)));
 		
 		if(quantidade > itensPossiveis.size())
-			throw new DadosInsuficientesException("Todos os itens informados já foram apresentados ao estudante em outros simulados. O estudante já gerou os simulados de nivelamento disponíveis.");
+			throw new DadosInsuficientesException("O estudante já gerou os simulados de nivelamento disponíveis.");
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
@@ -87,27 +76,24 @@ public class GerSim {
 		return itensSelecionados;
 	}
 	
-	private Item[] pegarOsTresItensAoRedorDaDificuldadeMediana(Habilidade habilidade) {
-		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
-		
-		int posicaoMediana = itens.size() / 2; // itens.size() / 2 - (1 - itens.size() % 2) // usar o valor da mediana para determinar se vai pegar o de cima ou de baixo?
+	private List<Item> pegarOsTresItensAoRedorDaDificuldadeMediana(List<Item> itens) {
+		int posicaoMediana = posicaoMedianaDosItens(itens);
 		
 		// se size < 3... (por enquanto ok)
 		
-		return new Item[] {itens.get(posicaoMediana - 1), itens.get(posicaoMediana), itens.get(posicaoMediana + 1)};
+		return Arrays.asList(new Item[] {itens.get(posicaoMediana - 1), itens.get(posicaoMediana), itens.get(posicaoMediana + 1)});
 	}
 	
-	@GetMapping("/itens")
-	public List<Integer[]> itens() { // temp
-		List<Integer[]> itens = new ArrayList<>();
-		
-		for(Habilidade habilidade : habilidadeRepository.findAll()) {
-			Item[] array = pegarOsTresItensAoRedorDaDificuldadeMediana(habilidade);
-			
-			itens.add(new Integer[] {array[0].getId(), array[1].getId(), array[2].getId()});
-		}
-		
-		return itens;
+	private int posicaoMedianaDosItens(List<Item> itens) { // conforme padrão
+		return posicaoMedianaArredondandoParaCima(itens.size());
+	}
+	
+	private int posicaoMedianaArredondandoParaCima(int tamanhoLista) { // List<Object>? Funciona, mas precisa?
+		return tamanhoLista / 2;
+	}
+	
+	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) {
+		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
 	}
 	
 	/* SIMULADO ADAPTADO
@@ -118,31 +104,55 @@ public class GerSim {
 	 * Instanciar simulado.
 	 */
 	
-	@GetMapping("/itens/abaixo/{id}")
-	private List<Item> pegarOsItensAbaixoDosTresMedianos(Habilidade habilidade) {
-		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
-		
-		return itens.subList(0, itens.size() / 2 - 1);
+	private List<Item> pegarOsItensAbaixoDosTresMedianos(List<Item> itens) {
+		return itens.subList(0, posicaoMedianaDosItens(itens) - 1);
 	}
 	
-	@GetMapping("/itens/acima/{id}")
-	private List<Item> pegarOsItensAcimaDosTresMedianos(Habilidade habilidade) {
-		List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
-		
-		return itens.subList(itens.size() / 2 + 2, itens.size());
+	private List<Item> pegarOsItensAcimaDosTresMedianos(List<Item> itens) {
+		return itens.subList(posicaoMedianaDosItens(itens) + 2, itens.size());
 	}
 	
-	// Como se dá a edição do simulado? Respostas do usuário...?
-	
-	/* Itens por desempenho - primeiro simulado adaptado
+	/* Itens por desempenho - primeiro simulado adaptado (a princípio)
 	 * 
-	 * 0 acertos: -2 em relação aos medianos; -3 em relação à mediana.
-	 * 1 acerto : -1; -2.
-	 * 2 acertos: +1; +2.
-	 * 3 acertos: +2; +3.
+	 * adaptacao = Adaptacao.DESEMPENHO;
 	 * 
-	 * Usada uma habilidade com 13 itens para chegar nesses números - faz sentido com 12 também.
-	 * Fazer com que esses números dependam do número de itens da habilidade?
+	 * Aproveitamento ou rendimento
+	 * 0.00 <= x <  0.25 : i(x) = posicaoMedianaArredondandoParaCima(pegarOsItensAbaixoDosTresMedianos(ITENS_DA_HABILIDADE));
+	 * 0.25 <= x <  0.50 : i(x) = i(0) + 1;
+	 * 0.50 <= x <  0.75 : i(x) = i(1) - 1;
+	 * 0.75 <= x <= 1.00 : i(x) = posicaoMedianaArredondandoParaBaixo(pegarOsItensAcimaDosTresMedianos(ITENS_DA_HABILIDADE));
 	 */
+	
+	// Simulados adaptados: só um por vez (não deixar o estudante gerar se houver um não finalizado).
+	
+	@Deprecated
+	@GetMapping("/itens")
+	private Object itens() { // temp
+		Map<Byte, Map<String, List<Integer>>> habilidadesMap = new LinkedHashMap<>();
+		
+		for(Habilidade habilidade : habilidadeRepository.findAll()) {
+			List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
+			
+			Map<String, List<Integer>> itensMap = new LinkedHashMap<>();
+			
+			itensMap.put("Abaixo", itensIds(pegarOsItensAbaixoDosTresMedianos(itens)));
+			itensMap.put("Medianos", itensIds(pegarOsTresItensAoRedorDaDificuldadeMediana(itens)));
+			itensMap.put("Acima", itensIds(pegarOsItensAcimaDosTresMedianos(itens)));
+			
+			habilidadesMap.put(habilidade.getId(), itensMap);
+		}
+		
+		return habilidadesMap;
+	}
+	
+	@Deprecated
+	private List<Integer> itensIds(List<Item> itens) { // temp
+		List<Integer> itensIds = new ArrayList<>();
+		
+		for(Item item : itens)
+			itensIds.add(item.getId());
+		
+		return itensIds;
+	}
 	
 }

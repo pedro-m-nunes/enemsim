@@ -17,6 +17,7 @@
 //
 //	@PostConstruct
 //	public void run() {
+//		// if administradorRepository.count() == 0 ... ? // se não existem esses usuários...?
 //		usuarioRepository.save(new Administrador(USUARIO, SENHA, "Pedro Müller Nunes"));
 //		usuarioRepository.save(new Administrador(USUARIO, SENHA, "João Guilherme Severo Schröer"));
 //		

@@ -7,7 +7,7 @@ import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
-import br.ifsul.enemsim.repositories.entidadesrelacionais.SimuladoItemRepository;
+import br.ifsul.enemsim.repositories.relacionais.SimuladoItemRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
