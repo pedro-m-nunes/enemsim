@@ -1,0 +1,13 @@
+Dúvidas no desenvolvimento/código do TCC
+
+- Para modificar atributos salvos, é melhor usar @Query com update ou buscar a entidade e trabalhar diretamente com seu objeto (usando setters e depois salvando)?
+
+- Para as operações nos componentes (@Component), usar os controllers ou diretamente os repositories?
+
+- Constraints de validação (jakarta.validation.constraints) são usadas em conjunto com constraints do banco (definidas em @Column)?
+
+- Como é um padrão bom para o mapeamento dos controllers (caminhos)?
+
+- Como fazer para a aplicação poder ser usada em outros computadores, usando dados do mesmo banco? Como disponibilizar a aplicação?
+
+- É ok ignorar atributos de relacionamentos bidimensionais em equals() e hashCode()? Assim eu poderia usar cascade em alguns casos.
