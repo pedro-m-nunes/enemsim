@@ -20,6 +20,6 @@ public class EstudanteHabilidadeId implements Serializable {
 
 	private Integer estudanteId;
 	
-	private Integer habilidadeId;
+	private Byte habilidadeId;
 	
 }

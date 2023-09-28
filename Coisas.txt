@@ -1,0 +1,1 @@
+- Notei que, ao clicar em "Resolver questão", na Home, são gerados dois simulados. Deveria gerar só um.

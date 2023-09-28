@@ -21,6 +21,7 @@ COISAS A FAZER:
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
+- Quando o simulado passado no método finalizarSimulado já foi finalizado (e talvez quando os itens não pertencem ao simulado também), os acertos ainda são contabilizados.
 
 DÚVIDAS/IDEIAS:
 - Caminhos dos controllers: singular ou plural?

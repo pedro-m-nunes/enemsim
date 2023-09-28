@@ -20,6 +20,9 @@ public interface SimuladoRepository extends JpaRepository<Simulado, Integer> {
 	@Query("UPDATE Simulado s SET s.finalizado = TRUE WHERE s.id = ?1")
 	public int setFinalizado(Integer simuladoId); // ?
 	
-//	public boolean existsByEstudanteAndAdaptacaoIsNotNull(Estudante estudante); // ?
+//	public boolean existsByEstudanteAndAdaptacaoIsNotNull(Estudante estudante); // ? // testar
+	
+	@Query("SELECT CASE WHEN COUNT(s) > 0 THEN TRUE ELSE FALSE END FROM Simulado s INNER JOIN SimuladoItem si ON s = si.simulado WHERE s = ?1 AND si.id.itemId = ?2")
+	public boolean simuladoPossuiItem(Simulado simulado, Integer itemId);
 	
 }
