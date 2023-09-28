@@ -10,8 +10,8 @@ import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
 
 public interface SimuladoItemRepository extends JpaRepository<SimuladoItem, SimuladoItemId> {
 
-//	@Modifying
-//	@Query("UPDATE SimuladoItem si SET si.resposta = ?2 WHERE si.id = ?1 AND si.id.simuladoId IN (SELECT s.id FROM Simulado s WHERE s.finalizado = FALSE)")
-//	public int salvarResposta(SimuladoItemId simuadoItemId, Resposta resposta); // ? // ""?
+	@Modifying
+	@Query("UPDATE SimuladoItem si SET si.resposta = ?2 WHERE si.id = ?1 AND si.id.simuladoId IN (SELECT s.id FROM Simulado s WHERE s.finalizado = FALSE)")
+	public int salvarResposta(SimuladoItemId simuadoItemId, Resposta resposta); // ? // ""?
 	
 }

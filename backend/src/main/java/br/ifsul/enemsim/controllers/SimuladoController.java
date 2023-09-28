@@ -73,13 +73,12 @@ public class SimuladoController {
 	// salvarResposta (só alterar o simulado se ele não tiver sido entregue!) // Post?
 	// entregarSimulado -> salvar respostas, marcar como finalizado, contabilizar acertos e erros // Post?
 	
-//	@Deprecated
-//	@Transactional
-//	@GetMapping("/{simuladoId}/responder/{itemId}={resposta}") // ""?
-//	public int salvarResposta(@PathVariable Integer simuladoId, @PathVariable Integer itemId, @PathVariable Resposta resposta) { // temp?
-//		return simuladoItemRepository.salvarResposta(new SimuladoItemId(simuladoId, itemId), resposta);
-//		// findById, setResposta, save?
-//	}
+	@Deprecated
+	@Transactional
+	@GetMapping("/{simuladoId}/responder/{itemId}={resposta}") // ""?
+	public int salvarResposta(@PathVariable Integer simuladoId, @PathVariable Integer itemId, @PathVariable Resposta resposta) { // temp?
+		return simuladoItemRepository.salvarResposta(new SimuladoItemId(simuladoId, itemId), resposta);
+	}
 	
 //	@Deprecated
 //	@Transactional

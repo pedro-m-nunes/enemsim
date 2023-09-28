@@ -3,8 +3,6 @@ Algumas anotações.
 IMPORTANTE:
 - Por uma questão de tempo e prioridades, um item poderá ser somente de uma prova por enquanto.
 - Na geração de simulados, devem ser ignorados os itens com resposta ou com parâmetros da TRI nulos.
-- (Alta prioridade) Passar as questões dos microdados para esse banco (10 habilidades mais frequentes).
-- Geração de simulados padrão.
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
