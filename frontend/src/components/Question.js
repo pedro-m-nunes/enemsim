@@ -2,41 +2,18 @@ import React, { useState , useEffect } from 'react';
 import axios from 'axios';
 
 export default function Question() {
-    
-    // array vindo do banco
-    // const quest = [{
-    //     link: 'https://drive.google.com/file/d/1NLgIA1TZzBmAWNyax_-XpNCIDhIKzuNA/preview',
-    //     num: 136,
-    //     w: 349.5,
-    //     h: 371 ,
-    //     certa: 'D'
-    // },
-    // {
-    //     link: 'https://drive.google.com/file/d/1g3JhrUEuJcTC98IajCLdluamikOCwXoO/preview',
-    //     num: 137,
-    //     w: 435,
-    //     h: 289.5,
-    //     certa: 'B'
-    // }, 
-    // {
-    //     link: 'https://drive.google.com/file/d/1S_NSTcnqB6-b0MIb1fX7D6Nqfjz8a937/preview',
-    //     num: 138,
-    //     w: 435.1,
-    //     h: 360,
-    //     certa: 'A'
-    // }]
-
+ 
     const[questions,setQuestions]=useState([{}]);
-    const[info,setInfo]=useState({});
+    const[idSimulado,setInfo]=useState({});
 
     async function clic() {
         let linkBase = 'http://localhost:8080';
-        let linkCerto = linkBase + '/gersim/1';
+        let linkCerto = linkBase + '/simulado/gerar/nivelamento/estudante=1';
         const response = await axios.get(linkCerto);
         const q = response.data.itens;
-        const info = response.data.simulado.id;
+        const idSimulado = response.data.simulado.id;
         setQuestions(q);
-        setInfo(info);
+        setInfo(idSimulado);
     }
 
     useEffect(()=>{
@@ -46,7 +23,7 @@ export default function Question() {
     const printA = (e) => {
         e.preventDefault();        
         console.log(questions);
-        console.log(info);
+        console.log(idSimulado);
     }
 
     // const loadQuestions = async() => {
@@ -62,8 +39,12 @@ export default function Question() {
     const [values] = useState([]);
 
     function onRes(index, i, res) {
-        values[index] = {
-            id: i,
+        values[index] = 
+        {
+            id: {
+                simuladoId: idSimulado,
+                itemId: i
+            },
             resposta: res
         };
     }
