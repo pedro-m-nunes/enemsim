@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.auxiliar.Resposta;
+import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
@@ -80,16 +82,24 @@ public class SimuladoController {
 		return simuladoItemRepository.salvarResposta(new SimuladoItemId(simuladoId, itemId), resposta);
 	}
 	
-//	@Deprecated
-//	@Transactional
-//	@GetMapping("/{simuladoId}/finalizar") // Post // ""?
-//	public void finalizarSimulado(@PathVariable Integer simuladoId) { // temp?
-//		// salvar respostas
-//		
-//		// marcar como finalizado
-//		
-//		// contabilizar acertos e erros
-//	}
+	@Deprecated
+	@Transactional
+	@PostMapping("/finalizar") // Post // ""?
+	public void finalizarSimulado(List<SimuladoItem> simuladoItens) { // temp?
+		Simulado simulado = simuladoRepository.findById(simuladoItens.get(0).getId().getSimuladoId()).get();
+		
+		// salvar respostas
+		for(SimuladoItem simuladoItem : simuladoItens)
+			simuladoItemRepository.salvarResposta(simuladoItem.getId(), simuladoItem.getResposta());
+		
+		// marcar como finalizado
+		simuladoRepository.setFinalizado(simulado.getId());
+		
+		// contabilizar acertos e erros
+		int acertosNoSimulado = 0;
+		
+		
+	}
 	
 	// delete, deleteAll
 //	@DeleteMapping("/delete/{id}/{confirmation}")

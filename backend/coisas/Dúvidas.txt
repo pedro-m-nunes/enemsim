@@ -1,6 +1,6 @@
 Dúvidas no desenvolvimento/código do TCC
 
-- Para modificar atributos salvos, é melhor usar @Query com update ou buscar a entidade e trabalhar diretamente com seu objeto (usando setters e depois salvando)?
+- Para modificar atributos salvos, é melhor usar @Query com update ou buscar a entidade e trabalhar diretamente com seu objeto (usando setters e depois salvando)? @Query é melhor para mudar atributos individualmente.
 
 - Para as operações nos componentes (@Component), usar os controllers ou diretamente os repositories?
 
