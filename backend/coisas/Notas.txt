@@ -27,6 +27,7 @@ DÚVIDAS/IDEIAS:
 - Caminhos dos controllers: singular ou plural?
 - Cores das provas: masculino ou feminino?
 - Usar Repository ou Controller nos @Component?
+- Se coloca constraints nos parâmetros dos construtores também?
 - Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
 - Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Como usar cascade nos relacionamentos?
