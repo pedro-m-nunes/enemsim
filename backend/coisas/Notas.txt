@@ -51,3 +51,6 @@ PRECISA DE PESQUISA:
 - Web vs Webflux
 - Spring Cloud
 - Flyway (alter table...)
+
+
+testando
