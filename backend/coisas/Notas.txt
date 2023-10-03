@@ -24,10 +24,11 @@ PROBLEMAS ENCONTRADOS:
 - Quando o simulado passado no método finalizarSimulado já foi finalizado (e talvez quando os itens não pertencem ao simulado também), os acertos ainda são contabilizados.
 
 DÚVIDAS/IDEIAS:
+- Classe GerSimDB? Que faz as buscas no banco.
 - Caminhos dos controllers: singular ou plural?
 - Cores das provas: masculino ou feminino?
 - Usar Repository ou Controller nos @Component?
-- Se coloca constraints nos parâmetros dos construtores também?
+- Colocar constraints nos parâmetros dos construtores e métodos também? https://www.baeldung.com/javax-validation-method-constraints
 - Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
 - Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Como usar cascade nos relacionamentos?

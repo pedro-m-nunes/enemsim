@@ -1,5 +1,8 @@
 package br.ifsul.enemsim.entidades.relacionais;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
@@ -59,8 +62,8 @@ public class EstudanteHabilidade { // vai ter muitos registros... (estudantes * 
 		this.id = new EstudanteHabilidadeId(estudanteId, habilidadeId);
 	}
 	
-//	public BigDecimal getAproveitamento() {
-//		return BigDecimal.valueOf(tentativasCertas).divide(BigDecimal.valueOf(tentativas), 4, RoundingMode.HALF_UP); // scale??
-//	}
+	public BigDecimal getAproveitamento() {
+		return BigDecimal.valueOf(tentativasCertas).divide(BigDecimal.valueOf(tentativas), 4, RoundingMode.HALF_UP); // scale??
+	}
 	
 }

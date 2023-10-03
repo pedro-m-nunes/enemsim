@@ -1,5 +1,6 @@
 package br.ifsul.enemsim.gerador;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
+import br.ifsul.enemsim.repositories.relacionais.EstudanteHabilidadeRepository;
 
 //@Component
 @RestController // temp
@@ -36,11 +39,17 @@ public class GerSim {
 	@Autowired
 	private HabilidadeRepository habilidadeRepository; // controller?
 	
+	private final List<Habilidade> HABILIDADES = habilidadeRepository.findAll(); // temp // findAll por enquanto ok // findByIdIn...
+	
+	private List<Item> pegarItensOrdenadosPorDificuldade(Habilidade habilidade) {
+		return itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
+	}
+	
 	public SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
 		List<Item> itensSimulado = new ArrayList<>();
 		
-		for(Habilidade habilidade : habilidadeRepository.findAll()) // findAll por enquanto ok // findByIdIn...
-			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(itemRepository.findByHabilidadeOrderByDificuldade(habilidade))));
+		for(Habilidade habilidade : HABILIDADES)
+			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(pegarItensOrdenadosPorDificuldade(habilidade))));
 		
 		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado));
 	}
@@ -112,26 +121,70 @@ public class GerSim {
 		return itens.subList(posicaoMedianaDosItens(itens) + 2, itens.size());
 	}
 	
-	/* Itens por desempenho - primeiro simulado adaptado (a princípio)
+	/* Itens por desempenho - primeiro simulado adaptado
 	 * 
 	 * adaptacao = Adaptacao.DESEMPENHO;
 	 * 
 	 * Aproveitamento ou rendimento
-	 * 0.00 <= x <  0.25 : i(x) = posicaoMedianaArredondandoParaCima(pegarOsItensAbaixoDosTresMedianos(ITENS_DA_HABILIDADE));
-	 * 0.25 <= x <  0.50 : i(x) = i(0) + 1;
-	 * 0.50 <= x <  0.75 : i(x) = i(1) - 1;
-	 * 0.75 <= x <= 1.00 : i(x) = posicaoMedianaArredondandoParaBaixo(pegarOsItensAcimaDosTresMedianos(ITENS_DA_HABILIDADE));
+	 * x <  0.5 : i(x) = random(abaixo)
+	 * x >= 0.5 : i(x) = random(acima)
 	 */
 	
 	// Simulados adaptados: só um por vez (não deixar o estudante gerar se houver um não finalizado).
+	
+	public SimuladoGerado gerarSimuladoAdaptado(Estudante estudante, Adaptacao adaptacao) throws UnsupportedOperationException {
+		switch(adaptacao) {
+		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudante);
+		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
+		case PONTOS_FRACOS: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
+		default: return null; // exception própria? // se for null...
+		}
+	}
+	
+	@Autowired
+	private EstudanteHabilidadeRepository estudanteHabilidadeRepository;
+	
+	private SimuladoGerado gerarSimuladoPorDesempenho(Estudante estudante) { // usar Distribuicao? // testar
+		// exceptions?
+		
+		Simulado simulado = new Simulado(estudante);
+		
+		Set<Item> itens = new LinkedHashSet<>();
+		
+		// para cada habilidade, buscar os itens abaixo/acima dos medianos, e pegar um aleatório
+		for(Habilidade habilidade : HABILIDADES) { // selecionarItensAleatoriamente()
+			List<Item> itensHabilidade = pegarItensOrdenadosPorDificuldade(habilidade); // Set?
+			
+			List<Item> itensPossiveisPorDesempenho; // Set?
+			
+			if(estudanteHabilidadeRepository.findByEstudanteAndHabilidade(estudante, habilidade).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar...
+				itensPossiveisPorDesempenho = pegarOsItensAcimaDosTresMedianos(itensHabilidade);
+			else
+				itensPossiveisPorDesempenho = pegarOsItensAbaixoDosTresMedianos(itensHabilidade);
+			
+			// desconsiderar os já feitos/apresentados/acertados
+			List<Item> itensPossiveis = new ArrayList<>(new LinkedHashSet<>(itemRepository.getItensDoConjuntoNaoPresentesEmOutrosSimuladosDoEstudante(itensPossiveisPorDesempenho, estudante)));
+			
+			// se todos já forem feitos...
+			// apresentados >= feitos >= acertados
+			// tentar por (em ordem): não apresentados, não feitos, não acertados.
+			
+			// selecionar aleatório
+			Random random = new Random();
+			
+			itens.add(itensPossiveis.get(random.nextInt(itensPossiveis.size())));
+		}
+		
+		return new SimuladoGerado(simulado, itens);
+	}
 	
 	@Deprecated
 	@GetMapping("/itens")
 	private Object itens() { // temp
 		Map<Byte, Map<String, List<Integer>>> habilidadesMap = new LinkedHashMap<>();
 		
-		for(Habilidade habilidade : habilidadeRepository.findAll()) {
-			List<Item> itens = itemRepository.findByHabilidadeOrderByDificuldade(habilidade);
+		for(Habilidade habilidade : HABILIDADES) {
+			List<Item> itens = pegarItensOrdenadosPorDificuldade(habilidade);
 			
 			Map<String, List<Integer>> itensMap = new LinkedHashMap<>();
 			
