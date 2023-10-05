@@ -98,7 +98,7 @@ public class SimuladoController {
 	// testar tudo isso aqui...
 	@Transactional
 	@PostMapping("/finalizar") // Post // ""?
-	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException { // void?
+	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException { // void?
 		Simulado simulado = simuladoRepository.findById(itensRespondidos.get(0).getId().getSimuladoId()).get(); // ?
 		
 		// if simulado == null ...?
@@ -132,6 +132,8 @@ public class SimuladoController {
 			if(simuladoItem.getResposta() == item.getRespostaCerta()) // método próprio?
 				estudanteHabilidadeRepository.adicionarTentativaCerta(estudanteHabilidadeId);
 		}
+		
+		return 1; // ?
 	}
 	
 //	@GetMapping("/s={sId}/i={iId}")

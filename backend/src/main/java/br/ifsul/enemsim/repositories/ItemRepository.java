@@ -14,6 +14,8 @@ public interface ItemRepository extends JpaRepository<Item, Integer> {
 	
 	public List<Item> findByHabilidadeOrderByDificuldade(Habilidade habilidade);
 	
+	// por competência?
+	
 //	@Query("SELECT i FROM Item i WHERE i.respostaCerta IS NOT NULL AND i.discriminacao IS NOT NULL AND i.dificuldade IS NOT NULL AND i.chanceAcertoCasual IS NOT NULL")
 //	public List<Item> findAllValidos(); // ? // testar
 	
