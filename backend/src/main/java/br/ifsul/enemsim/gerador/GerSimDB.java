@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
@@ -15,17 +15,18 @@ import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import br.ifsul.enemsim.repositories.relacionais.EstudanteHabilidadeRepository;
 
-@Component
-public class GerSimDB {
+@Service // Component?
+@Deprecated // ?
+class GerSimDB { // public?
 
-	@Autowired // ?
-	private ItemRepository itemRepository; // controller? service?
+	@Autowired
+	private ItemRepository itemRepository; // service
 	
 	@Autowired
-	private HabilidadeRepository habilidadeRepository; // controller? service?
+	private HabilidadeRepository habilidadeRepository; // service
 	
 	@Autowired
-	private EstudanteHabilidadeRepository estudanteHabilidadeRepository; // controller? service?
+	private EstudanteHabilidadeRepository estudanteHabilidadeRepository; // service
 	
 	List<Habilidade> habilidades() {
 		return habilidadeRepository.findAll(); // findAll por enquanto ok // findByIdIn...

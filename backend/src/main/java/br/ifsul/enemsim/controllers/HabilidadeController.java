@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.services.HabilidadeReadService;
+import br.ifsul.enemsim.services.entidades.HabilidadeReadService;
 
 @RestController
 @RequestMapping("/habilidade")

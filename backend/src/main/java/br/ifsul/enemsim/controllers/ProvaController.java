@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Prova;
-import br.ifsul.enemsim.services.ProvaReadService;
+import br.ifsul.enemsim.services.entidades.ProvaReadService;
 
 @RestController
 @RequestMapping("/prova")

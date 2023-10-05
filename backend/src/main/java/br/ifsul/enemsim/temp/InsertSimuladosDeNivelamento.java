@@ -5,6 +5,7 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import br.ifsul.enemsim.controllers.SimuladoController;
+import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.repositories.SimuladoRepository;
 import jakarta.annotation.PostConstruct;
 
@@ -19,8 +20,8 @@ public class InsertSimuladosDeNivelamento {
 	private SimuladoRepository simuladoRepository;
 	
 	@PostConstruct
-	public void run() {
-		if(simuladoRepository.count() == 0) { // ?
+	public void run() throws DadosInsuficientesException {
+		if(simuladoRepository.count() == 0) {
 			simuladoController.gerarSimuladoDeNivelamento(1);
 		}
 	}

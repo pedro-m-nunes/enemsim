@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services;
+package br.ifsul.enemsim.services.entidades;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.services.interfaces.CreateAndUpdateService;
+import br.ifsul.enemsim.services.entidades.interfaces.CreateAndUpdateService;
 
 @Service
 public class ItemCreateAndUpdateService implements CreateAndUpdateService<Item, Integer> {

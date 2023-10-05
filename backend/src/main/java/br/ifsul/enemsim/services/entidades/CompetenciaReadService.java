@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services;
+package br.ifsul.enemsim.services.entidades;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.ifsul.enemsim.entidades.Competencia;
 import br.ifsul.enemsim.repositories.CompetenciaRepository;
-import br.ifsul.enemsim.services.interfaces.ReadService;
+import br.ifsul.enemsim.services.entidades.interfaces.ReadService;
 
 @Service
 public class CompetenciaReadService implements ReadService<Competencia, Byte> {
@@ -23,7 +23,7 @@ public class CompetenciaReadService implements ReadService<Competencia, Byte> {
 
 	@Override
 	public Optional<Competencia> buscarPorId(Byte id) {
-		return competenciaRepository.findById(id); // não é recomendado retornar o objeto... retornar ma cópia? (DTO)
+		return competenciaRepository.findById(id);
 	}
 
 }

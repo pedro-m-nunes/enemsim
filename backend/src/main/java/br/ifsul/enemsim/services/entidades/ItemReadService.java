@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services;
+package br.ifsul.enemsim.services.entidades;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.services.interfaces.ReadService;
+import br.ifsul.enemsim.services.entidades.interfaces.ReadService;
 
 @Service
 public class ItemReadService implements ReadService<Item, Integer> {

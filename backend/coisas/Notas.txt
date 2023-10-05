@@ -53,6 +53,7 @@ PRECISA DE PESQUISA:
 - Web vs Webflux
 - Spring Cloud
 - Flyway (alter table...)
+- DTO (retornar cópia da entidade)
 
 
 testando

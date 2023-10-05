@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.services.ItemCreateAndUpdateService;
-import br.ifsul.enemsim.services.ItemReadService;
+import br.ifsul.enemsim.services.entidades.ItemCreateAndUpdateService;
+import br.ifsul.enemsim.services.entidades.ItemReadService;
 
 @RestController
 @RequestMapping("/item")

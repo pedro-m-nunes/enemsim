@@ -9,8 +9,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
@@ -19,13 +18,8 @@ import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 
-//@Component
-@RestController // temp
-@RequestMapping("/gersim")
-//@CrossOrigin(origins = "*")
+@Service // Components?
 public class GerSim {
-	
-	// Usar somente os itens que tem id do Drive cadastrado. Se imagemDriveId nullable = false, não precisa se preocupar
 	
 	@Autowired
 	private GerSimDB db;
@@ -46,8 +40,6 @@ public class GerSim {
 	}
 	
 	private Set<Item> selecionarItensAleatoriamente(Estudante estudante, int quantidade, List<Item> itens) throws DadosInsuficientesException {
-		// usar somente itens válidos... (?)
-		
 		if(quantidade <= 0)
 			throw new IllegalArgumentException("Não se pode gerar um simulado com menos de um item."); // exception própria?
 		
@@ -57,7 +49,7 @@ public class GerSim {
 		List<Item> itensPossiveis = db.retirarItensJaPresentesEmOutrosSimulados(itens, estudante);
 		
 		if(quantidade > itensPossiveis.size())
-			throw new DadosInsuficientesException("O estudante já gerou os simulados de nivelamento disponíveis.");
+			throw new DadosInsuficientesException("O estudante já gerou os simulados de nivelamento disponíveis."); // ""? geral?
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
@@ -86,9 +78,9 @@ public class GerSim {
 		return tamanhoLista / 2;
 	}
 	
-	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) {
-		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
-	}
+//	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) { // ?
+//		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
+//	}
 	
 	/* SIMULADO ADAPTADO
 	 * Pegar desempenho do estudante (inclui dados sobre itens já respondidos/acertados).
@@ -180,14 +172,14 @@ public class GerSim {
 //		return habilidadesMap;
 //	}
 	
-	@Deprecated
-	private List<Integer> itensIds(List<Item> itens) { // temp
-		List<Integer> itensIds = new ArrayList<>();
-		
-		for(Item item : itens)
-			itensIds.add(item.getId());
-		
-		return itensIds;
-	}
+//	@Deprecated
+//	private List<Integer> itensIds(List<Item> itens) { // temp
+//		List<Integer> itensIds = new ArrayList<>();
+//		
+//		for(Item item : itens)
+//			itensIds.add(item.getId());
+//		
+//		return itensIds;
+//	}
 	
 }

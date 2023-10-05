@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Competencia;
-import br.ifsul.enemsim.services.CompetenciaReadService;
+import br.ifsul.enemsim.services.entidades.CompetenciaReadService;
 
 @RestController
 @RequestMapping("/competencia")

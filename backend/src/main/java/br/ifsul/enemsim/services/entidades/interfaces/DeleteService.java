@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services.interfaces;
+package br.ifsul.enemsim.services.entidades.interfaces;
 
 public interface DeleteService<T, ID> {
 

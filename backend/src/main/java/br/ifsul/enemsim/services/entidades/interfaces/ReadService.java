@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services.interfaces;
+package br.ifsul.enemsim.services.entidades.interfaces;
 
 import java.util.List;
 import java.util.Optional;

@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.auxiliar.Resposta;
 import br.ifsul.enemsim.entidades.relacionais.EstudanteHabilidade;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
-import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.exceptions.RespostaAoSimuladoException;
 import br.ifsul.enemsim.gerador.GerSim;
-import br.ifsul.enemsim.repositories.ItemRepository;
-import br.ifsul.enemsim.repositories.SimuladoRepository;
+import br.ifsul.enemsim.gerador.SimuladoGerado;
 import br.ifsul.enemsim.repositories.relacionais.EstudanteHabilidadeRepository;
-import br.ifsul.enemsim.repositories.relacionais.SimuladoItemRepository;
+import br.ifsul.enemsim.services.entidades.ItemReadService;
+import br.ifsul.enemsim.services.entidades.SimuladoCreateAndUpdateService;
+import br.ifsul.enemsim.services.entidades.SimuladoReadService;
+import br.ifsul.enemsim.services.entidades.relacionais.SimuladoItemCreateAndUpdateService;
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -35,71 +35,62 @@ import jakarta.transaction.Transactional;
 public class SimuladoController {
 
 	@Autowired
-	private SimuladoRepository simuladoRepository;
-	
-	@Autowired
-	private SimuladoItemRepository simuladoItemRepository;
+	private SimuladoReadService simuladoReadService;
 	
 	@GetMapping
-	public List<Simulado> findAll() {
-		return simuladoRepository.findAll();
+	public List<Simulado> listar() {
+		return simuladoReadService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public Simulado findById(@PathVariable Integer id) {
-		return simuladoRepository.findById(id).get();
+	public Simulado buscarPorId(@PathVariable Integer id) {
+		return simuladoReadService.buscarPorId(id).get();
 	}
 	
-	@GetMapping("/{id}/itens")
-	public List<Item> getItensDoSimulado(@PathVariable Integer id) {
-		return simuladoRepository.getItens(id);
+	@GetMapping("/{simuladoId}/itens")
+	public List<Item> itensDoSimulado(@PathVariable Integer simuladoId) {
+		return simuladoReadService.itensDoSimulado(simuladoId);
 	}
 	
 	@GetMapping("/estudante/{estudanteId}")
-	public List<Simulado> findByEstudanteId(@PathVariable Integer estudanteId) {
-		return simuladoRepository.findByEstudanteId(estudanteId);
+	public List<Simulado> simuladosDoEstudante(@PathVariable Integer estudanteId) {
+		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
 	// save, saveAll?
 	
-	// gerarSimulado (?)
+	// GerarSimuladoService?
+	
+	@Autowired
+	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
+	
+	@Autowired
+	private SimuladoItemCreateAndUpdateService simuladoItemCreateAndUpdateService;
 	
 	@Autowired
 	private GerSim gerSim;
 
-	// gerarSimuladoDeNivelamento
 	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Get?
-	public Object gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) { // Object? SimuladoGerado?
-		try {
-			return gerSim.gerarSimuladoDeNivelamento(new Estudante(estudanteId)).save(simuladoRepository, simuladoItemRepository);
-		} catch (DadosInsuficientesException e) {
-			return e.getMessage();
-		}
+	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException { // tratar exceção aqui?
+		return gerSim.gerarSimuladoDeNivelamento(new Estudante(estudanteId)).salvar(simuladoCreateAndUpdateService, simuladoItemCreateAndUpdateService);
 	}
 
 	// gerarSimuladoAdaptado
 	
-	// salvarResposta (só alterar o simulado se ele não tiver sido entregue!) // Post?
-	// entregarSimulado -> salvar respostas, marcar como finalizado, contabilizar acertos e erros // Post?
-	
-	@Deprecated
-	@Transactional
-	@GetMapping("/{simuladoId}/responder/{itemId}={resposta}") // ""?
-	public int salvarResposta(@PathVariable Integer simuladoId, @PathVariable Integer itemId, @PathVariable Resposta resposta) { // temp?
-		return simuladoItemRepository.salvarResposta(new SimuladoItemId(simuladoId, itemId), resposta);
-	}
+	// salvarResposta?
+	// EntregarSimuladoService?
 	
 	@Autowired
-	private EstudanteHabilidadeRepository estudanteHabilidadeRepository;
+	private ItemReadService itemReadService;
 	
 	@Autowired
-	private ItemRepository itemRepository;
+	private EstudanteHabilidadeRepository estudanteHabilidadeRepository; // ...
 	
 	// testar tudo isso aqui...
 	@Transactional
 	@PostMapping("/finalizar") // Post // ""?
 	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException { // void?
-		Simulado simulado = simuladoRepository.findById(itensRespondidos.get(0).getId().getSimuladoId()).get(); // ?
+		Simulado simulado = simuladoReadService.buscarPorId(itensRespondidos.get(0).getId().getSimuladoId()).get(); // ?
 		
 		// if simulado == null ...?
 		
@@ -108,18 +99,18 @@ public class SimuladoController {
 		
 		// salvar respostas aos itens
 		for(SimuladoItem simuladoItem : itensRespondidos) {
-			if(!simuladoRepository.simuladoPossuiItem(simulado, simuladoItem.getId().getItemId()))
+			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), simuladoItem.getId().getItemId()))
 				throw new RespostaAoSimuladoException("O item informado (id = " + simuladoItem.getId().getItemId() + ") não aparece no simulado.");
 			
-			simuladoItemRepository.salvarResposta(simuladoItem.getId(), simuladoItem.getResposta());
+			simuladoItemCreateAndUpdateService.salvarResposta(simuladoItem.getId(), simuladoItem.getResposta());
 		}
 		
 		// marcar como finalizado
-		simuladoRepository.setFinalizado(simulado.getId());
+		simuladoCreateAndUpdateService.finalizarSimulado(simulado.getId());
 		
 		// contabilizar acertos e erros
 		for(SimuladoItem simuladoItem : itensRespondidos) {
-			Item item = itemRepository.findById(simuladoItem.getId().getItemId()).get();
+			Item item = itemReadService.buscarPorId(simuladoItem.getId().getItemId()).get();
 			
 			// estudanteHabilidade.adicionarTentativa(simulado.estudante, item.habilidade)
 			EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
@@ -141,12 +132,6 @@ public class SimuladoController {
 //		return simuladoRepository.simuladoPossuiItem(simuladoRepository.findById(sId).get(), itemRepository.findById(iId).get());
 //	}
 	
-	// delete, deleteAll
-//	@DeleteMapping("/delete/{id}/{confirmation}")
-//	public boolean deleteById(@PathVariable Integer id, @PathVariable String confirmation) { // ?
-//		if(confirmation.equals("aham"))
-//			simuladoRepository.deleteById(id);
-//		return true;
-//	}
+	// delete, deleteAll?
 	
 }

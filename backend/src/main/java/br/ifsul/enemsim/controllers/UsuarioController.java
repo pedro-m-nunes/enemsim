@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Usuario;
-import br.ifsul.enemsim.services.UsuarioReadService;
+import br.ifsul.enemsim.services.entidades.UsuarioReadService;
 
 @RestController
 @RequestMapping("/usuario")
@@ -31,5 +31,7 @@ public class UsuarioController {
 	}
 	
 	// autenticar, registrar... (?)
+	
+	// tipos de usuário...
 	
 }
