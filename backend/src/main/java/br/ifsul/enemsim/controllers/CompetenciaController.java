@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Competencia;
-import br.ifsul.enemsim.repositories.CompetenciaRepository;
+import br.ifsul.enemsim.services.ReadCompetenciaService;
 
 @RestController
 @RequestMapping("/competencia")
@@ -18,16 +18,16 @@ import br.ifsul.enemsim.repositories.CompetenciaRepository;
 public class CompetenciaController { // service?
 
 	@Autowired // ?
-	private CompetenciaRepository competenciaRepository;
+	private ReadCompetenciaService readCompetenciaService;
 	
 	@GetMapping
 	public List<Competencia> findAll() {
-		return competenciaRepository.findAll();
+		return readCompetenciaService.listar();
 	}
 	
 	@GetMapping("/{id}")
 	public Competencia findById(@PathVariable Byte id) {
-		return competenciaRepository.findById(id).get();
+		return readCompetenciaService.get(id);
 	}
 	
 }
