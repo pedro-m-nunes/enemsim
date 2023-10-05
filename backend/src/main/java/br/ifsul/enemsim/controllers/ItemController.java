@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.repositories.ItemRepository;
+import br.ifsul.enemsim.services.ItemCreateAndUpdateService;
+import br.ifsul.enemsim.services.ItemReadService;
 
 @RestController
 @RequestMapping("/item")
@@ -20,24 +21,26 @@ import br.ifsul.enemsim.repositories.ItemRepository;
 public class ItemController {
 	
 	@Autowired
-	private ItemRepository itemRepository;
+	private ItemReadService itemReadService;
 	
 	@GetMapping
-	public List<Item> findAll() {
-		return itemRepository.findAll();
+	public List<Item> listar() {
+		return itemReadService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public Item findById(@PathVariable Integer id) {
-		return itemRepository.findById(id).get();
+	public Item buscarPorId(@PathVariable Integer id) {
+		return itemReadService.buscarPorId(id).get();
 	}
+	
+	@Autowired
+	private ItemCreateAndUpdateService itemCreateAndUpdateService;
 	
 	@PostMapping("/save") // ""?
 	public Item save(@RequestBody Item item) {
-		return itemRepository.save(item);
+		return itemCreateAndUpdateService.salvarOuAtualizar(item);
 	}
 	
 	// saveAll
-	
 	
 }
