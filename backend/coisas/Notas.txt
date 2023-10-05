@@ -12,6 +12,7 @@ COISAS EM PROCESSO:
 COISAS A FAZER:
 - Sistema de login do teste.
 - Colocar validation.constraints nas entidades (e conciliar com @Column).
+- Services.
 - Atualizar testes unitários do gerador de simulados.
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
