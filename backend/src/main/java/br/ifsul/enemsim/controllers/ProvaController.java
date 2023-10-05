@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Prova;
-import br.ifsul.enemsim.repositories.ProvaRepository;
+import br.ifsul.enemsim.services.ProvaReadService;
 
 @RestController
 @RequestMapping("/prova")
@@ -18,16 +18,16 @@ import br.ifsul.enemsim.repositories.ProvaRepository;
 public class ProvaController {
 
 	@Autowired
-	private ProvaRepository provaRepository;
+	private ProvaReadService provaReadService;
 	
 	@GetMapping
-	public List<Prova> findAll() {
-		return provaRepository.findAll();
+	public List<Prova> listar() {
+		return provaReadService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public Prova findById(@PathVariable Integer id) {
-		return provaRepository.findById(id).get();
+	public Prova buscarPorId(@PathVariable Integer id) {
+		return provaReadService.buscarPorId(id).get();
 	}
 	
 }

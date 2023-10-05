@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Usuario;
-import br.ifsul.enemsim.repositories.UsuarioRepository;
+import br.ifsul.enemsim.services.UsuarioReadService;
 
 @RestController
 @RequestMapping("/usuario")
@@ -18,16 +18,16 @@ import br.ifsul.enemsim.repositories.UsuarioRepository;
 public class UsuarioController {
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UsuarioReadService usuarioReadService;
 	
 	@GetMapping
-	public List<Usuario> findAll() {
-		return usuarioRepository.findAll();
+	public List<Usuario> listar() {
+		return usuarioReadService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public Usuario findById(@PathVariable Integer id) {
-		return usuarioRepository.findById(id).get();
+	public Usuario buscarPorId(@PathVariable Integer id) {
+		return usuarioReadService.buscarPorId(id).get();
 	}
 	
 	// autenticar, registrar... (?)

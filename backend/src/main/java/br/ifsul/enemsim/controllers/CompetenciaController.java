@@ -15,7 +15,7 @@ import br.ifsul.enemsim.services.CompetenciaReadService;
 @RestController
 @RequestMapping("/competencia")
 @CrossOrigin(origins = "*")
-public class CompetenciaController { // service?
+public class CompetenciaController {
 
 	@Autowired
 	private CompetenciaReadService competenciaReadService;

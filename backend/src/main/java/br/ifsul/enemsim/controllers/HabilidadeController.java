@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.repositories.HabilidadeRepository;
+import br.ifsul.enemsim.services.HabilidadeReadService;
 
 @RestController
 @RequestMapping("/habilidade")
@@ -18,16 +18,16 @@ import br.ifsul.enemsim.repositories.HabilidadeRepository;
 public class HabilidadeController {
 
 	@Autowired
-	private HabilidadeRepository habilidadeRepository;
+	private HabilidadeReadService habilidadeReadService;
 	
 	@GetMapping
-	public List<Habilidade> findAll() {
-		return habilidadeRepository.findAll();
+	public List<Habilidade> listar() {
+		return habilidadeReadService.listar();
 	}
 	
 	@GetMapping("/{id}")
-	public Habilidade findById(@PathVariable Byte id) {
-		return habilidadeRepository.findById(id).get();
+	public Habilidade buscarPorId(@PathVariable Byte id) {
+		return habilidadeReadService.buscarPorId(id).get();
 	}
 	
 }

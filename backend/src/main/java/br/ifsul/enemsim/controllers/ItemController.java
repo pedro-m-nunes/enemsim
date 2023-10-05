@@ -37,7 +37,7 @@ public class ItemController {
 	private ItemCreateAndUpdateService itemCreateAndUpdateService;
 	
 	@PostMapping("/save") // ""?
-	public Item save(@RequestBody Item item) {
+	public Item salvarOuAtualizar(@RequestBody Item item) {
 		return itemCreateAndUpdateService.salvarOuAtualizar(item);
 	}
 	
