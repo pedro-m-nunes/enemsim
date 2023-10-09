@@ -125,7 +125,7 @@ public class GerarSimuladoService {
 		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudante);
 		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
 		case PONTOS_FRACOS: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
-		default: return null; // exception própria? // se for null...
+		default: return null; // exception própria? // se adaptacao for null...
 		}
 	}
 	
@@ -163,9 +163,6 @@ public class GerarSimuladoService {
 		
 		return new SimuladoGerado(simulado, itens);
 	}
-	
-	// salvarSimulado(SimuladoGerado simuladoGerado)
-	// gerarESalvarSimulado?
 	
 //	@Deprecated
 //	@GetMapping("/itens")

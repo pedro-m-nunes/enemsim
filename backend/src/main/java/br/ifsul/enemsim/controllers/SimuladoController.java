@@ -17,13 +17,11 @@ import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.exceptions.RespostaAoSimuladoException;
-import br.ifsul.enemsim.gerador.GerSim;
 import br.ifsul.enemsim.services.GerarSimuladoService;
 import br.ifsul.enemsim.services.ResponderSimuladoService;
 import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
 import br.ifsul.enemsim.services.entidades.SimuladoCreateAndUpdateService;
 import br.ifsul.enemsim.services.entidades.SimuladoReadService;
-import br.ifsul.enemsim.services.entidades.relacionais.SimuladoItemCreateAndUpdateService;
 import jakarta.transaction.Transactional;
 
 @RestController
@@ -54,16 +52,17 @@ public class SimuladoController {
 		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
-	// save, saveAll?
+	@Autowired
+	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
 	
-	// GerarSimuladoService
+	// save, saveAll?
 	
 	@Autowired
 	private GerarSimuladoService gerarSimuladoService;
 
-	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Get?
+	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
 	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException { // tratar exceção aqui?
-		return gerarSimuladoService.gerarSimuladoDeNivelamento(new Estudante(estudanteId)).salvar(simuladoCreateAndUpdateService, simuladoItemCreateAndUpdateService);
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(new Estudante(estudanteId)));
 	}
 
 	// gerarSimuladoAdaptado
@@ -72,7 +71,7 @@ public class SimuladoController {
 	private ResponderSimuladoService responderSimuladoService;
 	
 	@Transactional // ?
-	@PostMapping("/finalizar") // Post // ""?
+	@PostMapping("/finalizar") // ""?
 	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException { // void?
 		return responderSimuladoService.finalizarSimulado(itensRespondidos);
 	}

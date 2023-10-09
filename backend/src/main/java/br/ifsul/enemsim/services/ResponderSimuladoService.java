@@ -72,7 +72,7 @@ public class ResponderSimuladoService {
 			EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
 			
 			if(!estudanteHabilidadeReadService.existePorId(estudanteHabilidadeId))
-				estudanteHabilidadeCreateAndUpdateService.salvarOuAtualizar(new EstudanteHabilidade(new Estudante(estudanteHabilidadeId.getEstudanteId()), new Habilidade(estudanteHabilidadeId.getHabilidadeId())));
+				estudanteHabilidadeCreateAndUpdateService.salvarOuAtualizar(new EstudanteHabilidade(new Estudante(estudanteHabilidadeId.getEstudanteId()), new Habilidade(estudanteHabilidadeId.getHabilidadeId()))); // new EstudanteHabilidade(estudanteHabilidadeId)?
 			
 			estudanteHabilidadeCreateAndUpdateService.adicionarTentativa(estudanteHabilidadeId);
 			
