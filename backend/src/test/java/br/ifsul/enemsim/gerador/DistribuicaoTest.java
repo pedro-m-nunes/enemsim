@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.exceptions.DistribuicaoException;
+import br.ifsul.enemsim.services.auxiliar.Distribuicao;
+import br.ifsul.enemsim.services.auxiliar.Filtro;
 
 public class DistribuicaoTest {
 	

@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.gerador;
+package br.ifsul.enemsim.services.auxiliar;
 
 import java.util.Arrays;
 

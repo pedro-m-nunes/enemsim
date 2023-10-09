@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import br.ifsul.enemsim.entidades.Habilidade;
+import br.ifsul.enemsim.services.auxiliar.Filtro;
 
 public class FiltroTest {
 

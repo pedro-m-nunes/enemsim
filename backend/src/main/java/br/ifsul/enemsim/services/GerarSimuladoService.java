@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.gerador;
+package br.ifsul.enemsim.services;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -15,20 +15,31 @@ import br.ifsul.enemsim.entidades.Habilidade;
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
+import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
+import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
+import br.ifsul.enemsim.services.entidades.HabilidadeReadService;
+import br.ifsul.enemsim.services.entidades.ItemReadService;
+import br.ifsul.enemsim.services.entidades.relacionais.EstudanteHabilidadeReadService;
 
-@Service // Components?
-public class GerSim {
+@Service
+public class GerarSimuladoService {
 	
 	@Autowired
-	private GerSimDB db;
+	private ItemReadService itemReadService;
 	
+	@Autowired
+	private HabilidadeReadService habilidadeReadService;
+	
+	@Autowired
+	private EstudanteHabilidadeReadService estudanteHabilidadeReadService;
+
 	public SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
 		List<Item> itensSimulado = new ArrayList<>();
 		
-		for(Habilidade habilidade : db.habilidades())
-			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(db.pegarItensOrdenadosPorDificuldade(habilidade))));
+		for(Habilidade habilidade : habilidadeReadService.listar())
+			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(itemReadService.pegarItensOrdenadosPorDificuldade(habilidade))));
 		
 		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado));
 	}
@@ -46,7 +57,7 @@ public class GerSim {
 		if(itens == null)
 			throw new IllegalArgumentException("Não há como selecionar itens de uma lista nula."); // exception própria?
 		
-		List<Item> itensPossiveis = db.retirarItensJaPresentesEmOutrosSimulados(itens, estudante);
+		List<Item> itensPossiveis = itemReadService.pegarItensDoConjuntoAusentesEmOutrosSimuladosDoEstudante(itens, estudante);
 		
 		if(quantidade > itensPossiveis.size())
 			throw new DadosInsuficientesException("O estudante já gerou os simulados de nivelamento disponíveis."); // ""? geral?
@@ -118,6 +129,7 @@ public class GerSim {
 		}
 	}
 	
+	// testar
 	private SimuladoGerado gerarSimuladoPorDesempenho(Estudante estudante) { // usar Distribuicao? // testar
 		// exceptions?
 		
@@ -126,18 +138,18 @@ public class GerSim {
 		Set<Item> itens = new LinkedHashSet<>();
 		
 		// para cada habilidade, buscar os itens abaixo/acima dos medianos, e pegar um aleatório
-		for(Habilidade habilidade : db.habilidades()) { // selecionarItensAleatoriamente()
-			List<Item> itensHabilidade = db.pegarItensOrdenadosPorDificuldade(habilidade); // Set?
+		for(Habilidade habilidade : habilidadeReadService.listar()) { // selecionarItensAleatoriamente()
+			List<Item> itensHabilidade = itemReadService.pegarItensOrdenadosPorDificuldade(habilidade); // Set?
 			
 			List<Item> itensPossiveisPorDesempenho; // Set?
 			
-			if(db.getEstudanteHabilidade(estudante, habilidade).getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar...
+			if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar?
 				itensPossiveisPorDesempenho = pegarOsItensAcimaDosTresMedianos(itensHabilidade);
 			else
 				itensPossiveisPorDesempenho = pegarOsItensAbaixoDosTresMedianos(itensHabilidade);
 			
 			// desconsiderar os já feitos/apresentados/acertados
-			List<Item> itensPossiveis = db.retirarItensJaPresentesEmOutrosSimulados(itensPossiveisPorDesempenho, estudante);
+			List<Item> itensPossiveis = itemReadService.pegarItensDoConjuntoAusentesEmOutrosSimuladosDoEstudante(itensPossiveisPorDesempenho, estudante);
 			
 			// se todos já forem feitos...
 			// apresentados >= feitos >= acertados
@@ -151,6 +163,9 @@ public class GerSim {
 		
 		return new SimuladoGerado(simulado, itens);
 	}
+	
+	// salvarSimulado(SimuladoGerado simuladoGerado)
+	// gerarESalvarSimulado?
 	
 //	@Deprecated
 //	@GetMapping("/itens")

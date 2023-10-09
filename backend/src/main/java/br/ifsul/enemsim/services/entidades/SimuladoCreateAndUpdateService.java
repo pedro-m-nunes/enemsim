@@ -29,4 +29,6 @@ public class SimuladoCreateAndUpdateService implements CreateAndUpdateService<Si
 		return simuladoRepository.setFinalizado(simuladoId);
 	}
 	
+	// salvar(SimuladoGerado simuladoGerado)
+	
 }
