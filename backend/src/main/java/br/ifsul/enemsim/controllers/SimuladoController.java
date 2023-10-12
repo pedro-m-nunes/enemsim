@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.entidades.Item;
 import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
-import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
-import br.ifsul.enemsim.exceptions.RespostaAoSimuladoException;
+import br.ifsul.enemsim.exceptions.ResponderSimuladoException;
 import br.ifsul.enemsim.services.GerarSimuladoService;
 import br.ifsul.enemsim.services.ResponderSimuladoService;
 import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
@@ -52,6 +52,11 @@ public class SimuladoController {
 		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
+//	@GetMapping("/teste")
+//	private boolean teste() { // erro: simuladoReadService é null (?)
+//		return simuladoReadService.estudantePossuiSimuladoNaoFinalizado(1);
+//	}
+	
 	@Autowired
 	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
 	
@@ -62,24 +67,24 @@ public class SimuladoController {
 
 	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
 	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException { // tratar exceção aqui?
-		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(new Estudante(estudanteId)));
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(estudanteId));
 	}
 
-	// gerarSimuladoAdaptado
+	@GetMapping("/gerar/desempenho/estudante={estudanteId}") // ""? // Post?
+	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws UnsupportedOperationException, DadosInsuficientesException {
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoAdaptado(estudanteId, Adaptacao.DESEMPENHO));
+	}
+	
+	// pontos fortes, pontos fracos...
 	
 	@Autowired
 	private ResponderSimuladoService responderSimuladoService;
 	
 	@Transactional // ?
 	@PostMapping("/finalizar") // ""?
-	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException { // void?
+	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // void?
 		return responderSimuladoService.finalizarSimulado(itensRespondidos);
 	}
-	
-//	@GetMapping("/s={sId}/i={iId}")
-//	public Object teste(@PathVariable int sId, @PathVariable int iId) { // temp
-//		return simuladoRepository.simuladoPossuiItem(simuladoRepository.findById(sId).get(), itemRepository.findById(iId).get());
-//	}
 	
 	// delete, deleteAll?
 	

@@ -12,7 +12,7 @@ import br.ifsul.enemsim.entidades.relacionais.EstudanteHabilidade;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
-import br.ifsul.enemsim.exceptions.RespostaAoSimuladoException;
+import br.ifsul.enemsim.exceptions.ResponderSimuladoException;
 import br.ifsul.enemsim.services.entidades.ItemReadService;
 import br.ifsul.enemsim.services.entidades.SimuladoCreateAndUpdateService;
 import br.ifsul.enemsim.services.entidades.SimuladoReadService;
@@ -40,23 +40,25 @@ public class ResponderSimuladoService {
 	
 	// salvarResposta()?
 	
-	// testar tudo isso aqui...
-	//@Transactional // ?
 	@Autowired
 	private EstudanteHabilidadeCreateAndUpdateService estudanteHabilidadeCreateAndUpdateService;
-
-	public int finalizarSimulado(List<SimuladoItem> itensRespondidos) throws RespostaAoSimuladoException {
+	
+	// testar tudo isso aqui...
+//	@Transactional // ?
+	public int finalizarSimulado(List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException {
 		Simulado simulado = simuladoReadService.buscarPorId(itensRespondidos.get(0).getId().getSimuladoId()).get(); // ?
 		
 		// if simulado == null ...?
 		
-		if(simulado.getFinalizado()) // simuladoRepository.finalizado(id) ??
-			throw new RespostaAoSimuladoException("O simulado informado (id = " + simulado.getId() + ") já foi entregue e não aceita mais respostas.");
+		if(simulado.getFinalizado())
+			throw new ResponderSimuladoException("O simulado informado (id = " + simulado.getId() + ") já foi entregue e não aceita mais respostas.");
 		
 		// salvar respostas aos itens
 		for(SimuladoItem simuladoItem : itensRespondidos) {
+			// if simuladoDoItemN != simuladoDoItemM...
+			
 			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), simuladoItem.getId().getItemId()))
-				throw new RespostaAoSimuladoException("O item informado (id = " + simuladoItem.getId().getItemId() + ") não aparece no simulado.");
+				throw new ResponderSimuladoException("O item informado (id = " + simuladoItem.getId().getItemId() + ") não aparece no simulado.");
 			
 			simuladoItemCreateAndUpdateService.salvarResposta(simuladoItem.getId(), simuladoItem.getResposta());
 		}
@@ -68,7 +70,6 @@ public class ResponderSimuladoService {
 		for(SimuladoItem simuladoItem : itensRespondidos) {
 			Item item = itemReadService.buscarPorId(simuladoItem.getId().getItemId()).get();
 			
-			// estudanteHabilidade.adicionarTentativa(simulado.estudante, item.habilidade)
 			EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
 			
 			if(!estudanteHabilidadeReadService.existePorId(estudanteHabilidadeId))
