@@ -1,7 +1,6 @@
 package br.ifsul.enemsim.services;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -22,6 +21,7 @@ import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
 import br.ifsul.enemsim.services.entidades.HabilidadeReadService;
 import br.ifsul.enemsim.services.entidades.ItemReadService;
 import br.ifsul.enemsim.services.entidades.relacionais.EstudanteHabilidadeReadService;
+import br.ifsul.enemsim.services.entidades.usuarios.EstudanteReadService;
 
 @Service
 public class GerarSimuladoService {
@@ -33,15 +33,60 @@ public class GerarSimuladoService {
 	private HabilidadeReadService habilidadeReadService;
 	
 	@Autowired
+	private EstudanteReadService estudanteReadService;
+	
+	@Autowired
 	private EstudanteHabilidadeReadService estudanteHabilidadeReadService;
 
-	public SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
-		List<Item> itensSimulado = new ArrayList<>();
+	public SimuladoGerado gerarSimuladoDeNivelamento(Integer estudanteId) throws DadosInsuficientesException {
+		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get();
+		
+		Set<Item> itensSimulado = new LinkedHashSet<>();
 		
 		for(Habilidade habilidade : habilidadeReadService.listar())
 			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(itemReadService.pegarItensOrdenadosPorDificuldade(habilidade))));
 		
-		return instanciarSimulado(estudante, new LinkedHashSet<>(itensSimulado));
+		return instanciarSimulado(estudante, itensSimulado);
+	}
+	
+	// Simulados adaptados: só um por vez (não deixar o estudante gerar se houver um não finalizado).
+	
+	public SimuladoGerado gerarSimuladoAdaptado(Integer estudanteId, Adaptacao adaptacao) throws UnsupportedOperationException, DadosInsuficientesException {
+		// se não fez (respondeu) todos os de nivelamento, não deixar gerar
+		
+		// if tem um não finalizado, não deixar gerar (throw ...)
+		
+		switch(adaptacao) {
+		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudanteId);
+		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
+		case PONTOS_FRACOS: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
+		default: return null; // exception própria? // se adaptacao for null, gerar por desempenho ou jogar exceção?
+		}
+	}
+	
+	// testar
+	private SimuladoGerado gerarSimuladoPorDesempenho(Integer estudanteId) throws DadosInsuficientesException { // usar Distribuicao? // testar
+		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get();
+		
+		Set<Item> itensSimulado = new LinkedHashSet<>();
+
+		for(Habilidade habilidade : habilidadeReadService.listar()) {
+			List<Item> itensHabilidade = itemReadService.pegarItensOrdenadosPorDificuldade(habilidade); // Set?
+
+			List<Item> itensPossiveisPorDesempenho;
+
+			// se não existir estudanteHabilidadeService...
+			if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar? // erro aqui - talvez porque não tem de todas as habilidades...
+				itensPossiveisPorDesempenho = pegarOsItensAcimaDosTresMedianos(itensHabilidade);
+			else
+				itensPossiveisPorDesempenho = pegarOsItensAbaixoDosTresMedianos(itensHabilidade);
+
+			Set<Item> itensSelecionados = selecionarItensAleatoriamente(estudante, 1, itensPossiveisPorDesempenho);
+			
+			itensSimulado.addAll(itensSelecionados);
+		}
+
+		return instanciarSimulado(estudante, itensSimulado);
 	}
 	
 	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) {
@@ -60,7 +105,7 @@ public class GerarSimuladoService {
 		List<Item> itensPossiveis = itemReadService.pegarItensDoConjuntoAusentesEmOutrosSimuladosDoEstudante(itens, estudante);
 		
 		if(quantidade > itensPossiveis.size())
-			throw new DadosInsuficientesException("O estudante já gerou os simulados de nivelamento disponíveis."); // ""? geral?
+		throw new DadosInsuficientesException("Não é possível selecionar os itens com as condições informadas."); // ""? "O estudante já gerou os simulados de nivelamento disponíveis."?
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
@@ -81,26 +126,6 @@ public class GerarSimuladoService {
 		return Arrays.asList(new Item[] {itens.get(posicaoMediana - 1), itens.get(posicaoMediana), itens.get(posicaoMediana + 1)});
 	}
 	
-	private int posicaoMedianaDosItens(List<Item> itens) { // conforme padrão
-		return posicaoMedianaArredondandoParaCima(itens.size());
-	}
-	
-	private int posicaoMedianaArredondandoParaCima(int tamanhoLista) { // List<Object>? Funciona, mas precisa?
-		return tamanhoLista / 2;
-	}
-	
-//	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) { // ?
-//		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
-//	}
-	
-	/* SIMULADO ADAPTADO
-	 * Pegar desempenho do estudante (inclui dados sobre itens já respondidos/acertados).
-	 * Gerar uma distribuição adequada ao desempenho, com base também no tipo de adaptação.
-	 * Selecionar os "bancos" de itens com base nos filtros da distribuição gerada.
-	 * Selecionar os itens de cada "banco" aleatoriamente.
-	 * Instanciar simulado.
-	 */
-	
 	private List<Item> pegarOsItensAbaixoDosTresMedianos(List<Item> itens) {
 		return itens.subList(0, posicaoMedianaDosItens(itens) - 1);
 	}
@@ -109,59 +134,16 @@ public class GerarSimuladoService {
 		return itens.subList(posicaoMedianaDosItens(itens) + 2, itens.size());
 	}
 	
-	/* Itens por desempenho - primeiro simulado adaptado
-	 * 
-	 * adaptacao = Adaptacao.DESEMPENHO;
-	 * 
-	 * Aproveitamento ou rendimento
-	 * x <  0.5 : i(x) = random(abaixo)
-	 * x >= 0.5 : i(x) = random(acima)
-	 */
-	
-	// Simulados adaptados: só um por vez (não deixar o estudante gerar se houver um não finalizado).
-	
-	public SimuladoGerado gerarSimuladoAdaptado(Estudante estudante, Adaptacao adaptacao) throws UnsupportedOperationException {
-		switch(adaptacao) {
-		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudante);
-		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
-		case PONTOS_FRACOS: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
-		default: return null; // exception própria? // se adaptacao for null...
-		}
+	private int posicaoMedianaDosItens(List<Item> itens) { // conforme padrão // ?
+		return posicaoMedianaArredondandoParaCima(itens.size());
 	}
 	
-	// testar
-	private SimuladoGerado gerarSimuladoPorDesempenho(Estudante estudante) { // usar Distribuicao? // testar
-		// exceptions?
-		
-		Simulado simulado = new Simulado(estudante);
-		
-		Set<Item> itens = new LinkedHashSet<>();
-		
-		// para cada habilidade, buscar os itens abaixo/acima dos medianos, e pegar um aleatório
-		for(Habilidade habilidade : habilidadeReadService.listar()) { // selecionarItensAleatoriamente()
-			List<Item> itensHabilidade = itemReadService.pegarItensOrdenadosPorDificuldade(habilidade); // Set?
-			
-			List<Item> itensPossiveisPorDesempenho; // Set?
-			
-			if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar?
-				itensPossiveisPorDesempenho = pegarOsItensAcimaDosTresMedianos(itensHabilidade);
-			else
-				itensPossiveisPorDesempenho = pegarOsItensAbaixoDosTresMedianos(itensHabilidade);
-			
-			// desconsiderar os já feitos/apresentados/acertados
-			List<Item> itensPossiveis = itemReadService.pegarItensDoConjuntoAusentesEmOutrosSimuladosDoEstudante(itensPossiveisPorDesempenho, estudante);
-			
-			// se todos já forem feitos...
-			// apresentados >= feitos >= acertados
-			// tentar por (em ordem): não apresentados, não feitos, não acertados.
-			
-			// selecionar aleatório
-			Random random = new Random();
-			
-			itens.add(itensPossiveis.get(random.nextInt(itensPossiveis.size())));
-		}
-		
-		return new SimuladoGerado(simulado, itens);
+	private int posicaoMedianaArredondandoParaCima(int tamanhoLista) {
+		return tamanhoLista / 2;
+	}
+	
+	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) { // ?
+		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
 	}
 	
 //	@Deprecated

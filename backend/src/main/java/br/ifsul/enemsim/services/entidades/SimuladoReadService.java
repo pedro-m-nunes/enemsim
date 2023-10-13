@@ -39,4 +39,8 @@ public class SimuladoReadService implements ReadService<Simulado, Integer> {
 		return simuladoRepository.simuladoPossuiItem(simuladoId, itemId);
 	}
 	
+//	public boolean estudantePossuiSimuladoNaoFinalizado(Integer estudanteId) {
+//		return simuladoRepository.existsByEstudanteIdAndFinalizadoIsFalse(estudanteId);
+//	}
+	
 }
