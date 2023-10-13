@@ -22,11 +22,13 @@ COISAS A FAZER:
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
 - Prova e Item como N:N.
 - Turmas.
+- Mapping "/error"?
+- Pontuação do estudante na habilidade?
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
 - (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
-- Quando o simulado passado no método finalizarSimulado já foi finalizado (e talvez quando os itens não pertencem ao simulado também), os acertos ainda são contabilizados.
+- estudanteId, usado na geração, pode não ser de um usuário (meio que ok, joga uma exceção).
 
 DÚVIDAS/IDEIAS:
 - Caminhos dos controllers: singular ou plural?

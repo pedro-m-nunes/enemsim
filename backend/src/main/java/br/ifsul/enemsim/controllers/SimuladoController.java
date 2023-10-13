@@ -53,11 +53,6 @@ public class SimuladoController {
 		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
-//	@GetMapping("/teste")
-//	private boolean teste() { // erro: simuladoReadService é null (?)
-//		return simuladoReadService.estudantePossuiSimuladoNaoFinalizado(1);
-//	}
-	
 	@Autowired
 	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
 	
@@ -67,21 +62,26 @@ public class SimuladoController {
 	private GerarSimuladoService gerarSimuladoService;
 	
 	private static final int MINIMO_SIMULADOS_DE_NIVELAMENTO = 3;
+	
+	// gerarSimulado?
 
 	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException { // tratar exceção aqui?
-		// if !simuladoAberto
+	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException { // tratar exceção aqui?
+		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
+			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
+		
 		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(estudanteId));
 	}
 
 	@GetMapping("/gerar/desempenho/estudante={estudanteId}") // ""? // Post?
 	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
-		// if !simuladoAberto
-		
 		int simuladosDeNivelamentoRealizadosPeloEstudante = simuladoReadService.quantidadeSimuladosDeNivelamentoFinalizados(estudanteId);
 		
 		if(simuladosDeNivelamentoRealizadosPeloEstudante < MINIMO_SIMULADOS_DE_NIVELAMENTO)
 			throw new GerarSimuladoException("É preciso realizar " + MINIMO_SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s)."); // ?
+		
+		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
+			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
 		
 		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoAdaptado(estudanteId, Adaptacao.DESEMPENHO));
 	}

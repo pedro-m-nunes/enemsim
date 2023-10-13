@@ -38,7 +38,7 @@ public class GerarSimuladoService {
 	private EstudanteHabilidadeReadService estudanteHabilidadeReadService;
 
 	public SimuladoGerado gerarSimuladoDeNivelamento(Integer estudanteId) throws DadosInsuficientesException {
-		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get();
+		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get(); // exception própria?
 		
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 		
@@ -58,7 +58,7 @@ public class GerarSimuladoService {
 	}
 	
 	private SimuladoGerado gerarSimuladoPorDesempenho(Integer estudanteId) throws DadosInsuficientesException { // usar Distribuicao?
-		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get();
+		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get(); // exception própria?
 		
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 

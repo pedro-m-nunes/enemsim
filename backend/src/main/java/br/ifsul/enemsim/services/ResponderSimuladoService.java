@@ -36,20 +36,33 @@ public class ResponderSimuladoService {
 	@Autowired
 	private EstudanteHabilidadeCreateAndUpdateService estudanteHabilidadeCreateAndUpdateService;
 	
-	public void finalizarSimulado(List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException {
-		// if simuladoDoItemN != simuladoDoItemM...
-		// if simulado == null ...?
-		Simulado simulado = simuladoReadService.buscarPorId(itensRespondidos.get(0).getId().getSimuladoId()).get(); // get 0?
+	public void finalizarSimulado(List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // fazer métodos próprios para as ações?
+		// checar se todos os itens pertencem ao mesmo simulado
+		int ultimoSimuladoId = -1;
+		
+		for(SimuladoItem itemRespondido : itensRespondidos) {
+			int simuladoId = itemRespondido.getId().getSimuladoId();
+			
+			if(ultimoSimuladoId != -1 && ultimoSimuladoId != simuladoId)
+				throw new ResponderSimuladoException("Os itens informados não pertencem ao mesmo simulado.");
+			
+			ultimoSimuladoId = simuladoId;
+		}
+		
+		Simulado simulado = simuladoReadService.buscarPorId(itensRespondidos.get(0).getId().getSimuladoId()).get();
+		
+		if(simulado == null)
+			throw new ResponderSimuladoException("O simulado informado é nulo.");
 		
 		if(simulado.getFinalizado())
 			throw new ResponderSimuladoException("O simulado informado (id = " + simulado.getId() + ") já foi entregue e não aceita mais respostas.");
 		
 		// salvar respostas aos itens
-		for(SimuladoItem simuladoItem : itensRespondidos) {
-			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), simuladoItem.getId().getItemId()))
-				throw new ResponderSimuladoException("O item informado (id = " + simuladoItem.getId().getItemId() + ") não aparece no simulado.");
+		for(SimuladoItem itemRespondido : itensRespondidos) {
+			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), itemRespondido.getId().getItemId()))
+				throw new ResponderSimuladoException("O item informado (id = " + itemRespondido.getId().getItemId() + ") não aparece no simulado.");
 			
-			simuladoItemCreateAndUpdateService.salvarResposta(simuladoItem.getId(), simuladoItem.getResposta());
+			simuladoItemCreateAndUpdateService.salvarResposta(itemRespondido.getId(), itemRespondido.getResposta());
 		}
 		
 		// marcar como finalizado
@@ -61,11 +74,9 @@ public class ResponderSimuladoService {
 			
 			EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
 			
-			// antigo: se não tiver EH, criar (não precisa mais)
-			
 			estudanteHabilidadeCreateAndUpdateService.adicionarTentativa(estudanteHabilidadeId);
 			
-			if(simuladoItem.getResposta() == item.getRespostaCerta()) // método próprio?
+			if(simuladoItem.getResposta() == item.getRespostaCerta())
 				estudanteHabilidadeCreateAndUpdateService.adicionarTentativaCerta(estudanteHabilidadeId);
 		}
 	}
