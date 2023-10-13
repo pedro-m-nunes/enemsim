@@ -1,7 +1,6 @@
 package br.ifsul.enemsim.services;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Random;
@@ -44,18 +43,12 @@ public class GerarSimuladoService {
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 		
 		for(Habilidade habilidade : habilidadeReadService.listar())
-			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, pegarOsTresItensAoRedorDaDificuldadeMediana(itemReadService.pegarItensOrdenadosPorDificuldade(habilidade))));
+			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, itemReadService.itensMedianos(habilidade)));
 		
-		return instanciarSimulado(estudante, itensSimulado);
+		return instanciarSimulado(estudante, itensSimulado, null);
 	}
 	
-	// Simulados adaptados: só um por vez (não deixar o estudante gerar se houver um não finalizado).
-	
 	public SimuladoGerado gerarSimuladoAdaptado(Integer estudanteId, Adaptacao adaptacao) throws UnsupportedOperationException, DadosInsuficientesException {
-		// se não fez (respondeu) todos os de nivelamento, não deixar gerar
-		
-		// if tem um não finalizado, não deixar gerar (throw ...)
-		
 		switch(adaptacao) {
 		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudanteId);
 		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
@@ -64,33 +57,34 @@ public class GerarSimuladoService {
 		}
 	}
 	
-	// testar
-	private SimuladoGerado gerarSimuladoPorDesempenho(Integer estudanteId) throws DadosInsuficientesException { // usar Distribuicao? // testar
+	private SimuladoGerado gerarSimuladoPorDesempenho(Integer estudanteId) throws DadosInsuficientesException { // usar Distribuicao?
 		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get();
 		
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 
 		for(Habilidade habilidade : habilidadeReadService.listar()) {
-			List<Item> itensHabilidade = itemReadService.pegarItensOrdenadosPorDificuldade(habilidade); // Set?
+			Set<Item> itensSelecionados;
 
-			List<Item> itensPossiveisPorDesempenho;
-
-			// se não existir estudanteHabilidadeService...
-			if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar? // erro aqui - talvez porque não tem de todas as habilidades...
-				itensPossiveisPorDesempenho = pegarOsItensAcimaDosTresMedianos(itensHabilidade);
-			else
-				itensPossiveisPorDesempenho = pegarOsItensAbaixoDosTresMedianos(itensHabilidade);
-
-			Set<Item> itensSelecionados = selecionarItensAleatoriamente(estudante, 1, itensPossiveisPorDesempenho);
+			final int ITENS_POR_HABILIDADE = 1;
+			
+			try {
+				if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar?
+					itensSelecionados = selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.itensAcimaDosMedianos(habilidade));
+				else
+					itensSelecionados = selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.itensAbaixoDosMedianos(habilidade));
+			} catch(DadosInsuficientesException e) {
+				itensSelecionados = selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.pegarItensPorHabilidade(habilidade));
+				// catch { continue; } // gera simulados sem itens (?)
+			}
 			
 			itensSimulado.addAll(itensSelecionados);
 		}
 
-		return instanciarSimulado(estudante, itensSimulado);
+		return instanciarSimulado(estudante, itensSimulado, Adaptacao.DESEMPENHO);
 	}
 	
-	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados) {
-		Simulado simulado = new Simulado(estudante);
+	private SimuladoGerado instanciarSimulado(Estudante estudante, Set<Item> itensSelecionados, Adaptacao adaptacao) {
+		Simulado simulado = new Simulado(estudante, adaptacao);
 		
 		return new SimuladoGerado(simulado, itensSelecionados);
 	}
@@ -105,7 +99,7 @@ public class GerarSimuladoService {
 		List<Item> itensPossiveis = itemReadService.pegarItensDoConjuntoAusentesEmOutrosSimuladosDoEstudante(itens, estudante);
 		
 		if(quantidade > itensPossiveis.size())
-		throw new DadosInsuficientesException("Não é possível selecionar os itens com as condições informadas."); // ""? "O estudante já gerou os simulados de nivelamento disponíveis."?
+			throw new DadosInsuficientesException("Não há itens o suficiente para selecionar a quantidade informada (habilidade.id = " + itens.get(0).getHabilidade().getId() + ")."); // ""? "O estudante já gerou os simulados de nivelamento disponíveis."?
 		
 		Set<Item> itensSelecionados = new LinkedHashSet<>();
 		
@@ -117,63 +111,5 @@ public class GerarSimuladoService {
 		
 		return itensSelecionados;
 	}
-	
-	private List<Item> pegarOsTresItensAoRedorDaDificuldadeMediana(List<Item> itens) {
-		int posicaoMediana = posicaoMedianaDosItens(itens);
-		
-		// se size < 3... (por enquanto ok)
-		
-		return Arrays.asList(new Item[] {itens.get(posicaoMediana - 1), itens.get(posicaoMediana), itens.get(posicaoMediana + 1)});
-	}
-	
-	private List<Item> pegarOsItensAbaixoDosTresMedianos(List<Item> itens) {
-		return itens.subList(0, posicaoMedianaDosItens(itens) - 1);
-	}
-	
-	private List<Item> pegarOsItensAcimaDosTresMedianos(List<Item> itens) {
-		return itens.subList(posicaoMedianaDosItens(itens) + 2, itens.size());
-	}
-	
-	private int posicaoMedianaDosItens(List<Item> itens) { // conforme padrão // ?
-		return posicaoMedianaArredondandoParaCima(itens.size());
-	}
-	
-	private int posicaoMedianaArredondandoParaCima(int tamanhoLista) {
-		return tamanhoLista / 2;
-	}
-	
-	private int posicaoMedianaArredondandoParaBaixo(int tamanhoLista) { // ?
-		return tamanhoLista / 2 - (1 - tamanhoLista % 2);
-	}
-	
-//	@Deprecated
-//	@GetMapping("/itens")
-//	private Object itens() { // temp
-//		Map<Byte, Map<String, List<Integer>>> habilidadesMap = new LinkedHashMap<>();
-//		
-//		for(Habilidade habilidade : db.HABILIDADES_DO_TESTE) {
-//			List<Item> itens = db.pegarItensOrdenadosPorDificuldade(habilidade);
-//			
-//			Map<String, List<Integer>> itensMap = new LinkedHashMap<>();
-//			
-//			itensMap.put("Abaixo", itensIds(pegarOsItensAbaixoDosTresMedianos(itens)));
-//			itensMap.put("Medianos", itensIds(pegarOsTresItensAoRedorDaDificuldadeMediana(itens)));
-//			itensMap.put("Acima", itensIds(pegarOsItensAcimaDosTresMedianos(itens)));
-//			
-//			habilidadesMap.put(habilidade.getId(), itensMap);
-//		}
-//		
-//		return habilidadesMap;
-//	}
-	
-//	@Deprecated
-//	private List<Integer> itensIds(List<Item> itens) { // temp
-//		List<Integer> itensIds = new ArrayList<>();
-//		
-//		for(Item item : itens)
-//			itensIds.add(item.getId());
-//		
-//		return itensIds;
-//	}
-	
+
 }

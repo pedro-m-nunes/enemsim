@@ -50,6 +50,8 @@ public class Usuario {
 	
 	// instituição?
 	
+	// ativo, dataCriacao, dataDesativacao
+	
 	protected Usuario(String username, String senha, String nome) {
 		super();
 		this.username = username;

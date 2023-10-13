@@ -7,17 +7,21 @@ IMPORTANTE:
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
 - (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
-- Registro de respostas aos simulados.
+	A FAZER:
+	- Se tiver aproveitamento alto e não houver mais questões difíceis: colocar as questões que tiver. FEITO
+	- Restringir a quantidade de simulados abertos para 1.
+	- Só permitir a geração de simulados adaptados após um número mínimo de de nivelamento (todos, 3). FEITO
 
 COISAS A FAZER:
 - Sistema de login do teste.
 - Colocar validation.constraints nas entidades (e conciliar com @Column).
-- Services.
-- Atualizar testes unitários do gerador de simulados.
+	- Colocar constraints nos parâmetros dos construtores e métodos também? https://www.baeldung.com/javax-validation-method-constraints
+- Testes unitários do gerador de simulados.
 - Services/controllers com as operações dos usuários (CRUD...).
 - Testes unitários do CRUD das entidades.
 - Acertar relacionamento de Disciplina e Resolucao com Item (resolver erros).
-- Insert de provas e itens de provas.
+- Prova e Item como N:N.
+- Turmas.
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
@@ -25,17 +29,11 @@ PROBLEMAS ENCONTRADOS:
 - Quando o simulado passado no método finalizarSimulado já foi finalizado (e talvez quando os itens não pertencem ao simulado também), os acertos ainda são contabilizados.
 
 DÚVIDAS/IDEIAS:
-- Classe GerSimDB? Que faz as buscas no banco.
 - Caminhos dos controllers: singular ou plural?
 - Cores das provas: masculino ou feminino?
-- Usar Repository ou Controller nos @Component?
-- Colocar constraints nos parâmetros dos construtores e métodos também? https://www.baeldung.com/javax-validation-method-constraints
 - Permitir itens inválidos no banco? (TRI, habilidade ou resposta null)
-- Como se dará a identificação dos pontos fortes/fracos? EstudanteHabilidade mesmo?
 - Como usar cascade nos relacionamentos?
 - Colocar alguns atributos como final? (Simulado.adaptacao)
-- Usar @Basic?
-- Usar @Transactional?
 - Usar Postgres ou MySQL?
 - Como disponibilizar o sistema?
 
@@ -43,7 +41,6 @@ TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).
 - Quando um estudante for deletado, todos os seus simulados devem ser deletados também. (Mas estudante pode ser deletado? Ou apenas será inativado? Se for inativado, manter os simulados salvos)
 - Quando um estudante for deletado, deletar também suas relações com as habilidades? Dados podem ser usados para estatísticas...
-- Criar/cadastrar um estudante deve criar também seus relacionamentos com as habilidades (EstudanteHabilidade).
 - ... (bastante coisa)
 
 PRECISA DE PESQUISA:
@@ -54,6 +51,3 @@ PRECISA DE PESQUISA:
 - Spring Cloud
 - Flyway (alter table...)
 - DTO (retornar cópia da entidade)
-
-
-testando

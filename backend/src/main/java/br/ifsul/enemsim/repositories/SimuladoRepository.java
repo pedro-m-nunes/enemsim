@@ -22,9 +22,9 @@ public interface SimuladoRepository extends JpaRepository<Simulado, Integer> {
 	
 //	public boolean existsByEstudanteIdAndFinalizadoIsFalse(Integer estudanteId);
 	
-//	public boolean existsByEstudanteAndAdaptacaoIsNotNull(Integer estudanteId); // ? // testar
-	
 	@Query("SELECT CASE WHEN COUNT(s) > 0 THEN TRUE ELSE FALSE END FROM Simulado s INNER JOIN SimuladoItem si ON s = si.simulado WHERE s.id = ?1 AND si.id.itemId = ?2")
 	public boolean simuladoPossuiItem(Integer simuladoId, Integer itemId); // testar
+	
+	public int countByEstudanteIdAndAdaptacaoIsNullAndFinalizadoIsTrue(Integer estudanteId);
 	
 }
