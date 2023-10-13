@@ -16,6 +16,7 @@ import br.ifsul.enemsim.entidades.Simulado;
 import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
+import br.ifsul.enemsim.exceptions.GerarSimuladoException;
 import br.ifsul.enemsim.exceptions.ResponderSimuladoException;
 import br.ifsul.enemsim.services.GerarSimuladoService;
 import br.ifsul.enemsim.services.ResponderSimuladoService;
@@ -52,11 +53,6 @@ public class SimuladoController {
 		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
-//	@GetMapping("/teste")
-//	private boolean teste() { // erro: simuladoReadService é null (?)
-//		return simuladoReadService.estudantePossuiSimuladoNaoFinalizado(1);
-//	}
-	
 	@Autowired
 	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
 	
@@ -64,14 +60,29 @@ public class SimuladoController {
 	
 	@Autowired
 	private GerarSimuladoService gerarSimuladoService;
+	
+	private static final int MINIMO_SIMULADOS_DE_NIVELAMENTO = 3;
+	
+	// gerarSimulado?
 
 	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException { // tratar exceção aqui?
+	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException { // tratar exceção aqui?
+		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
+			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
+		
 		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(estudanteId));
 	}
 
 	@GetMapping("/gerar/desempenho/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws UnsupportedOperationException, DadosInsuficientesException {
+	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
+		int simuladosDeNivelamentoRealizadosPeloEstudante = simuladoReadService.quantidadeSimuladosDeNivelamentoFinalizados(estudanteId);
+		
+		if(simuladosDeNivelamentoRealizadosPeloEstudante < MINIMO_SIMULADOS_DE_NIVELAMENTO)
+			throw new GerarSimuladoException("É preciso realizar " + MINIMO_SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s)."); // ?
+		
+		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
+			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
+		
 		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoAdaptado(estudanteId, Adaptacao.DESEMPENHO));
 	}
 	
@@ -82,8 +93,8 @@ public class SimuladoController {
 	
 	@Transactional // ?
 	@PostMapping("/finalizar") // ""?
-	public int finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // void?
-		return responderSimuladoService.finalizarSimulado(itensRespondidos);
+	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // void?
+		responderSimuladoService.finalizarSimulado(itensRespondidos);
 	}
 	
 	// delete, deleteAll?

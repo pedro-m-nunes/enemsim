@@ -17,15 +17,17 @@
 //
 //	@PostConstruct
 //	public void run() {
-//		// if administradorRepository.count() == 0 ... ? // se não existem esses usuários...?
-//		usuarioRepository.save(new Administrador(USUARIO, SENHA, "Pedro Müller Nunes"));
-//		usuarioRepository.save(new Administrador(USUARIO, SENHA, "João Guilherme Severo Schröer"));
+//		// if administradorReadService.count() == 0 ... ?
+//		usuarioRepository.save(new Administrador("pedro", SENHA, "Pedro Müller Nunes"));
+//		usuarioRepository.save(new Administrador("joao", SENHA, "João Guilherme Severo Schröer"));
 //		
-//		usuarioRepository.save(new Estudante(USUARIO, SENHA, "Pedro Müller Nunes"));
-//		usuarioRepository.save(new Estudante(USUARIO, SENHA, "João Guilherme Severo Schröer"));
+//		// se não existem estudantes com esse nome?
+//		usuarioRepository.save(new Estudante("080250infq", SENHA, "Pedro Müller Nunes"));
+//		usuarioRepository.save(new Estudante(MATRICULA, SENHA, "João Guilherme Severo Schröer"));
 //		
-//		usuarioRepository.save(new Professor(USUARIO, SENHA, "Roberto Maurício Bokowski Sobrinho"));
-//		usuarioRepository.save(new Professor(USUARIO, SENHA, "Mônica Xavier Py"));
+//		// if professorReadService.count() == 0 ... ?
+//		usuarioRepository.save(new Professor("roberto", SENHA, "Roberto Maurício Bokowski Sobrinho"));
+//		usuarioRepository.save(new Professor("monica", SENHA, "Mônica Xavier Py"));
 //	}
 //
 //}

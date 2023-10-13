@@ -33,6 +33,31 @@ public class ItemController {
 		return itemReadService.buscarPorId(id).get();
 	}
 	
+//	@GetMapping("/separados")
+//	public List<List<List<Integer>>> itensSeparados() { // temp
+//		List<List<List<Integer>>> retorno = new ArrayList<>();
+//		
+//		for(byte i = 1; i <= 10; i++) {
+//			List<List<Item>> itensDivididos = itemReadService.itensDivididosPelosMedianos(new Habilidade(i));
+//			
+//			List<List<Integer>> itensDivididosIds = new ArrayList<>();
+//			
+//			for(List<Item> itensDivisao : itensDivididos) {
+//				List<Integer> itensDivisaoIds = new ArrayList<>();
+//				
+//				for(Item item : itensDivisao) {
+//					itensDivisaoIds.add(item.getId());
+//				}
+//				
+//				itensDivididosIds.add(itensDivisaoIds);
+//			}
+//			
+//			retorno.add(itensDivididosIds);
+//		}
+//		
+//		return retorno;
+//	}
+	
 	@Autowired
 	private ItemCreateAndUpdateService itemCreateAndUpdateService;
 	

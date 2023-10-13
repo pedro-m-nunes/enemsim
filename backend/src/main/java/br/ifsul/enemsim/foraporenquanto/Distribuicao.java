@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.services.auxiliar;
+package br.ifsul.enemsim.foraporenquanto;
 
 import java.util.Arrays;
 
