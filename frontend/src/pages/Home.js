@@ -1,18 +1,20 @@
-import React from 'react';
-import { BrowserRouter, Link, useLocation } from 'react-router-dom';
-import Rotas from '../components/Rotas';
+import { Link, useLocation } from 'react-router-dom';
 
 const Home = () => {
   const location = useLocation();
   console.log(location.state);
+
+  // const dadosBrutos = 
+  // const dados = dadosBrutos.data;
+
   return (
-      <li>
+      <div>
         <Link to='/'>Login</Link>
         <br />
-        <Link to='/question'>Resolver questão</Link>
+        <Link to='/question'>Resolver Simulado</Link>
         <br />
         <Link to='/filtro'>Filtrar questões</Link>
-      </li>
+      </div>
   )
 }
 

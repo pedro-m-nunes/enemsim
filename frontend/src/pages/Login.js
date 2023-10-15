@@ -4,26 +4,15 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-    // definir POST no axios
-    // mandar dados ao banco
+    // definir POST no axios / mandar dados ao banco
     // definir tela de home melhor
-    // definir NAVIGATE
   const navigate = useNavigate();
 
   const[user, setUser] = useState();
   const[senha, setSenha] = useState();
 
-  useEffect(()=>{
-  },[]);
-
-    // const handleSubmit = (e) => {
-    //     setData({
-    //         usuario: user,
-    //         password: senha,
-    //     }, 
-    //     console.log(data))
-    //     e.preventDefault();
-    // }
+  // useEffect(()=>{
+  // },[]);
 
     const handleSubmit2 = (e) => {
       e.preventDefault();
