@@ -93,7 +93,9 @@ public class GerarSimuladoService {
 			final int ITENS_POR_HABILIDADE = 1;
 			
 			try {
-				if(estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0) // encurtar?
+				boolean desempenhoDoEstudante50PorCentoOuMais = estudanteHabilidadeReadService.buscarPorId(new EstudanteHabilidadeId(estudante.getId(), habilidade.getId())).get().getAproveitamento().compareTo(BigDecimal.valueOf(0.5)) >= 0;
+				
+				if(desempenhoDoEstudante50PorCentoOuMais) // encurtar?
 					itensSelecionados = selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.itensAcimaDosMedianos(habilidade));
 				else
 					itensSelecionados = selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.itensAbaixoDosMedianos(habilidade));

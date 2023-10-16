@@ -43,7 +43,9 @@ public class ResponderSimuladoService {
 		for(SimuladoItem itemRespondido : itensRespondidos) {
 			int simuladoId = itemRespondido.getId().getSimuladoId();
 			
-			if(ultimoSimuladoId != -1 && ultimoSimuladoId != simuladoId)
+			boolean mesmoSimuladoDoUltimoItem = ultimoSimuladoId != -1 && ultimoSimuladoId != simuladoId;
+			
+			if(mesmoSimuladoDoUltimoItem)
 				throw new ResponderSimuladoException("Os itens informados não pertencem ao mesmo simulado.");
 			
 			ultimoSimuladoId = simuladoId;
@@ -56,18 +58,14 @@ public class ResponderSimuladoService {
 		
 		if(simulado.getFinalizado())
 			throw new ResponderSimuladoException("O simulado informado (id = " + simulado.getId() + ") já foi entregue e não aceita mais respostas.");
-		
-		boolean usuarioNaoRespondeuNenhumItem = itensRespondidos.size() == 1 && itensRespondidos.get(0).getId().getItemId() == null; // se nenhuma questão for respondida (resposta do front)
-		
-		if(!usuarioNaoRespondeuNenhumItem) {
-			// salvar respostas aos itens
-			for(SimuladoItem itemRespondido : itensRespondidos) {
-				if(itemRespondido != null && itemRespondido.getId() != null) {
-					if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), itemRespondido.getId().getItemId())) // se id é null...?
-						throw new ResponderSimuladoException("O item informado (id = " + itemRespondido.getId().getItemId() + ") não aparece no simulado.");
-					
-					simuladoItemCreateAndUpdateService.salvarResposta(itemRespondido.getId(), itemRespondido.getResposta());
-				}
+	
+		// salvar respostas aos itens
+		for(SimuladoItem itemRespondido : itensRespondidos) {
+			if(itemRespondido != null && itemRespondido.getId() != null) {
+				if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), itemRespondido.getId().getItemId()))
+					throw new ResponderSimuladoException("O item informado (id = " + itemRespondido.getId().getItemId() + ") não aparece no simulado.");
+
+				simuladoItemCreateAndUpdateService.salvarResposta(itemRespondido.getId(), itemRespondido.getResposta());
 			}
 		}
 		
@@ -75,21 +73,18 @@ public class ResponderSimuladoService {
 		simuladoCreateAndUpdateService.finalizarSimulado(simulado.getId());
 
 		// contabilizar acertos e erros
-		if(!usuarioNaoRespondeuNenhumItem) {
-			for(SimuladoItem itemRespondido : itensRespondidos) { // quando oUsuarioNaoRespondeuNenhumItem, deve contabilizar como tentativas erradas
-				Item item = itemReadService.buscarPorId(itemRespondido.getId().getItemId()).get(); // 
+		for(SimuladoItem itemRespondido : itensRespondidos) { // quando oUsuarioNaoRespondeuNenhumItem, deve contabilizar como tentativas erradas
+			Item item = itemReadService.buscarPorId(itemRespondido.getId().getItemId()).get(); // 
 
-				EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
+			EstudanteHabilidadeId estudanteHabilidadeId = new EstudanteHabilidadeId(simulado.getEstudante().getId(), item.getHabilidade().getId());
 
-				estudanteHabilidadeCreateAndUpdateService.adicionarTentativa(estudanteHabilidadeId);
+			estudanteHabilidadeCreateAndUpdateService.adicionarTentativa(estudanteHabilidadeId);
 
-				boolean respondeuCorretamente = itemRespondido.getResposta() == item.getRespostaCerta();
-				
-				if(respondeuCorretamente)
-					estudanteHabilidadeCreateAndUpdateService.adicionarTentativaCerta(estudanteHabilidadeId);
-			}
-		} // else adicionar tentativas (como erradas)
-		
+			boolean respondeuCorretamente = itemRespondido.getResposta() == item.getRespostaCerta();
+
+			if(respondeuCorretamente)
+				estudanteHabilidadeCreateAndUpdateService.adicionarTentativaCerta(estudanteHabilidadeId);
+		}
 	}
 	
 }

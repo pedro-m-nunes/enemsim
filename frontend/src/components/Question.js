@@ -21,7 +21,7 @@ export default function Question() {
     },[]);
     
     //resposta para o BD
-    let  [values] = useState([]);
+    let [values] = useState([]);
 
     itens.map((itens, index) => (
         values[index] = 
