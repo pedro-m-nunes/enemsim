@@ -66,24 +66,24 @@ export default function Question() {
                     <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
                     <div className='options'>
                         <div className='btn-option'>
-                            <input type="radio" name={"res"+index+1} id="A" value="A" onChange={()=>onRes(index, itens.id, 'A')}/>
-                            <label for="A">A</label>
+                            <input type="radio" name={"res"+index+1} id={"A"+index} value="A" onChange={()=>onRes(index, itens.id, 'A')}/>
+                            <label for={"A"+index}>A</label>
                         </div>
                         <div className='btn-option'>
-                            <input type="radio" name={"res"+index+1} id="B" value="B" onChange={()=>onRes(index, itens.id, 'B')}/>
-                            <label for="B">B</label>
+                            <input type="radio" name={"res"+index+1} id={"B"+index} value="B" onChange={()=>onRes(index, itens.id, 'B')}/>
+                            <label for={"B"+index}>B</label>
                         </div>
                         <div className='btn-option'>
-                            <input type="radio" name={"res"+index+1} id="C" value="C" onChange={()=>onRes(index, itens.id, 'C')}/>
-                            <label for="C">C</label>
+                            <input type="radio" name={"res"+index+1} id={"C"+index} value="C" onChange={()=>onRes(index, itens.id, 'C')}/>
+                            <label for={"C"+index}>C</label>
                         </div>
                         <div className='btn-option'>
-                            <input type="radio" name={"res"+index+1} id="D" value="D" onChange={()=>onRes(index, itens.id, 'D')}/>
-                            <label for="D">D</label>
+                            <input type="radio" name={"res"+index+1} id={"D"+index} value="D" onChange={()=>onRes(index, itens.id, 'D')}/>
+                            <label for={"D"+index}>D</label>
                         </div>
                         <div className='btn-option'>
-                            <input type="radio" name={"res"+index+1} id="E" value="E" onChange={()=>onRes(index, itens.id, 'E')} size='10px'/>
-                            <label for="E">E</label>
+                            <input type="radio" name={"res"+index+1} id={"E"+index} value="E" onChange={()=>onRes(index, itens.id, 'E')} size='10px'/>
+                            <label for={"E"+index}>E</label>
                         </div>
                     </div>
                 </div>
