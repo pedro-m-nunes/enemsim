@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from 'react';
-import axios from 'axios';import './estilos/question.css';
+import axios, { AxiosError } from 'axios';import './estilos/question.css';
+import toast from 'react-hot-toast';
 
 export default function Question() {
    
@@ -20,7 +21,17 @@ export default function Question() {
     },[]);
     
     //resposta para o BD
-    const [values] = useState([]);
+    let  [values] = useState([]);
+
+    values = 
+    [{
+        id: {
+            simuladoId: idSimulado,
+            itemId: null
+        },
+        resposta: null
+    }];
+
     function onRes(index, i, res) {
         values[index] = 
         {
@@ -34,8 +45,15 @@ export default function Question() {
     
     const enviarForm = (e) => {
         e.preventDefault();
-        console.log(values);
-        axios.post('http://localhost:8080/simulado/finalizar', values);
+        try {
+            console.log(values);
+            axios.post('http://localhost:8080/simulado/finalizar', values);
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                toast.error(error.response?.data.message);
+            }
+        }
+        
     }
     // onSubmit={(e) => enviarForm(e)}
     return (

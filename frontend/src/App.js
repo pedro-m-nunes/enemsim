@@ -4,9 +4,12 @@ import Question from './components/Question';
 import Home from './pages/Home';
 import Filter from './components/Filter';
 import Login from './pages/Login';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
+    <>
+    <Toaster/>
     <BrowserRouter>
         <Routes>
             <Route element = { <Login/> }  path="/"/>
@@ -15,6 +18,7 @@ function App() {
             <Route element = { <Filter/> }  path="/filtro" />
         </Routes>
     </BrowserRouter>
+    </>
   );
 }
 

@@ -23,7 +23,7 @@ public class InsertSimuladosDeNivelamento {
 	@PostConstruct
 	public void run() throws DadosInsuficientesException, GerarSimuladoException {
 		if(simuladoRepository.count() == 0) {
-			simuladoController.gerarSimuladoDeNivelamento(1);
+			simuladoController.gerarSimuladoDeNivelamento(3);
 		}
 	}
 

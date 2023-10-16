@@ -16,9 +16,11 @@ import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
 import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
 import br.ifsul.enemsim.entidades.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
+import br.ifsul.enemsim.exceptions.GerarSimuladoException;
 import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
 import br.ifsul.enemsim.services.entidades.HabilidadeReadService;
 import br.ifsul.enemsim.services.entidades.ItemReadService;
+import br.ifsul.enemsim.services.entidades.SimuladoReadService;
 import br.ifsul.enemsim.services.entidades.relacionais.EstudanteHabilidadeReadService;
 import br.ifsul.enemsim.services.entidades.usuarios.EstudanteReadService;
 
@@ -36,30 +38,53 @@ public class GerarSimuladoService {
 	
 	@Autowired
 	private EstudanteHabilidadeReadService estudanteHabilidadeReadService;
-
-	public SimuladoGerado gerarSimuladoDeNivelamento(Integer estudanteId) throws DadosInsuficientesException {
+	
+	@Autowired
+	private SimuladoReadService simuladoReadService;
+	
+	private static final int MINIMO_SIMULADOS_DE_NIVELAMENTO = 3;
+	
+	public SimuladoGerado gerarSimulado(Integer estudanteId, Adaptacao adaptacao) throws DadosInsuficientesException, GerarSimuladoException {
 		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get(); // exception própria?
 		
+		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
+			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado (estudante.id = " + estudanteId + ").");
+		
+		int simuladosDeNivelamentoRealizadosPeloEstudante = simuladoReadService.quantidadeSimuladosDeNivelamentoFinalizados(estudante.getId());
+		
+		if(adaptacao == null)
+			if(simuladosDeNivelamentoRealizadosPeloEstudante >= MINIMO_SIMULADOS_DE_NIVELAMENTO)
+				throw new GerarSimuladoException("Todos os simulados de nivelamento disponíveis já foram gerados (estudante.id = " + estudante.getId() + ").");
+			else
+				return gerarSimuladoDeNivelamento(estudante);
+		else
+			if(simuladosDeNivelamentoRealizadosPeloEstudante < MINIMO_SIMULADOS_DE_NIVELAMENTO)
+				throw new GerarSimuladoException("É preciso realizar " + MINIMO_SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s) (estudante.id = " + estudante.getId() + ").");
+			else
+				return gerarSimuladoAdaptado(estudante, adaptacao);
+	}
+
+	private SimuladoGerado gerarSimuladoDeNivelamento(Estudante estudante) throws DadosInsuficientesException {
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 		
+		final int ITENS_POR_HABILIDADE = 1;
+		
 		for(Habilidade habilidade : habilidadeReadService.listar())
-			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, 1, itemReadService.itensMedianos(habilidade)));
+			itensSimulado.addAll(selecionarItensAleatoriamente(estudante, ITENS_POR_HABILIDADE, itemReadService.itensMedianos(habilidade)));
 		
 		return instanciarSimulado(estudante, itensSimulado, null);
 	}
 	
-	public SimuladoGerado gerarSimuladoAdaptado(Integer estudanteId, Adaptacao adaptacao) throws UnsupportedOperationException, DadosInsuficientesException {
+	private SimuladoGerado gerarSimuladoAdaptado(Estudante estudante, Adaptacao adaptacao) throws UnsupportedOperationException, DadosInsuficientesException {
 		switch(adaptacao) {
-		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudanteId);
+		case DESEMPENHO: return gerarSimuladoPorDesempenho(estudante);
 		case PONTOS_FORTES: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
 		case PONTOS_FRACOS: throw new UnsupportedOperationException("Tipo de geração de simulado ainda não implementado.");
 		default: return null; // exception própria? // se adaptacao for null, gerar por desempenho ou jogar exceção?
 		}
 	}
 	
-	private SimuladoGerado gerarSimuladoPorDesempenho(Integer estudanteId) throws DadosInsuficientesException { // usar Distribuicao?
-		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get(); // exception própria?
-		
+	private SimuladoGerado gerarSimuladoPorDesempenho(Estudante estudante) throws DadosInsuficientesException { // usar Distribuicao?
 		Set<Item> itensSimulado = new LinkedHashSet<>();
 
 		for(Habilidade habilidade : habilidadeReadService.listar()) {

@@ -60,30 +60,17 @@ public class SimuladoController {
 	
 	@Autowired
 	private GerarSimuladoService gerarSimuladoService;
-	
-	private static final int MINIMO_SIMULADOS_DE_NIVELAMENTO = 3;
-	
+		
 	// gerarSimulado?
 
 	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException { // tratar exceção aqui?
-		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
-			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
-		
-		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoDeNivelamento(estudanteId));
+	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudanteId, null));
 	}
 
 	@GetMapping("/gerar/desempenho/estudante={estudanteId}") // ""? // Post?
 	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
-		int simuladosDeNivelamentoRealizadosPeloEstudante = simuladoReadService.quantidadeSimuladosDeNivelamentoFinalizados(estudanteId);
-		
-		if(simuladosDeNivelamentoRealizadosPeloEstudante < MINIMO_SIMULADOS_DE_NIVELAMENTO)
-			throw new GerarSimuladoException("É preciso realizar " + MINIMO_SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s)."); // ?
-		
-		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
-			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado."); // ""?
-		
-		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimuladoAdaptado(estudanteId, Adaptacao.DESEMPENHO));
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudanteId, Adaptacao.DESEMPENHO));
 	}
 	
 	// pontos fortes, pontos fracos...
@@ -93,12 +80,8 @@ public class SimuladoController {
 	
 	@Transactional // ?
 	@PostMapping("/finalizar") // ""?
-	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) { // void?
-		try {
-			responderSimuladoService.finalizarSimulado(itensRespondidos);
-		} catch (ResponderSimuladoException e) {
-			e.printStackTrace(); // temp
-		}
+	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // void?
+		responderSimuladoService.finalizarSimulado(itensRespondidos);
 	}
 	
 	// delete, deleteAll?
