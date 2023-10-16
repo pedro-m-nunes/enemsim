@@ -93,8 +93,12 @@ public class SimuladoController {
 	
 	@Transactional // ?
 	@PostMapping("/finalizar") // ""?
-	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) throws ResponderSimuladoException { // void?
-		responderSimuladoService.finalizarSimulado(itensRespondidos);
+	public void finalizarSimulado(@RequestBody List<SimuladoItem> itensRespondidos) { // void?
+		try {
+			responderSimuladoService.finalizarSimulado(itensRespondidos);
+		} catch (ResponderSimuladoException e) {
+			e.printStackTrace(); // temp
+		}
 	}
 	
 	// delete, deleteAll?

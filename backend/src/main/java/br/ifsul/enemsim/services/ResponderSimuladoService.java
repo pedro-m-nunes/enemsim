@@ -59,7 +59,7 @@ public class ResponderSimuladoService {
 		
 		// salvar respostas aos itens
 		for(SimuladoItem itemRespondido : itensRespondidos) {
-			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), itemRespondido.getId().getItemId()))
+			if(!simuladoReadService.simuladoPossuiItem(simulado.getId(), itemRespondido.getId().getItemId())) // se id é null...
 				throw new ResponderSimuladoException("O item informado (id = " + itemRespondido.getId().getItemId() + ") não aparece no simulado.");
 			
 			simuladoItemCreateAndUpdateService.salvarResposta(itemRespondido.getId(), itemRespondido.getResposta());
