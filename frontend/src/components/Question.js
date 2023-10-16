@@ -23,14 +23,16 @@ export default function Question() {
     //resposta para o BD
     let  [values] = useState([]);
 
-    values = 
-    [{
-        id: {
-            simuladoId: idSimulado,
-            itemId: null
-        },
-        resposta: null
-    }];
+    itens.map((itens, index) => (
+        values[index] = 
+        {
+            id: {
+                simuladoId: idSimulado,
+                itemId: itens.id
+            },
+            resposta: null
+        }
+    ))
 
     function onRes(index, i, res) {
         values[index] = 
