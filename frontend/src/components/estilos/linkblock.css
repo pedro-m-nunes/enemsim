@@ -1,0 +1,33 @@
+#bloco {
+    background-color: #D9D9D9;
+    margin-top: 2vh;
+    border-radius: 20%;
+    flex-direction: column;
+    margin: 20vh 1vw auto 1vw;
+
+    height: 15em;
+    width: 15em;
+}
+#bloco:hover {
+    background-color: #ade0ff;
+    cursor: pointer;
+    box-shadow: 0 0 5px #0377C1;
+}
+#bloco img {
+    margin-top: 4vh;
+    margin-bottom: 2vh;
+    width: 60%;
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.texto {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-weight: 700;
+    font-size: larger;
+}
+
