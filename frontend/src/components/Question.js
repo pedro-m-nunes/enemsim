@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from 'react';
-import axios, { AxiosError } from 'axios';import './estilos/question.css';
+import axios, { AxiosError } from 'axios';
+import './estilos/question.css';
 import toast from 'react-hot-toast';
 
 export default function Question() {
