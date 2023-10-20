@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.Prova;
-import br.ifsul.enemsim.entidades.auxiliar.Resposta;
+import br.ifsul.enemsim.domain.Habilidade;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.Prova;
+import br.ifsul.enemsim.domain.auxiliar.Resposta;
 import br.ifsul.enemsim.repositories.ItemRepository;
 import jakarta.annotation.PostConstruct;
 

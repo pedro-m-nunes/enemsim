@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.usuarios.Estudante;
+import br.ifsul.enemsim.domain.Habilidade;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.usuarios.Estudante;
 
 public interface ItemRepository extends JpaRepository<Item, Integer> {
 	

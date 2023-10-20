@@ -2,7 +2,7 @@ package br.ifsul.enemsim.foraporenquanto;
 
 import java.math.BigDecimal;
 
-import br.ifsul.enemsim.entidades.Habilidade;
+import br.ifsul.enemsim.domain.Habilidade;
 import lombok.Getter;
 
 @Getter

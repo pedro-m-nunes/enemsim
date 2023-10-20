@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import br.ifsul.enemsim.entidades.relacionais.EstudanteHabilidade;
-import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
+import br.ifsul.enemsim.domain.relacionais.EstudanteHabilidade;
+import br.ifsul.enemsim.domain.relacionais.auxiliar.EstudanteHabilidadeId;
 
 public interface EstudanteHabilidadeRepository extends JpaRepository<EstudanteHabilidade, EstudanteHabilidadeId> {
 

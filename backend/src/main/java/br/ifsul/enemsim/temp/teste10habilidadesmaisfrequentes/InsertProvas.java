@@ -7,8 +7,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Prova;
-import br.ifsul.enemsim.entidades.auxiliar.Cor;
+import br.ifsul.enemsim.domain.Prova;
+import br.ifsul.enemsim.domain.auxiliar.Cor;
 import br.ifsul.enemsim.repositories.ProvaRepository;
 import jakarta.annotation.PostConstruct;
 

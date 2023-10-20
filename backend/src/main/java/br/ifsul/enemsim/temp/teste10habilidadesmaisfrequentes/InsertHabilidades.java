@@ -6,9 +6,9 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.entidades.Competencia;
-import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.entidades.auxiliar.Area;
+import br.ifsul.enemsim.domain.Competencia;
+import br.ifsul.enemsim.domain.Habilidade;
+import br.ifsul.enemsim.domain.auxiliar.Area;
 import br.ifsul.enemsim.repositories.HabilidadeRepository;
 import jakarta.annotation.PostConstruct;
 

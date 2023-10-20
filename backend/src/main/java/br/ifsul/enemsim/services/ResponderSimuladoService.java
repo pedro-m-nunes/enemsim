@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
-import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.Simulado;
+import br.ifsul.enemsim.domain.relacionais.SimuladoItem;
+import br.ifsul.enemsim.domain.relacionais.auxiliar.EstudanteHabilidadeId;
 import br.ifsul.enemsim.exceptions.ResponderSimuladoException;
-import br.ifsul.enemsim.services.entidades.ItemReadService;
-import br.ifsul.enemsim.services.entidades.SimuladoCreateAndUpdateService;
-import br.ifsul.enemsim.services.entidades.SimuladoReadService;
-import br.ifsul.enemsim.services.entidades.relacionais.EstudanteHabilidadeCreateAndUpdateService;
-import br.ifsul.enemsim.services.entidades.relacionais.SimuladoItemCreateAndUpdateService;
+import br.ifsul.enemsim.services.domain.ItemReadService;
+import br.ifsul.enemsim.services.domain.SimuladoCreateAndUpdateService;
+import br.ifsul.enemsim.services.domain.SimuladoReadService;
+import br.ifsul.enemsim.services.domain.relacionais.EstudanteHabilidadeCreateAndUpdateService;
+import br.ifsul.enemsim.services.domain.relacionais.SimuladoItemCreateAndUpdateService;
 
 @Service
 public class ResponderSimuladoService {

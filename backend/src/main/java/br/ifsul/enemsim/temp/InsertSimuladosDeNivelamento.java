@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
-import br.ifsul.enemsim.controllers.SimuladoController;
+import br.ifsul.enemsim.controllers.domain.SimuladoController;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.exceptions.GerarSimuladoException;
 import br.ifsul.enemsim.repositories.SimuladoRepository;

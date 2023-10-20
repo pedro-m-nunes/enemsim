@@ -9,20 +9,20 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.ifsul.enemsim.entidades.Habilidade;
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.Simulado;
-import br.ifsul.enemsim.entidades.auxiliar.Adaptacao;
-import br.ifsul.enemsim.entidades.relacionais.auxiliar.EstudanteHabilidadeId;
-import br.ifsul.enemsim.entidades.usuarios.Estudante;
+import br.ifsul.enemsim.domain.Habilidade;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.Simulado;
+import br.ifsul.enemsim.domain.auxiliar.Adaptacao;
+import br.ifsul.enemsim.domain.relacionais.auxiliar.EstudanteHabilidadeId;
+import br.ifsul.enemsim.domain.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.exceptions.GerarSimuladoException;
 import br.ifsul.enemsim.services.auxiliar.SimuladoGerado;
-import br.ifsul.enemsim.services.entidades.HabilidadeReadService;
-import br.ifsul.enemsim.services.entidades.ItemReadService;
-import br.ifsul.enemsim.services.entidades.SimuladoReadService;
-import br.ifsul.enemsim.services.entidades.relacionais.EstudanteHabilidadeReadService;
-import br.ifsul.enemsim.services.entidades.usuarios.EstudanteReadService;
+import br.ifsul.enemsim.services.domain.HabilidadeReadService;
+import br.ifsul.enemsim.services.domain.ItemReadService;
+import br.ifsul.enemsim.services.domain.SimuladoReadService;
+import br.ifsul.enemsim.services.domain.relacionais.EstudanteHabilidadeReadService;
+import br.ifsul.enemsim.services.domain.usuarios.EstudanteReadService;
 
 @Service
 public class GerarSimuladoService {

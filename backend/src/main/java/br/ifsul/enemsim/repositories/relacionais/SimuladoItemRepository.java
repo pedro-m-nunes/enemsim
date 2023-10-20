@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import br.ifsul.enemsim.entidades.auxiliar.Resposta;
-import br.ifsul.enemsim.entidades.relacionais.SimuladoItem;
-import br.ifsul.enemsim.entidades.relacionais.auxiliar.SimuladoItemId;
+import br.ifsul.enemsim.domain.auxiliar.Resposta;
+import br.ifsul.enemsim.domain.relacionais.SimuladoItem;
+import br.ifsul.enemsim.domain.relacionais.auxiliar.SimuladoItemId;
 
 public interface SimuladoItemRepository extends JpaRepository<SimuladoItem, SimuladoItemId> {
 

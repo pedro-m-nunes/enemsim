@@ -2,8 +2,8 @@ package br.ifsul.enemsim.services.auxiliar;
 
 import java.util.Set;
 
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.Simulado;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

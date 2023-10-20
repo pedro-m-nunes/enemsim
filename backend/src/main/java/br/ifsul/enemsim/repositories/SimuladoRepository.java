@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import br.ifsul.enemsim.entidades.Item;
-import br.ifsul.enemsim.entidades.Simulado;
+import br.ifsul.enemsim.domain.Item;
+import br.ifsul.enemsim.domain.Simulado;
 
 public interface SimuladoRepository extends JpaRepository<Simulado, Integer> {
 
