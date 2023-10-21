@@ -35,7 +35,6 @@ public class Item { // usar jakarta.validation.constraints?
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
 	@NotBlank
 	@Column(nullable = false)
 	private String imagemDriveId;
@@ -55,12 +54,6 @@ public class Item { // usar jakarta.validation.constraints?
 //	@OneToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Resolucao
 //	@JoinColumn(name = "item_id")
 //	private Set<Resolucao> resolucoes;
-	
-//	@Column(nullable = false) // @PositiveOrZero
-//	private Integer tentativas = 0; // ? // (0, inf)
-	
-//	@Column(nullable = false) // @PositiveOrZero // @Max(tentativas)
-//	private Integer tentativasCertas = 0; // ? // (0, attempts]
 	
 	@NotNull
 	// Digits?
@@ -108,9 +101,5 @@ public class Item { // usar jakarta.validation.constraints?
 	}
 	
 	// construtor com restrições?
-	
-//	public boolean isValido() {
-//		return discriminacao != null && dificuldade != null && chanceAcertoCasual != null && respostaCerta != null && habilidade != null;
-//	}
 	
 }

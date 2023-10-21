@@ -1,6 +1,5 @@
 package br.ifsul.enemsim.domain.usuarios;
 
-import br.ifsul.enemsim.domain.Usuario;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;

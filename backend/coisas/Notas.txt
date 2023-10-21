@@ -6,14 +6,10 @@ IMPORTANTE:
 
 COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
-- (Alta prioridade) Sistema de simulados adaptados para o teste, conforme o desempenho nos simulados de nivelamento.
-	A FAZER:
-	- Se tiver aproveitamento alto e não houver mais questões difíceis: colocar as questões que tiver. FEITO
-	- Restringir a quantidade de simulados abertos para 1.
-	- Só permitir a geração de simulados adaptados após um número mínimo de de nivelamento (todos, 3). FEITO
+- Sistema de login do teste (sem Spring Security).
+	- Tipo de usuario como atributo?
 
 COISAS A FAZER:
-- Sistema de login do teste.
 - Colocar validation.constraints nas entidades (e conciliar com @Column).
 	- Colocar constraints nos parâmetros dos construtores e métodos também? https://www.baeldung.com/javax-validation-method-constraints
 - Testes unitários do gerador de simulados.
@@ -27,7 +23,7 @@ COISAS A FAZER:
 
 PROBLEMAS ENCONTRADOS:
 - Resolucao e Disciplina em um Set em Item (OneToMany) causam LazyInitializationException quando o item é chamado/buscado.
-- (Baixa prioridade) O cascade não funcionou bem em Item.Habilidade.
+- (Baixíssima prioridade) O cascade não funcionou bem em Item.Habilidade.
 - estudanteId, usado na geração, pode não ser de um usuário (meio que ok, joga uma exceção).
 
 DÚVIDAS/IDEIAS:
@@ -37,7 +33,7 @@ DÚVIDAS/IDEIAS:
 - Como usar cascade nos relacionamentos?
 - Colocar alguns atributos como final? (Simulado.adaptacao)
 - Usar Postgres ou MySQL?
-- Como disponibilizar o sistema?
+- Como disponibilizar o sistema? Azure, AWS...
 
 TESTAR:
 - Se os itens são removidos quando se remove um simulado (não devem).

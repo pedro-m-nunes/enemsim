@@ -22,7 +22,7 @@ public class Competencia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Byte id; // Byte?
+	private Byte id;
 	
 	@Column(nullable = false, length = 510) // qual tamanho?
 	private String descricao;

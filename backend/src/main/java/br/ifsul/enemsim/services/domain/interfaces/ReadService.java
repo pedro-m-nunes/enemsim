@@ -7,6 +7,10 @@ public interface ReadService<T, ID> {
 
 	public List<T> listar();
 	
-	public Optional<T> buscarPorId(ID id); // ""?
+	public Optional<T> buscarPorId(ID id);
+	
+//	public long quantidade(); // ?
+	
+//	public boolean existePorId(ID id); // ?
 	
 }
