@@ -22,7 +22,7 @@ public class Habilidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Byte id; // Byte?
+	private Byte id;
 	
 	@Column(nullable = false)
 	private String descricao;

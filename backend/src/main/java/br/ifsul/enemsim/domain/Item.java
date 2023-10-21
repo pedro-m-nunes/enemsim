@@ -56,12 +56,6 @@ public class Item { // usar jakarta.validation.constraints?
 //	@JoinColumn(name = "item_id")
 //	private Set<Resolucao> resolucoes;
 	
-//	@Column(nullable = false) // @PositiveOrZero
-//	private Integer tentativas = 0; // ? // (0, inf)
-	
-//	@Column(nullable = false) // @PositiveOrZero // @Max(tentativas)
-//	private Integer tentativasCertas = 0; // ? // (0, attempts]
-	
 	@NotNull
 	// Digits?
 	@Positive

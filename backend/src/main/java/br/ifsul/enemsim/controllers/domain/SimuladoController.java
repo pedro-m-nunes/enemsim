@@ -15,6 +15,7 @@ import br.ifsul.enemsim.domain.Item;
 import br.ifsul.enemsim.domain.Simulado;
 import br.ifsul.enemsim.domain.auxiliar.Adaptacao;
 import br.ifsul.enemsim.domain.relacionais.SimuladoItem;
+import br.ifsul.enemsim.domain.usuarios.Estudante;
 import br.ifsul.enemsim.exceptions.DadosInsuficientesException;
 import br.ifsul.enemsim.exceptions.GerarSimuladoException;
 import br.ifsul.enemsim.exceptions.ResponderSimuladoException;
@@ -63,14 +64,14 @@ public class SimuladoController {
 		
 	// gerarSimulado?
 
-	@GetMapping("/gerar/nivelamento/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoDeNivelamento(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
-		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudanteId, null));
+	@PostMapping("/gerar/nivelamento")
+	public SimuladoGerado gerarSimuladoDeNivelamento(@RequestBody Estudante estudante) throws DadosInsuficientesException, GerarSimuladoException {
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudante.getId(), null));
 	}
 
-	@GetMapping("/gerar/desempenho/estudante={estudanteId}") // ""? // Post?
-	public SimuladoGerado gerarSimuladoPorDesempenho(@PathVariable Integer estudanteId) throws DadosInsuficientesException, GerarSimuladoException {
-		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudanteId, Adaptacao.DESEMPENHO));
+	@PostMapping("/gerar/desempenho")
+	public SimuladoGerado gerarSimuladoPorDesempenho(@RequestBody Estudante estudante) throws DadosInsuficientesException, GerarSimuladoException {
+		return simuladoCreateAndUpdateService.salvarSimuladoGerado(gerarSimuladoService.gerarSimulado(estudante.getId(), Adaptacao.DESEMPENHO));
 	}
 	
 	// pontos fortes, pontos fracos...
