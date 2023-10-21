@@ -35,7 +35,6 @@ public class Item { // usar jakarta.validation.constraints?
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotNull
 	@NotBlank
 	@Column(nullable = false)
 	private String imagemDriveId;
@@ -102,9 +101,5 @@ public class Item { // usar jakarta.validation.constraints?
 	}
 	
 	// construtor com restrições?
-	
-//	public boolean isValido() {
-//		return discriminacao != null && dificuldade != null && chanceAcertoCasual != null && respostaCerta != null && habilidade != null;
-//	}
 	
 }

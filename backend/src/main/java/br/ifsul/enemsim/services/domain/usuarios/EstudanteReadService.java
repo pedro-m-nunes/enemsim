@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import br.ifsul.enemsim.domain.usuarios.Estudante;
 import br.ifsul.enemsim.repositories.usuarios.EstudanteRepository;
 import br.ifsul.enemsim.services.domain.interfaces.ReadService;
+import br.ifsul.enemsim.services.domain.interfaces.UsuariosReadService;
 
 @Service
-public class EstudanteReadService implements ReadService<Estudante, Integer> {
+public class EstudanteReadService implements ReadService<Estudante, Integer>, UsuariosReadService<Estudante> {
 
 	@Autowired
 	private EstudanteRepository estudanteRepository;
@@ -24,6 +25,16 @@ public class EstudanteReadService implements ReadService<Estudante, Integer> {
 	@Override
 	public Optional<Estudante> buscarPorId(Integer id) {
 		return estudanteRepository.findById(id);
+	}
+
+	@Override
+	public boolean existePorUsername(String username) {
+		return estudanteRepository.existsByUsername(username);
+	}
+
+	@Override
+	public Optional<Estudante> buscarPorUsername(String username) {
+		return estudanteRepository.findByUsername(username);
 	}
 	
 }

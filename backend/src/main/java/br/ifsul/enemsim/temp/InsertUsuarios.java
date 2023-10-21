@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import br.ifsul.enemsim.domain.usuarios.Administrador;
 import br.ifsul.enemsim.domain.usuarios.Estudante;
 import br.ifsul.enemsim.domain.usuarios.Professor;
-import br.ifsul.enemsim.repositories.UsuarioRepository;
+import br.ifsul.enemsim.repositories.usuarios.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component

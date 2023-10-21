@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.ifsul.enemsim.domain.Usuario;
-import br.ifsul.enemsim.services.domain.UsuarioReadService;
+import br.ifsul.enemsim.domain.usuarios.Usuario;
+import br.ifsul.enemsim.services.domain.usuarios.UsuarioReadService;
 
 @RestController
 @RequestMapping("/usuario")

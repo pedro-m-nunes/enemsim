@@ -6,13 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.ifsul.enemsim.domain.Item;
-import br.ifsul.enemsim.services.domain.ItemCreateAndUpdateService;
 import br.ifsul.enemsim.services.domain.ItemReadService;
 
 @RestController
@@ -58,13 +55,13 @@ public class ItemController {
 //		return retorno;
 //	}
 	
-	@Autowired
-	private ItemCreateAndUpdateService itemCreateAndUpdateService;
-	
-	@PostMapping("/save") // ""?
-	public Item salvarOuAtualizar(@RequestBody Item item) {
-		return itemCreateAndUpdateService.salvarOuAtualizar(item);
-	}
+//	@Autowired
+//	private ItemCreateAndUpdateService itemCreateAndUpdateService;
+//	
+//	@PostMapping("/save") // ""?
+//	public Item salvarOuAtualizar(@RequestBody Item item) {
+//		return itemCreateAndUpdateService.salvarOuAtualizar(item);
+//	}
 	
 	// saveAll
 	
