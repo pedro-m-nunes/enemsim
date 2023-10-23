@@ -15,17 +15,17 @@ import lombok.Setter;
 @DiscriminatorValue("PROF")
 public class Professor extends Usuario { // final?
 	
-//	@Transient
-//	public static String getDiscriminatorValue() { // ?
-//	    return Professor.class.getAnnotation(DiscriminatorValue.class).value();
-//	}
-	
 	public Professor(Integer id) {
 		super(id);
 	}
 
 	public Professor(String username, String senha, String nome) {
 		super(username, senha, nome);
+	}
+	
+	@Override
+	public String getPapel() {
+		return Professor.class.getAnnotation(DiscriminatorValue.class).value();
 	}
 
 }

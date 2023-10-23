@@ -54,6 +54,11 @@ public class SimuladoController {
 		return simuladoReadService.simuladosDoEstudante(estudanteId);
 	}
 	
+	@GetMapping("/{simuladoId}/taxa-de-acertos")
+	public int[] buscarQuantidadeDeAcertosEItens(@PathVariable Integer simuladoId) {
+		return simuladoReadService.quantidadeDeAcertosEItens(simuladoId);
+	}
+	
 	@Autowired
 	private SimuladoCreateAndUpdateService simuladoCreateAndUpdateService;
 	

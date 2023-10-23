@@ -24,7 +24,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "papel", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
 	
 	@Id
@@ -44,7 +44,7 @@ public class Usuario {
 	@Pattern(regexp = "^(?=\\s*\\S).*$") // Não pode ser vazio, mas pode ser nulo.
 	private String nome; // ? // nome e sobrenome?
 	
-	// tipo?
+	// papel/tipo?
 	
 	// foto? por ora, não
 	
@@ -62,6 +62,10 @@ public class Usuario {
 	protected Usuario(Integer id) {
 		super();
 		this.id = id;
+	}
+	
+	public String getPapel() {
+		throw new UnsupportedOperationException("Usuários genéricos não possuem papel."); // exception própria?
 	}
 	
 }
