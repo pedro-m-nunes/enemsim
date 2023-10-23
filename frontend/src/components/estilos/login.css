@@ -1,0 +1,104 @@
+#base {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 15vh;
+}
+
+#logoTit {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5vh;
+}
+#titulo {
+    display: flex;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 650%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.coiso {
+    display: block;
+    justify-items: center;
+    box-sizing: border-box;
+
+    color: white;
+    height: 7vh;
+    width: 25vw;
+    background-color: #0377C1;
+    border: none;
+    border-radius: 25vh;
+    margin-bottom: 2vh;
+
+    font-weight: 600;
+    font-size: medium;
+    text-align: center;
+}
+.coiso:hover {
+    background-color: #0d92e5;
+    cursor: pointer;
+}
+.coiso::placeholder {
+    color: #fff;
+    font-size: 20px;
+}
+
+#botoes {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+}
+#btn1 {
+    border: none;
+    border-radius: 25vh;
+    background-color: #FEC502;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 900;
+    height: 7vh;
+    width: 12vw;
+    margin-right: 1vw;
+}
+#btn1:hover {
+    background-color: black;
+    color: #FEC502;
+    cursor: pointer;
+}
+#btn2 {
+    border: none;
+    border-radius: 25vh;
+    background-color: red;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 900;
+    height: 7vh;
+    width: 12vw;
+}
+#btn2:hover{
+    background-color: black;
+    color: red;
+    cursor: pointer;
+}
+
+#logo {
+    width: 260px;
+    margin-right: 1vw;
+}
+#titulo {
+    display: flex;
+    color: black;
+}
+#logo{
+    animation: mymove 2s;
+}
+@keyframes mymove {
+    30% {transform: rotate(10deg);}
+}

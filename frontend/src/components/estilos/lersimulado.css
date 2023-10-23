@@ -1,0 +1,13 @@
+.respostas {
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 1vh;
+
+    font-weight: 700;
+}
+
+#acertos {
+    text-align: center;
+}
