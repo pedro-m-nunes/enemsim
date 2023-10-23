@@ -2,24 +2,40 @@ import React, { useState , useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import './estilos/question.css';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
-export default function Question() {
-   
+export default function Question(props) {
+    const navigate = useNavigate();
     const[itens,setItens]=useState([{}]);
-    const[idSimulado,setInfo]=useState({});
+    const[idSimulado,setId]=useState({});
 
+    const[linkVariavel, setLink]=useState('');
+    
     async function carregarItens() {
-        const dadosBrutos = await axios.get('http://localhost:8080/simulado/gerar/nivelamento/estudante=' + 1);
-        const itens = dadosBrutos.data.itens;
-        const idSimulado = dadosBrutos.data.simulado.id;
-        setItens(itens);
-        setInfo(idSimulado);
+        if(props.idSim === "0") {
+            console.log("Gerando novo simulado")
+            setLink('http://localhost:8080/simulado/gerar/nivelamento/estudante=' + 1);
+            console.log(linkVariavel)
+            const dadosBrutos = await axios.get(linkVariavel);
+            const itensPegos = dadosBrutos.data.itens;
+            const idSimuladoPego = dadosBrutos.data.simulado.id;
+            setItens(itensPegos);
+            setId(idSimuladoPego);
+        } else {
+            console.log("Lendo simulado")
+            setLink('http://localhost:8080/simulado/' + props.tipo + '/itens');
+            console.log(linkVariavel)
+            const dadosBrutos = await axios.get(linkVariavel);
+            const itensPegos = dadosBrutos.data;
+            setItens(itensPegos);
+            setId(props.tipo);
+        }
     }
 
     //executa na entrada do site
     useEffect(()=>{
         carregarItens();
-    },[]);
+    });
     
     //resposta para o BD
     let [values] = useState([]);
@@ -45,12 +61,18 @@ export default function Question() {
             resposta: res
         };
     }
-    
+
     const enviarForm = (e) => {
         e.preventDefault();
         try {
             console.log(values);
             axios.post('http://localhost:8080/simulado/finalizar', values);
+            navigate(
+                "/lersimulado",
+                {state: {
+                    itens: itens,
+                    respostas: values
+                }})
         } catch (error) {
             if (error instanceof AxiosError) {
                 toast.error(error.response?.data.message);
@@ -70,30 +92,30 @@ export default function Question() {
                     <div className='options'>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"A"+index} value="A" onChange={()=>onRes(index, itens.id, 'A')}/>
-                            <label for={"A"+index}>A</label>
+                            <label htmlFor={"A"+index}>A</label>
                         </div>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"B"+index} value="B" onChange={()=>onRes(index, itens.id, 'B')}/>
-                            <label for={"B"+index}>B</label>
+                            <label htmlFor={"B"+index}>B</label>
                         </div>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"C"+index} value="C" onChange={()=>onRes(index, itens.id, 'C')}/>
-                            <label for={"C"+index}>C</label>
+                            <label htmlFor={"C"+index}>C</label>
                         </div>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"D"+index} value="D" onChange={()=>onRes(index, itens.id, 'D')}/>
-                            <label for={"D"+index}>D</label>
+                            <label htmlFor={"D"+index}>D</label>
                         </div>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"E"+index} value="E" onChange={()=>onRes(index, itens.id, 'E')} size='10px'/>
-                            <label for={"E"+index}>E</label>
+                            <label htmlFor={"E"+index}>E</label>
                         </div>
+                            {/* <button className='btn-limpar' id={"L"+index} value="Limpar" onChange={()=>onRes(index, itens.id, null)} size='5px'></button> */}
                     </div>
                 </div>
             ))
             }
-            <br />
-            <button type="submit">ENVIAR</button>
+            <button type="submit" id='btn-enviar'>ENVIAR</button>
             </form>
         </div>
     )

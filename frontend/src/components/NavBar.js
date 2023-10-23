@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import './estilos/navbar.css';
 import logo from '../images/Logo.png';
 import logoBranco from '../images/LogoBranco.png';
+import { useNavigate } from 'react-router-dom';
 
 function NavBar( props ) {
+    const navigate = useNavigate();
 
     const[imagem,setImg]=useState(logo);
     const[val,setVal]=useState(true);
@@ -18,14 +20,17 @@ function NavBar( props ) {
     }
 
     function voltar() {
-
+        navigate(
+            props.destino,
+            {state:props.usuario}
+        );
     }
 
   return (
     <div id='nav'>
         <img src={imagem} id='logoImg' onClick={() => alterarImg()} alt='Logo do EnemSim'/>
-        <h1 id="pagina">EnemSim / {props.nomePagina}</h1>
-        <button onClick={voltar} id='btn'>{props.saida}</button>
+        <h1 id="titulo-pagina">EnemSim / {props.nomePagina}</h1>
+        <button onClick={() => voltar()} id='btn'>{props.saida}</button>
     </div>
   )
 }
