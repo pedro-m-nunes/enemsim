@@ -26,7 +26,6 @@ const Login = () => {
     e.preventDefault();
     if(validar()) {
       toast.success('Campos preenchidos!')
-      console.log('segue aí')
       axios.post('http://localhost:8080/auth/login', login).then(response => { console.log(response) });
       console.log(id)
     }
@@ -46,6 +45,7 @@ const Login = () => {
     }
     if(senha === null || senha ==='') {
       toast.error('Senha não preenchida')
+      validate = false;
     }
 
     return validate;
