@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor // ?
 @EqualsAndHashCode
 @Entity
 public class Item { // usar jakarta.validation.constraints?

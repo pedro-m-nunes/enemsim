@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.controllers.domain;
+package br.ifsul.enemsim.controllers.domain.usuarios;
 
 import java.util.List;
 

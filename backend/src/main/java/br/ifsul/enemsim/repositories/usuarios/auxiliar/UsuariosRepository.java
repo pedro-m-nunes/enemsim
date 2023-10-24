@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import br.ifsul.enemsim.domain.usuarios.Usuario;
 
-public interface UsuariosRepository<T extends Usuario, ID> extends JpaRepository<T, ID> {
+public interface UsuariosRepository<T extends Usuario> extends JpaRepository<T, Integer> {
 	
 	public boolean existsByUsername(String username);
 	
