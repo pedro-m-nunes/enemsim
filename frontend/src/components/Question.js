@@ -12,24 +12,10 @@ export default function Question(props) {
     const[linkVariavel, setLink]=useState('');
     
     async function carregarItens() {
-        if(props.idSim === "0") {
-            console.log("Gerando novo simulado")
-            setLink('http://localhost:8080/simulado/gerar/nivelamento/estudante=' + 1);
-            console.log(linkVariavel)
-            const dadosBrutos = await axios.get(linkVariavel);
-            const itensPegos = dadosBrutos.data.itens;
-            const idSimuladoPego = dadosBrutos.data.simulado.id;
-            setItens(itensPegos);
-            setId(idSimuladoPego);
-        } else {
-            console.log("Lendo simulado")
-            setLink('http://localhost:8080/simulado/' + props.tipo + '/itens');
-            console.log(linkVariavel)
-            const dadosBrutos = await axios.get(linkVariavel);
-            const itensPegos = dadosBrutos.data;
-            setItens(itensPegos);
-            setId(props.tipo);
-        }
+        console.log("Gerando novo simulado")
+        setLink('http://localhost:8080/simulado/gerar/nivelamento');
+        console.log(linkVariavel);
+        axios.post(linkVariavel, { id : 1 }).then(response => (console.log(response), setItens(response.data.itens), setId(response.data.simulado.id)));
     }
 
     //executa na entrada do site
