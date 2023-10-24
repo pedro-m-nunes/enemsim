@@ -15,11 +15,6 @@ import lombok.Setter;
 @DiscriminatorValue("EST")
 public class Estudante extends Usuario /*implements ...?*/ { // final?
 	
-//	@Transient
-//	public static String getDiscriminatorValue() { // ?
-//	    return Estudante.class.getAnnotation(DiscriminatorValue.class).value();
-//	}
-	
 	// simulados? para poder usar cascade...
 	
 	// atributos...
@@ -30,6 +25,11 @@ public class Estudante extends Usuario /*implements ...?*/ { // final?
 
 	public Estudante(String username, String senha, String nome) {
 		super(username, senha, nome);
+	}
+	
+	@Override
+	public String getPapel() {
+		return Estudante.class.getAnnotation(DiscriminatorValue.class).value();
 	}
 
 }

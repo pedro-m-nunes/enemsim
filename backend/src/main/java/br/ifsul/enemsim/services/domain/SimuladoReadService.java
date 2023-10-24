@@ -47,4 +47,14 @@ public class SimuladoReadService implements ReadService<Simulado, Integer> {
 		return simuladoRepository.existsByEstudanteIdAndFinalizadoIsFalse(estudanteId);
 	}
 	
+	public int[] quantidadeDeAcertosEItens(Integer simuladoId) {
+		if(!simuladoRepository.isFinalizado(simuladoId))
+			throw new IllegalArgumentException("Só se pode ver os acertos em simulados finalizados."); // ""? // exception própria?
+		
+		return new int[] {
+				simuladoRepository.getItensAcertados(simuladoId).size(), 
+				simuladoRepository.getItens(simuladoId).size()
+		};
+	}
+	
 }
