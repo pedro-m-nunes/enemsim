@@ -62,10 +62,8 @@ public class EstudanteHabilidade { // vai ter muitos registros... (estudantes * 
 		this.id = new EstudanteHabilidadeId(estudanteId, habilidadeId);
 	}
 	
-	public BigDecimal getAproveitamento() {
-		BigDecimal divisor = tentativas == 0 ? BigDecimal.ONE : BigDecimal.valueOf(tentativas);
-		
-		return BigDecimal.valueOf(tentativasCertas).divide(divisor, 4, RoundingMode.HALF_UP); // scale???
+	public BigDecimal getAproveitamento() { // testar
+		return BigDecimal.valueOf(tentativasCertas).divide(BigDecimal.valueOf(tentativas), 4, RoundingMode.HALF_UP); // scale???
 	}
 	
 }
