@@ -4,22 +4,52 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../components/estilos/login.css'
 import logo from '../images/Logo.png';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const Login = () => {
     // definir POST no axios / mandar dados ao banco
-    // definir tela de home melhor
   const navigate = useNavigate();
 
-  const[user, setUser] = useState();
-  const[senha, setSenha] = useState();
+  const[user, setUser] = useState('');
+  const[senha, setSenha] = useState('');
+  const[id, setId] = useState('');
 
   // useEffect(()=>{
   // },[]);
 
-    const handleSubmit2 = (e) => {
-      e.preventDefault();
-      navigate('/inicio', {state:{user, senha}});
+  const handleSubmit = (e) => {
+    let login = {
+      usuario: user,
+      senha: senha
     }
+    e.preventDefault();
+    if(validar()) {
+      toast.success('Campos preenchidos!')
+      console.log('segue aí')
+      axios.post('http://localhost:8080/auth/login', login).then(response => { console.log(response) });
+      console.log(id)
+    }
+    // navigate(
+    //   '/inicio',
+    //   {state:
+    //     {user, senha}
+    //   }
+    // );
+  }
+
+  const validar = () => {
+    let validate = true;
+    if(user === null || user ==='') {
+      toast.error('Usuário não preenchido')
+      validate = false;
+    }
+    if(senha === null || senha ==='') {
+      toast.error('Senha não preenchida')
+    }
+
+    return validate;
+  }
 
   return (
     <div id='base'>
@@ -27,11 +57,11 @@ const Login = () => {
         <img src={logo} alt="Logo do EnemSim" id='logo'/>
         <h1 id='titulo'>EnemSim</h1>
       </div>
-      <form onSubmit={handleSubmit2}>
+      <form onSubmit={handleSubmit}>
         <input type="text" id='user' onChange={(e) => setUser(e.target.value)} placeholder='Usuário' className='coiso'/>
         <input type="password" id='senha' onChange={(e) => setSenha(e.target.value)} placeholder='Senha' className='coiso'/>
         <div id='botoes'>
-          <button className='coiso' id='btn1'>Cadastro</button>
+          {/* <button className='coiso' id='btn1'>Cadastro</button> */}
           <button type='submit' className='coiso' id='btn2'>Login</button>
         </div>
       </form>
