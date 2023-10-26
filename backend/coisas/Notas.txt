@@ -11,6 +11,7 @@ COISAS EM PROCESSO:
 - (Baixa prioridade) Turmas.
 
 COISAS A FAZER:
+- Documentar a API com Swagger.
 - Colocar validation.constraints nas entidades (e conciliar com @Column).
 	- Colocar constraints nos parâmetros dos construtores e métodos também? https://www.baeldung.com/javax-validation-method-constraints
 - Testes unitários do gerador de simulados.
