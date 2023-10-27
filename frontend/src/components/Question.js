@@ -2,27 +2,21 @@ import React, { useState , useEffect } from 'react';
 import axios, { AxiosError } from 'axios';
 import './estilos/question.css';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { useFetcher, useNavigate } from 'react-router-dom';
 
 export default function Question(props) {
     const navigate = useNavigate();
     const[itens,setItens]=useState([{}]);
     const[idSimulado,setId]=useState({});
-
-    const[linkVariavel, setLink]=useState('');
+    const[dados,setDados]=useState([{}]);
     
-    async function carregarItens() {
-        console.log("Gerando novo simulado")
-        setLink('http://localhost:8080/simulado/gerar/nivelamento');
-        console.log(linkVariavel);
-        axios.post(linkVariavel, { id : 1 }).then(response => (console.log(response), setItens(response.data.itens), setId(response.data.simulado.id)));
-    }
-
     //executa na entrada do site
-    useEffect(()=>{
-        carregarItens();
-    });
-    
+    //descobrir maneira de carregar os itens e o simulado separadamente, em duas variáveis, sem ferrar com o retorno
+
+    useEffect(() => {
+        console.log(navigate)
+    })
+
     //resposta para o BD
     let [values] = useState([]);
 
@@ -66,7 +60,7 @@ export default function Question(props) {
         }
         
     }
-    // onSubmit={(e) => enviarForm(e)}
+    
     return (
         <div>
             <form className="form-block" onSubmit={(e) => enviarForm(e)}>
@@ -96,7 +90,6 @@ export default function Question(props) {
                             <input type="radio" name={"res"+index+1} id={"E"+index} value="E" onChange={()=>onRes(index, itens.id, 'E')} size='10px'/>
                             <label htmlFor={"E"+index}>E</label>
                         </div>
-                            {/* <button className='btn-limpar' id={"L"+index} value="Limpar" onChange={()=>onRes(index, itens.id, null)} size='5px'></button> */}
                     </div>
                 </div>
             ))

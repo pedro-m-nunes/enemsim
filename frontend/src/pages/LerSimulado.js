@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import { useLocation } from 'react-router-dom'
 import '../components/estilos/question.css'
 import '../components/estilos/lersimulado.css'
+import toast from 'react-hot-toast'
 
 export default function LerSimulado() {
     const location = useLocation();
@@ -26,6 +27,7 @@ export default function LerSimulado() {
         }
         setAcertos(acertosTemp)
         console.log(acertos)
+        toast.loading('Carregando imagens: tende a demorar dependendo de sua conexão', {duration: 4000})
     },[])
 
     useEffect(() => {
