@@ -8,33 +8,33 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 const Login = () => {
-    // definir POST no axios / mandar dados ao banco
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const[user, setUser] = useState('');
   const[senha, setSenha] = useState('');
-  const[id, setId] = useState('');
-
-  // useEffect(()=>{
-  // },[]);
 
   const handleSubmit = (e) => {
-    let login = {
-      usuario: user,
-      senha: senha
-    }
     e.preventDefault();
     if(validar()) {
-      toast.success('Campos preenchidos!')
-      axios.post('http://localhost:8080/auth/login', login).then(response => { console.log(response) });
-      console.log(id)
+      axios.post(
+        'http://localhost:8080/auth/login',
+        {username: user, senha: senha}
+      ).then(
+        response => {
+          toast.success('Seja bem vindo(a) ' + response.data.nome + '!');
+          sessionStorage.setItem('id', response.data.id);
+          navigate('/inicio')
+        }
+      ).catch(function (error) {
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else if (error.request) {
+          toast.error('Sistema fora do ar');
+        } else {
+          toast.error('Erro:', error.message);
+        }
+      });
     }
-    // navigate(
-    //   '/inicio',
-    //   {state:
-    //     {user, senha}
-    //   }
-    // );
   }
 
   const validar = () => {

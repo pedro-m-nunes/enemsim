@@ -11,10 +11,7 @@ import LerSimulado from './pages/LerSimulado';
 function App() {
   return (
     <>
-    <Toaster
-      position="top-right"
-      reverseOrder={false}
-    />
+    <Toaster/>
     <BrowserRouter>
         <Routes>
             <Route element = { <Login/> }  path="/"/>
