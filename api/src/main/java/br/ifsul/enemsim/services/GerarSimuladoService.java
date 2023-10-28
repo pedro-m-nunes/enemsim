@@ -42,24 +42,25 @@ public class GerarSimuladoService {
 	@Autowired
 	private SimuladoReadService simuladoReadService;
 	
-	private static final int MINIMO_SIMULADOS_DE_NIVELAMENTO = 3;
+	private static final int SIMULADOS_DE_NIVELAMENTO = 3;
 	
+	// area
 	public SimuladoGerado gerarSimulado(Integer estudanteId, Adaptacao adaptacao) throws DadosInsuficientesException, GerarSimuladoException {
 		Estudante estudante = estudanteReadService.buscarPorId(estudanteId).get(); // exception própria?
 		
 		if(simuladoReadService.estudantePossuiSimuladoNaoFinalizado(estudanteId))
-			throw new GerarSimuladoException("Um estudante não pode gerar um novo simulado enquanto tiver um simulado não finalizado (estudante.id = " + estudanteId + ").");
+			throw new GerarSimuladoException("Não se pode gerar um novo simulado enquanto tiver um não finalizado.");
 		
 		int simuladosDeNivelamentoRealizadosPeloEstudante = simuladoReadService.quantidadeSimuladosDeNivelamentoFinalizados(estudante.getId());
 		
 		if(adaptacao == null)
-			if(simuladosDeNivelamentoRealizadosPeloEstudante >= MINIMO_SIMULADOS_DE_NIVELAMENTO)
-				throw new GerarSimuladoException("Todos os simulados de nivelamento disponíveis já foram gerados (estudante.id = " + estudante.getId() + ").");
+			if(simuladosDeNivelamentoRealizadosPeloEstudante >= SIMULADOS_DE_NIVELAMENTO)
+				throw new GerarSimuladoException("Todos os simulados de nivelamento disponíveis já foram gerados.");
 			else
 				return gerarSimuladoDeNivelamento(estudante);
 		else
-			if(simuladosDeNivelamentoRealizadosPeloEstudante < MINIMO_SIMULADOS_DE_NIVELAMENTO)
-				throw new GerarSimuladoException("É preciso realizar " + MINIMO_SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s) (estudante.id = " + estudante.getId() + ").");
+			if(simuladosDeNivelamentoRealizadosPeloEstudante < SIMULADOS_DE_NIVELAMENTO)
+				throw new GerarSimuladoException("É preciso realizar " + SIMULADOS_DE_NIVELAMENTO + " simulados de nivelamento antes de poder gerar simulados adaptados. " + simuladosDeNivelamentoRealizadosPeloEstudante + " simulado(s) realizado(s).");
 			else
 				return gerarSimuladoAdaptado(estudante, adaptacao);
 	}

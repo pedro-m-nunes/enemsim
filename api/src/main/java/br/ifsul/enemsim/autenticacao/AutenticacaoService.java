@@ -20,18 +20,6 @@ public class AutenticacaoService {
 	
 	@Autowired
 	private EstudanteCreateAndUpdateService estudanteCreateAndUpdateService;
-
-//	public Usuario login(UsuarioLogin possivelUsuario) throws AutenticacaoException { // ?
-//		if(!usuarioReadService.existePorUsername(possivelUsuario.username()))
-//			throw new AutenticacaoException("Usuário não encontrado (username = " + possivelUsuario.username() + ").");
-//		
-//		Usuario usuario = usuarioReadService.buscarPorUsername(possivelUsuario.username()).get();
-//		
-//		if(possivelUsuario.senha().equals(usuario.getSenha()))
-//			return usuario;
-//		else
-//			throw new AutenticacaoException("Senha incorreta (username = " + usuario.getUsername() + ").");
-//	}
 	
 	private boolean usuarioExisteComUsername(String username) {
 		return usuarioReadService.existePorUsername(username);
@@ -39,14 +27,14 @@ public class AutenticacaoService {
 	
 	public Usuario loginEstudante(UsuarioLogin possivelUsuario) throws AutenticacaoException { // ?
 		if(!usuarioExisteComUsername(possivelUsuario.username()))
-			throw new AutenticacaoException("Usuário não encontrado (username = " + possivelUsuario.username() + ").");
+			throw new AutenticacaoException("Não foi possível encontrar o usuário \"" + possivelUsuario.username() + "\".");
 		
 		Estudante estudante = estudanteReadService.buscarPorUsername(possivelUsuario.username()).get();
 		
 		if(possivelUsuario.senha().equals(estudante.getSenha()))
 			return estudante;
 		else
-			throw new AutenticacaoException("Senha incorreta (username = " + estudante.getUsername() + ").");
+			throw new AutenticacaoException("Senha incorreta.");
 	}
 	
 	public Usuario cadastrarEstudante(UsuarioCadastro possivelUsuario) throws AutenticacaoException {
@@ -54,7 +42,7 @@ public class AutenticacaoService {
 			throw new AutenticacaoException("O nome de usuário \"" + possivelUsuario.username() + "\" já é usado.");
 		
 		if(!possivelUsuario.senha().equals(possivelUsuario.senhaConfirmada())) // só no front?
-			throw new AutenticacaoException("A senha não foi confirmada corretamente (username = " + possivelUsuario.username() + ").");
+			throw new AutenticacaoException("A senha não foi confirmada corretamente.");
 		
 		String nomeValidado = possivelUsuario.nome() == null ? null : (possivelUsuario.nome().isBlank() ? null : possivelUsuario.nome());
 		

@@ -1,12 +1,15 @@
 package br.ifsul.enemsim.teste10habilidadesmaisfrequentes;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.ifsul.enemsim.domain.Turma;
 import br.ifsul.enemsim.domain.usuarios.Estudante;
+import br.ifsul.enemsim.domain.usuarios.Professor;
+import br.ifsul.enemsim.repositories.TurmaRepository;
 import br.ifsul.enemsim.repositories.usuarios.EstudanteRepository;
 import br.ifsul.enemsim.repositories.usuarios.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
@@ -20,20 +23,23 @@ public class InsertEstudantes {
 	@Autowired
 	private EstudanteRepository estudanteRepository;
 	
+	@Autowired
+	private TurmaRepository turmaRepository;
+	
 	@PostConstruct
 	public void run() {
 		if(estudanteRepository.count() == 0) {
 			
-			// turmas?
 			// testar simulados e afins com os estudantes (o banco aguenta?)
 			
-			List<Estudante> projetistas = new ArrayList<>();
+			Set<Estudante> projetistas = new LinkedHashSet<>();
+			projetistas.add(new Estudante("demonstracao", "enemsim_demo", "Demonstração"));
 			projetistas.add(new Estudante("joaoguiss", "enemsim_joao", "João Guilherme Severo Schröer"));
 			projetistas.add(new Estudante("pedromn", "enemsim_pedro", "Pedro Müller Nunes"));
 			projetistas.add(new Estudante("roberto", "enemsim_roberto", "Roberto Maurício Bokowski Sobrinho"));
 			projetistas.add(new Estudante("monica", "enemsim_monica", "Mônica Xavier Py"));
 			
-			List<Estudante> estudantesQuinta = new ArrayList<>();
+			Set<Estudante> estudantesQuinta = new LinkedHashSet<>();
 			estudantesQuinta.add(new Estudante("080880EVEQ", "zk2ib0", "Alana R. N."));
 			estudantesQuinta.add(new Estudante("20211SS.INF_Q0074", "nxotcu", "Alessandra V. L. C."));
 			estudantesQuinta.add(new Estudante("079520EVEQ", "e3dxll", "Ana L. B. V."));
@@ -57,7 +63,7 @@ public class InsertEstudantes {
 			estudantesQuinta.add(new Estudante("20221SS.INF_Q0004", "vgviat", "Vinícius R. R."));
 			estudantesQuinta.add(new Estudante("20211SS.INF_Q0011", "kufgqt", "Vitória P."));
 			
-			List<Estudante> estudantesSegunda = new ArrayList<>();
+			Set<Estudante> estudantesSegunda = new LinkedHashSet<>();
 			estudantesSegunda.add(new Estudante("079850EVEQ", "agygde", "Alanis O. H."));
 			estudantesSegunda.add(new Estudante("079680EVEQ", "cqibn4", "Amanda R."));
 			estudantesSegunda.add(new Estudante("080650EVEQ", "e29e3u", "Carolyne M. J."));
@@ -72,7 +78,7 @@ public class InsertEstudantes {
 			estudantesSegunda.add(new Estudante("079730EVEQ", "6xtawr", "Samantha M. T."));
 			estudantesSegunda.add(new Estudante("079770EVEQ", "lb0l7k", "Thauane S. M."));
 
-			List<Estudante> extras = new ArrayList<>(); // Caso haja algum problema com algum usuário
+			Set<Estudante> extras = new LinkedHashSet<>(); // Caso haja algum problema com algum usuário
 			extras.add(new Estudante("extra1", "111111", "Extra 1"));
 			extras.add(new Estudante("extra2", "222222", "Extra 2"));
 			extras.add(new Estudante("extra3", "333333", "Extra 3"));
@@ -80,15 +86,23 @@ public class InsertEstudantes {
 			extras.add(new Estudante("extra5", "555555", "Extra 5"));
 			extras.add(new Estudante("extra6", "666666", "Extra 6"));
 			
+			usuarioRepository.saveAll(projetistas);
+			Set<Estudante> estudantesQuintaCadastrados = new LinkedHashSet<>(usuarioRepository.saveAll(estudantesQuinta));
+			Set<Estudante> estudantesSegundaCadastrados = new LinkedHashSet<>(usuarioRepository.saveAll(estudantesSegunda));
+			usuarioRepository.saveAll(extras);
 			
+			// turmas
+			Set<Professor> professores = new LinkedHashSet<>();
+			professores.add(new Professor("Prof. Roberto", "enemsim_professor", "Roberto Maurício Bokowski Sobrinho"));
 			
-			List<Estudante> estudantesTotais = new ArrayList<>();
-			estudantesTotais.addAll(projetistas);
-			estudantesTotais.addAll(estudantesQuinta);
-			estudantesTotais.addAll(estudantesSegunda);
-			estudantesTotais.addAll(extras);
+			Set<Professor> professoresCadastrados = new LinkedHashSet<>(usuarioRepository.saveAll(professores));
 			
-			usuarioRepository.saveAll(estudantesTotais);
+			Set<Turma> turmas = new LinkedHashSet<>();
+			turmas.add(new Turma("Matemática e suas Tecnologias (Manhã)", "Aulas nas quintas-feiras.", estudantesQuintaCadastrados, professoresCadastrados));
+			turmas.add(new Turma("Matemática e suas Tecnologias (Tarde)", "Aulas nas segundas-feiras.", estudantesSegundaCadastrados, professoresCadastrados));
+			
+			turmaRepository.saveAll(turmas);
+			
 		}
 	}
 

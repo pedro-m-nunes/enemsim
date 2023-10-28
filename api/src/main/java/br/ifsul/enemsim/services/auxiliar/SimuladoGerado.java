@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class SimuladoGerado { // record?
+public class SimuladoGerado {
 	
 	private Simulado simulado;
 	
