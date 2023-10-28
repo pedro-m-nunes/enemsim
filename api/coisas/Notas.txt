@@ -9,6 +9,9 @@ COISAS EM PROCESSO:
 - (Macro) Fazendo o gerador de simulados.
 - Sistema de login do teste (sem Spring Security).
 - (Baixa prioridade) Turmas.
+	- Fazer services.
+	- Fazer métodos que usem.
+	- Validações (nenhum estudante/professor...)
 
 COISAS A FAZER:
 - Documentar a API com Swagger.

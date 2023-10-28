@@ -57,7 +57,7 @@ public class ResponderSimuladoService {
 			throw new ResponderSimuladoException("O simulado informado é nulo.");
 		
 		if(simulado.getFinalizado())
-			throw new ResponderSimuladoException("O simulado informado (id = " + simulado.getId() + ") já foi entregue e não aceita mais respostas.");
+			throw new ResponderSimuladoException("O simulado informado já foi entregue e não aceita mais respostas.");
 	
 		// salvar respostas aos itens
 		for(SimuladoItem itemRespondido : itensRespondidos) {
