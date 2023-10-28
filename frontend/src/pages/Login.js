@@ -6,6 +6,7 @@ import '../components/estilos/login.css'
 import logo from '../images/Logo.png';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { requestBaseUrl } from '../url';
 
 const Login = () => {
 
@@ -17,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     if(validar()) {
       axios.post(
-        'http://localhost:8080/auth/login',
+        (requestBaseUrl + 'auth/login'),
         {username: user, senha: senha}
       ).then(
         response => {
