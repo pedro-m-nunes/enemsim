@@ -7,6 +7,7 @@ import PaginaInicial from './pages/PaginaInicial';
 import ResponderSimulado from './pages/ResponderSimulado';
 import MeusSimulados from './pages/MeusSimulados';
 import LerSimulado from './pages/LerSimulado';
+import GerarSimulados from './pages/GerarSimulados';
 
 function App() {
   return (
@@ -15,10 +16,10 @@ function App() {
     <BrowserRouter>
         <Routes>
             <Route element = { <Login/> }  path="/"/>
-            <Route element = { <ResponderSimulado/> }  path="/simulado"/>
-            <Route element = { <MeusSimulados/> }  path="/meussimulados" />
-            <Route element = { <Filter/> }  path="/filtro" />
             <Route element = { <PaginaInicial/>} path="/inicio"/>
+            <Route element = { <GerarSimulados/> } path="/gerarsimulados"/>
+            <Route element = { <MeusSimulados/> }  path="/meussimulados" />
+            <Route element = { <ResponderSimulado/> }  path="/simulado"/>
             <Route element = { <LerSimulado/>} path="/lersimulado"/>
         </Routes>
     </BrowserRouter>

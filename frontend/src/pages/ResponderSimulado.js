@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios, { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
+import { requestBaseUrl } from '../url';
 
 function ResponderSimulado() {
     const location = useLocation();
@@ -44,7 +45,15 @@ function ResponderSimulado() {
     const enviarForm = (e) => {
         e.preventDefault();
         console.log(values);
-        axios.post('http://localhost:8080/simulado/finalizar', values)
+        axios.post((requestBaseUrl + 'simulado/finalizar'), values)
+        .then(
+            navigate(
+              "/lersimulado",
+              {state: {
+                itens: itens,
+                respostas: values
+              }})
+        )
         .catch(function (error) {
           if (error.response) {
             toast.error(error.response.data.message);
@@ -54,14 +63,6 @@ function ResponderSimulado() {
             toast.error('Erro:', error.message);
           }}
         )
-        .then(
-            navigate(
-              "/lersimulado",
-              {state: {
-                itens: itens,
-                respostas: values
-              }})
-        );
     }
     
   return (

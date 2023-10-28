@@ -4,6 +4,8 @@ import NavBar from '../components/NavBar';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../components/estilos/meussimulados.css';
+import { requestBaseUrl } from '../url';
+import '../components/estilos/genericopage.css';
 
 export default function MeusSimulados() {
     const location = useLocation();
@@ -17,7 +19,7 @@ export default function MeusSimulados() {
 
     function lerResponderSim(simuladoRecebido, id) {
       if(simuladoRecebido.data.finalizado == false) {
-        axios.get('http://localhost:8080/simulado/' + id + '/itens')
+        axios.get((requestBaseUrl + 'simulado/') + id + '/itens')
         .then(response => (
           toast.loading('Carregando imagens: tende a demorar dependendo de sua conexão', {duration: 4000}),
           navigate(
@@ -25,8 +27,7 @@ export default function MeusSimulados() {
             {
               state: {
                   itens: response.data,
-                  simulado: simuladoRecebido.data,
-                  retorno: '/meussimulados'
+                  simulado: simuladoRecebido.data
               }
             })
         ))
@@ -46,7 +47,7 @@ export default function MeusSimulados() {
     }
 
     function abrirSimulado(id) {
-        axios.get('http://localhost:8080/simulado/'+ id)
+        axios.get(requestBaseUrl + 'simulado/'+ id)
         .then(response => (
             lerResponderSim(response, id)
         ))
@@ -67,13 +68,21 @@ export default function MeusSimulados() {
         nomePagina={'Meus Simulados'}
         destino='/inicio'
         saida='VOLTAR'/>
-        <div id='blcoo'>
-        {simulados.map((simulados, index) => (
-                <div key={index} id='bloco-acesso'>
-                    <h1 id='nome-acesso'>{'Simulado n°' + simulados.id}</h1>
-                    <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Acessar simulado</h1>
-                </div>
-            ))}
+        <div>
+          {simulados.map((simulados, index) => {
+            if(simulados.finalizado === false) {
+              return <div key={index} id='bloco-acesso'>
+                        <h1 id='nome-acesso'>{'Simulado n°' + simulados.id}</h1>
+                        <h1 id='texto-meio'>Não finalizado!</h1>
+                        <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Responder</h1>
+                     </div>;
+            } else {
+              return <div key={index} id='bloco-acesso'>
+                        <h1 id='nome-acesso'>{'Simulado n°' + simulados.id}</h1>
+                        <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Acessar</h1>
+                     </div>;
+            }
+            })}
         </div>
     </div>
   )

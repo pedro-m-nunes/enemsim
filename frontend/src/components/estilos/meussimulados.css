@@ -36,3 +36,12 @@
     border: none;
     border-radius: 25vh;
 }
+
+#texto-meio {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    color: red;
+    font-size: 3.5vh;
+    margin-top: 3.5vh;    
+}
