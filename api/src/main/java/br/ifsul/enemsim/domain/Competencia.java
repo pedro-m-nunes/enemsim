@@ -22,7 +22,7 @@ public class Competencia {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Byte id;
+	private Integer id;
 	
 	@Column(nullable = false, length = 510) // qual tamanho?
 	private String descricao;
@@ -41,7 +41,7 @@ public class Competencia {
 		this.area = area;
 	}
 
-	public Competencia(Byte id) {
+	public Competencia(Integer id) {
 		super();
 		this.id = id;
 	}

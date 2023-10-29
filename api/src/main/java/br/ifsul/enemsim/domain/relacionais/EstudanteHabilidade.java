@@ -57,7 +57,7 @@ public class EstudanteHabilidade { // vai ter muitos registros... (estudantes * 
 		this.id = id;
 	}
 
-	public EstudanteHabilidade(Integer estudanteId, Byte habilidadeId) {
+	public EstudanteHabilidade(Integer estudanteId, Integer habilidadeId) {
 		super();
 		this.id = new EstudanteHabilidadeId(estudanteId, habilidadeId);
 	}
