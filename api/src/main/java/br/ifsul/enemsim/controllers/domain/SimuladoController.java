@@ -98,7 +98,7 @@ public class SimuladoController {
 			@Parameter(name = "id", description = "O id do simulado no banco de dados.", schema = @Schema(implementation = Integer.class))
 	})
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Retorna um array com a quantidade de acertos e a quantidade de itens do simulado.", content = {
+			@ApiResponse(responseCode = "200", description = "Retorna um objeto com a quantidade de acertos e a quantidade de itens do simulado.", content = {
 					@Content(mediaType = "application/json", schema = @Schema(implementation = TaxaAcertos.class))
 			})
 	})
