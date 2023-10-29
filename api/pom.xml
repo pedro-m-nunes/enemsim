@@ -107,7 +107,7 @@
 				<groupId>com.microsoft.azure</groupId>
 				<artifactId>azure-webapp-maven-plugin</artifactId>
 				<version>2.2.0</version>
-				<configuration>
+				<!-- <configuration>
 					<schemaVersion>v2</schemaVersion>
 					<subscriptionId>30248fb2-462f-4b6a-a0bd-04675ee8126f</subscriptionId>
 					<resourceGroup>enemsim-rg</resourceGroup>
@@ -116,8 +116,8 @@
 					<region>brazilsouth</region>
 					<runtime>
 						<os>Linux</os>
-						<javaVersion>Java 11</javaVersion>
-						<webContainer>Tomcat 8.5</webContainer>
+						<javaVersion>Java 17</javaVersion>
+						<webContainer>Tomcat 10.0</webContainer>
 					</runtime>
 					<deployment>
 						<resources>
@@ -129,7 +129,7 @@
 							</resource>
 						</resources>
 					</deployment>
-				</configuration>
+				</configuration> -->
 			</plugin>
 		</plugins>
 	</build>
