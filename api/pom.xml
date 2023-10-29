@@ -8,6 +8,7 @@
 		<version>3.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>war</packaging>
 	<groupId>br.ifsul</groupId>
 	<artifactId>enemsim</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -131,7 +132,9 @@
 					</deployment>
 				</configuration> -->
 			</plugin>
+			<plugin>
+    			<artifactId>maven-war-plugin</artifactId>
+			</plugin>
 		</plugins>
 	</build>
-
 </project>

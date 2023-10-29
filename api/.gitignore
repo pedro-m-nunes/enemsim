@@ -1,5 +1,5 @@
 HELP.md
-target/
+# target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -128,7 +128,7 @@ hs_err_pid*
 replay_pid*
 
 ### Maven ###
-target/
+# target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -147,3 +147,11 @@ buildNumber.properties
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,eclipse,java
+
+!target/enemsim-0.0.1-SNAPSHOT.war
+target/classes/
+target/enemsim-0.0.1-SNAPSHOT.war.original
+target/enemsim-0.0.1-SNAPSHOT/
+target/maven-archiver/
+target/maven-status/
+target/surefire-reports/
