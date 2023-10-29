@@ -22,7 +22,7 @@ public class Habilidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Byte id;
+	private Integer id;
 	
 	@Column(nullable = false)
 	private String descricao;
@@ -41,7 +41,7 @@ public class Habilidade {
 		this.competencia = competencia;
 	}
 	
-	public Habilidade(Byte id) {
+	public Habilidade(Integer id) {
 		super();
 		this.id = id;
 	}
