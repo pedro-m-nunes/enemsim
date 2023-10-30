@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { useLocation } from 'react-router-dom'
-import '../components/estilos/question.css'
+import '../components/estilos/simulado.css'
 import '../components/estilos/lersimulado.css'
 import toast from 'react-hot-toast'
 
@@ -50,14 +50,29 @@ export default function LerSimulado() {
         saida='SAIR DA REVISÃO'/>
         <h1 id='acertos'>Você acertou {acertos}/10, uma taxa de {acertos * 10}% de acertos</h1>
         {
-        itens.map((itens, index) => (
-            <div key={index} id='container'>
-                <h1>Questão {index+1}</h1>
-                <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
-                <p className='respostas'>RESPOSTA: {respostas[index]}</p>
-                <p className='respostas'>RESPOSTA CERTA: {itens.respostaCerta}</p>
-            </div>
-        ))}
+        itens.map((itens, index) => {
+            if(itens.respostaCerta === itens.resposta) {
+                return  <div key={index} id='container-certa'>
+                            <h1 id='titulo-item'>Questão {index+1}</h1>
+                            <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
+                            <p className='respostas'>Resposta: {arrayEnviado.respostas[index].resposta}</p>
+                        </div>
+            } else if(itens.resposta === null || itens.resposta === undefined) {
+                return  <div key={index} id='container'>
+                            <h1 id='titulo-item'>Questão {index+1}</h1>
+                            <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
+                            <p className="respostas">Questão não respondida</p>
+                            <p className='respostas'>Resposta: {arrayEnviado.respostas[index].respostaCerta}</p>
+                        </div>
+            } else {
+                return  <div key={index} id='container-errrada'>
+                            <h1 id='titulo-item'>Questão {index+1}</h1>
+                            <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
+                            <p className='respostas'>Resposta: {arrayEnviado.respostas[index].resposta}</p>
+                            <p className="respostas">Resposta certa: {arrayEnviado.respostas[index].respostaCerta}</p>
+                        </div>
+            }
+        })}
     </>
     )
 }
