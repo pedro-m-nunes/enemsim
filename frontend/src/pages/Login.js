@@ -30,7 +30,7 @@ const Login = () => {
         if (error.response) {
           toast.error(error.response.data.message);
         } else if (error.request) {
-          toast.error('Sistema fora do ar');
+          toast.error('Não foi possível se conectar ao sistema');
         } else {
           toast.error('Erro:', error.message);
         }

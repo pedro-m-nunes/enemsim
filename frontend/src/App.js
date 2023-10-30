@@ -8,6 +8,7 @@ import ResponderSimulado from './pages/ResponderSimulado';
 import MeusSimulados from './pages/MeusSimulados';
 import LerSimulado from './pages/LerSimulado';
 import GerarSimulados from './pages/GerarSimulados';
+import VerSimulado from './pages/VerSimulado';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route element = { <MeusSimulados/> }  path="/meussimulados" />
             <Route element = { <ResponderSimulado/> }  path="/simulado"/>
             <Route element = { <LerSimulado/>} path="/lersimulado"/>
+            <Route element = { <VerSimulado/> } path="versimulado"/>
         </Routes>
     </BrowserRouter>
     </>

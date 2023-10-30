@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import toast from 'react-hot-toast';
 import { requestBaseUrl } from '../url';
 
@@ -15,10 +15,6 @@ function ResponderSimulado() {
     useEffect(() => {
       setItens(location.state.itens);
     },[])
-    // useEffect(() => {
-    //   setSimulado(location.state.simulado);
-    //   console.log(simulado)
-    // },[])
 
     itens.map((itens, index) => (
       values[index] = 
@@ -43,6 +39,7 @@ function ResponderSimulado() {
     }
 
     const enviarForm = (e) => {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
         e.preventDefault();
         console.log(values);
         axios.post((requestBaseUrl + 'simulado/finalizar'), values)

@@ -7,6 +7,40 @@
     text-align: center;
     width: 50vw;
     height: 85vh;
+    padding-top: 0.5vh;
+}
+#container-nulo {
+    background-color: #c0c0c0;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    border-radius: 25px;
+    text-align: center;
+    width: 50vw;
+    height: 90vh;
+    padding-top: 0.5vh;
+}
+#container-certa {
+    background-color: rgb(202, 255, 182);
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    border-radius: 25px;
+    text-align: center;
+    width: 50vw;
+    height: 90vh;
+    padding-top: 0.5vh;
+}
+#container-errada {
+    background-color: #ff8080;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top: 2vh;
+    border-radius: 25px;
+    text-align: center;
+    width: 50vw;
+    height: 95vh;
+    padding-top: 0.5vh;
 }
 
 #img-frame {
@@ -58,6 +92,26 @@
     margin: 5vh;
 }
 #btn-enviar:hover{
+    background-color: black;
+    color: red;
+    cursor: pointer;
+}
+
+#btn-revisao {
+    border: none;
+    border-radius: 20vh;
+
+    background-color: red;
+    color: #fff;
+    
+    font-size: 20px;
+    font-weight: 900;
+    
+    height: 7vh;
+    width: 20%;
+    margin: 5vh 40% 5vh 40%;
+}
+#btn-revisao:hover{
     background-color: black;
     color: red;
     cursor: pointer;

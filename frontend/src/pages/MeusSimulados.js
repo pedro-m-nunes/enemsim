@@ -21,7 +21,7 @@ export default function MeusSimulados() {
       if(simuladoRecebido.data.finalizado == false) {
         axios.get((requestBaseUrl + 'simulado/') + id + '/itens')
         .then(response => (
-          toast.loading('Carregando imagens: tende a demorar dependendo de sua conexão', {duration: 4000}),
+          toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
           navigate(
             '/simulado',
             {
@@ -35,13 +35,28 @@ export default function MeusSimulados() {
           if (error.response) {
             toast.error(error.response.data.message);
           } else if (error.request) {
-            toast.error('Sistema fora do ar');
+            toast.error('Não foi possível se conectar ao sistema.');
           } else {
             toast.error('Erro:', error.message);
           }
         })
       } else {
-        toast.error('Simulado já finalizado!')
+        axios.get((requestBaseUrl + 'simulado/') + id + '/respostas')
+        .then(response => (
+          toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
+          navigate(
+            '/versimulado',
+            {state: response.data})
+        ))
+        .catch(function (error) {
+          if (error.response) {
+            toast.error(error.response.data.message);
+          } else if (error.request) {
+            toast.error('Não foi possível se conectar ao sistema.');
+          } else {
+            toast.error('Erro:', error.message);
+          }
+        })
       } 
 
     }
@@ -55,7 +70,7 @@ export default function MeusSimulados() {
             if (error.response) {
               toast.error(error.response.data.message);
             } else if (error.request) {
-              toast.error('Sistema fora do ar');
+              toast.error('Não foi possível se conectar ao sistema.');
             } else {
               toast.error('Erro:', error.message);
             }
