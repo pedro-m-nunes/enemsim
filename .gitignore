@@ -149,10 +149,10 @@ buildNumber.properties
 # End of https://www.toptal.com/developers/gitignore/api/maven,eclipse,java
 
 !target/enemsim-0.0.1-SNAPSHOT.war
-target/enemsim-0.0.1-SNAPSHOT.war.original
-target/classes/
-target/enemsim-0.0.1-SNAPSHOT/
-target/maven-archiver/
-target/maven-status/
-target/surefire-reports/
-target/m2e-wtp/
+# target/enemsim-0.0.1-SNAPSHOT.war.original
+# target/classes/
+# target/enemsim-0.0.1-SNAPSHOT/
+# target/maven-archiver/
+# target/maven-status/
+# target/surefire-reports/
+# target/m2e-wtp/
