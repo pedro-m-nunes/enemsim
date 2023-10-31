@@ -37,7 +37,7 @@ export default function MeusSimulados() {
           } else if (error.request) {
             toast.error('Não foi possível se conectar ao sistema.');
           } else {
-            toast.error('Erro:', error.message);
+            toast.error('Erro: ', error.message);
           }
         })
       } else {
@@ -54,7 +54,7 @@ export default function MeusSimulados() {
           } else if (error.request) {
             toast.error('Não foi possível se conectar ao sistema.');
           } else {
-            toast.error('Erro:', error.message);
+            toast.error('Erro: ', error.message);
           }
         })
       } 
@@ -72,7 +72,7 @@ export default function MeusSimulados() {
             } else if (error.request) {
               toast.error('Não foi possível se conectar ao sistema.');
             } else {
-              toast.error('Erro:', error.message);
+              toast.error('Erro: ', error.message);
             }
           })
     }

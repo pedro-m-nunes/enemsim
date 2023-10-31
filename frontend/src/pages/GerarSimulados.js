@@ -50,7 +50,7 @@ export default function GerarSimulados() {
         } else if (error.request) {
           toast.error('Não foi possível se conectar ao sistema.');
         } else {
-          toast.error('Erro:', error.message);
+          toast.error('Erro: ', error.message);
         }
       });
   }

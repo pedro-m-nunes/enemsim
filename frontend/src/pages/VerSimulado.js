@@ -3,7 +3,6 @@ import NavBar from '../components/NavBar'
 import { useLocation, useNavigate } from 'react-router-dom'
 import '../components/estilos/simulado.css'
 import '../components/estilos/lersimulado.css'
-import toast from 'react-hot-toast';
 
 export default function VerSimulado() {
     const location = useLocation();

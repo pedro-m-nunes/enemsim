@@ -30,9 +30,9 @@ const Login = () => {
         if (error.response) {
           toast.error(error.response.data.message);
         } else if (error.request) {
-          toast.error('Não foi possível se conectar ao sistema');
+          toast.error('Não foi possível se conectar ao sistema.');
         } else {
-          toast.error('Erro:', error.message);
+          toast.error('Erro: ', error.message);
         }
       });
     }
@@ -41,11 +41,11 @@ const Login = () => {
   const validar = () => {
     let validate = true;
     if(user === null || user ==='') {
-      toast.error('Usuário não preenchido')
+      toast.error('Usuário não preenchido.')
       validate = false;
     }
     if(senha === null || senha ==='') {
-      toast.error('Senha não preenchida')
+      toast.error('Senha não preenchida.')
       validate = false;
     }
 
