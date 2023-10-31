@@ -6,8 +6,6 @@ IMPORTANTE:
 - Incluir a área como parâmetro da geração de simulados.
 
 COISAS EM PROCESSO:
-- (Macro) Fazendo o gerador de simulados.
-- Sistema de login do teste (sem Spring Security).
 - (Baixa prioridade) Turmas.
 	- Fazer services.
 	- Fazer métodos que usem.
