@@ -34,7 +34,7 @@ export default function VerSimulado() {
         nomePagina={'Revisar Simulado'}
         destino='/inicio'
         saida='SAIR DA REVISÃO'/>
-        <h1 id='acertos'>Você acertou {acertos}/10, uma taxa de {acertos * 10}% de acertos</h1>
+        <h1 id='acertos'>Você acertou {acertos}/10, uma taxa de {acertos * 10}% de acertos.</h1>
         {
         dados.map((dados, index) => {
             if(dados.resposta === dados.item.respostaCerta) {
