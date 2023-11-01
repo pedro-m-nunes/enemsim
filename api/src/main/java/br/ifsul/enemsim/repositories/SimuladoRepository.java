@@ -14,10 +14,10 @@ public interface SimuladoRepository extends JpaRepository<Simulado, Integer> {
 
 	public List<Simulado> findByEstudanteId(Integer estudanteId);
 	
-	@Query("SELECT si.item FROM SimuladoItem si INNER JOIN Simulado s ON si.simulado = s WHERE s.id = ?1")
+	@Query("SELECT si.item FROM SimuladoItem si INNER JOIN Simulado s ON si.simulado = s INNER JOIN Item i ON si.item = i INNER JOIN Habilidade h ON i.habilidade = h WHERE s.id = ?1 ORDER BY h.id, i.id")
 	public List<Item> getItens(Integer simuladoId);
 	
-	@Query("SELECT si FROM SimuladoItem si INNER JOIN Simulado s ON si.simulado = s WHERE s.id = ?1")
+	@Query("SELECT si FROM SimuladoItem si INNER JOIN Simulado s ON si.simulado = s INNER JOIN Item i ON si.item = i INNER JOIN Habilidade h ON i.habilidade = h WHERE s.id = ?1 ORDER BY h.id, i.id")
 	public List<SimuladoItem> getRespostas(Integer simuladoId);
 	
 	@Query("SELECT si.item FROM SimuladoItem si INNER JOIN Simulado s ON si.simulado = s INNER JOIN Item i ON si.item = i WHERE s.id = ?1 AND s.finalizado = TRUE AND si.resposta = i.respostaCerta")
