@@ -20,7 +20,7 @@ function NavBarSim( props ) {
     }
 
     function voltar() {
-        const enviarBoolean = window.confirm("Deseja voltar à tela inicial? /n Suas respostas não serão salvas.");
+        const enviarBoolean = window.confirm("Deseja voltar à tela inicial?\nSuas respostas não serão salvas.");
         if(enviarBoolean) {
             navigate(
                 props.destino,
@@ -38,4 +38,4 @@ function NavBarSim( props ) {
   )
 }
 
-export default NavBar
+export default NavBarSim

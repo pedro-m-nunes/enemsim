@@ -7,6 +7,7 @@ import logo from '../images/Logo.png';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { requestBaseUrl } from '../url';
+import audio from '../images/roblox-oof-sound-effect.mp3';
 
 const Login = () => {
 
@@ -52,10 +53,14 @@ const Login = () => {
     return validate;
   }
 
+  const playAudio = () => {
+    new Audio(audio).play();
+  }
+
   return (
     <div id='base'>
       <div id='logoTit'>
-        <img src={logo} alt="Logo do EnemSim" id='logo'/>
+        <img src={logo} alt="Logo do EnemSim" id='logo' onClick={()=>playAudio()}/>
         <h1 id='titulo'>EnemSim</h1>
       </div>
       <form onSubmit={handleSubmit}>

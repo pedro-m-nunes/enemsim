@@ -74,8 +74,6 @@ function ResponderSimulado() {
           toast.error('Erro: ', error.message);
         }}
       )
-    } else {
-
     }
   }
     
