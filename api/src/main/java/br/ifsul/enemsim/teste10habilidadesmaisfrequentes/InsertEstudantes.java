@@ -40,28 +40,28 @@ public class InsertEstudantes {
 			projetistas.add(new Estudante("monica", "enemsim_monica", "Mônica Xavier Py"));
 			
 			Set<Estudante> estudantesQuinta = new LinkedHashSet<>();
-			estudantesQuinta.add(new Estudante("080880EVEQ", "zk2ib0", "Alana R. N."));
-			estudantesQuinta.add(new Estudante("20211SS.INF_Q0074", "nxotcu", "Alessandra V. L. C."));
-			estudantesQuinta.add(new Estudante("079520EVEQ", "e3dxll", "Ana L. B. V."));
-			estudantesQuinta.add(new Estudante("079590EVEQ", "xzd2ur", "Brenda R. M. M."));
-			estudantesQuinta.add(new Estudante("080180EVEQ", "fx9vpr", "Dafny B. S."));
-			estudantesQuinta.add(new Estudante("20211SS.EVE_Q0061", "tn6kyc", "Eduarda S. C."));
-			estudantesQuinta.add(new Estudante("078780INFQ", "wm4fuh", "Gabriel M. P."));
-			estudantesQuinta.add(new Estudante("079480EVEQ", "xkvz7l", "Gabrielle F. S. B."));
-			estudantesQuinta.add(new Estudante("20231SS.TDS_Q0033", "3gv2j3", "João H. P."));
-			estudantesQuinta.add(new Estudante("20211SS.INF_Q0028", "z9qirl", "João T. R. R."));
-			estudantesQuinta.add(new Estudante("080210EVEQ", "bgyt2u", "Karolinne V. M."));
-			estudantesQuinta.add(new Estudante("079610EVEQ", "uhi5fi", "Kauã F. S."));
-			estudantesQuinta.add(new Estudante("079780EVEQ", "ab9sh4", "Laura V. L."));
-			estudantesQuinta.add(new Estudante("079430EVEQ", "3gkd1e", "Maiara G. S."));
-			estudantesQuinta.add(new Estudante("079530EVEQ", "m5fre0", "Maria E. S. D."));
-			estudantesQuinta.add(new Estudante("079390EVEQ", "fohham", "Maria L. A. A."));
-			estudantesQuinta.add(new Estudante("079800EVEQ", "jf2imo", "Nicole O. C."));
-			estudantesQuinta.add(new Estudante("20221SS.INF_Q0002", "9lrsfk", "Nicoly F. G. K."));
-			estudantesQuinta.add(new Estudante("079450EVEQ", "cln0hl", "Rafaela B. C."));
-			estudantesQuinta.add(new Estudante("079490EVEQ", "ynrvvq", "Thaissa R. D."));
-			estudantesQuinta.add(new Estudante("20221SS.INF_Q0004", "vgviat", "Vinícius R. R."));
-			estudantesQuinta.add(new Estudante("20211SS.INF_Q0011", "kufgqt", "Vitória P."));
+			estudantesQuinta.add(new Estudante("080880EVEQ", "080880EVEQ", "Alana R. N."));
+			estudantesQuinta.add(new Estudante("20211SS.INF_Q0074", "20211SS.INF_Q0074", "Alessandra V. L. C."));
+			estudantesQuinta.add(new Estudante("079520EVEQ", "079520EVEQ", "Ana L. B. V."));
+			estudantesQuinta.add(new Estudante("079590EVEQ", "079590EVEQ", "Brenda R. M. M."));
+			estudantesQuinta.add(new Estudante("080180EVEQ", "080180EVEQ", "Dafny B. S."));
+			estudantesQuinta.add(new Estudante("20211SS.EVE_Q0061", "20211SS.EVE_Q0061", "Eduarda S. C."));
+			estudantesQuinta.add(new Estudante("078780INFQ", "078780INFQ", "Gabriel M. P."));
+			estudantesQuinta.add(new Estudante("079480EVEQ", "079480EVEQ", "Gabrielle F. S. B."));
+			estudantesQuinta.add(new Estudante("20231SS.TDS_Q0033", "20231SS.TDS_Q0033", "João H. P."));
+			estudantesQuinta.add(new Estudante("20211SS.INF_Q0028", "20211SS.INF_Q0028", "João T. R. R."));
+			estudantesQuinta.add(new Estudante("080210EVEQ", "080210EVEQ", "Karolinne V. M."));
+			estudantesQuinta.add(new Estudante("079610EVEQ", "079610EVEQ", "Kauã F. S."));
+			estudantesQuinta.add(new Estudante("079780EVEQ", "079780EVEQ", "Laura V. L."));
+			estudantesQuinta.add(new Estudante("079430EVEQ", "079430EVEQ", "Maiara G. S."));
+			estudantesQuinta.add(new Estudante("079530EVEQ", "079530EVEQ", "Maria E. S. D."));
+			estudantesQuinta.add(new Estudante("079390EVEQ", "079390EVEQ", "Maria L. A. A."));
+			estudantesQuinta.add(new Estudante("079800EVEQ", "079800EVEQ", "Nicole O. C."));
+			estudantesQuinta.add(new Estudante("20221SS.INF_Q0002", "20221SS.INF_Q0002", "Nicoly F. G. K."));
+			estudantesQuinta.add(new Estudante("079450EVEQ", "079450EVEQ", "Rafaela B. C."));
+			estudantesQuinta.add(new Estudante("079490EVEQ", "079490EVEQ", "Thaissa R. D."));
+			estudantesQuinta.add(new Estudante("20221SS.INF_Q0004", "20221SS.INF_Q0004", "Vinícius R. R."));
+			estudantesQuinta.add(new Estudante("20211SS.INF_Q0011", "20211SS.INF_Q0011", "Vitória P."));
 			
 			Set<Estudante> estudantesSegunda = new LinkedHashSet<>();
 			estudantesSegunda.add(new Estudante("079850EVEQ", "agygde", "Alanis O. H."));
@@ -102,6 +102,15 @@ public class InsertEstudantes {
 			turmas.add(new Turma("Matemática e suas Tecnologias (Tarde)", "Aulas nas segundas-feiras.", estudantesSegundaCadastrados, professoresCadastrados));
 			
 			turmaRepository.saveAll(turmas);
+			
+			Set<Estudante> maisEstudantes = new LinkedHashSet<>();
+			maisEstudantes.add(new Estudante("jacque", "senhas", "Jacqueline S. R."));
+			maisEstudantes.add(new Estudante("kyobao", "senhas", "Bruno B. T."));
+			maisEstudantes.add(new Estudante("nicola", "senhas", "Nícolas M. C."));
+			maisEstudantes.add(new Estudante("kirchy", "senhas", "Rafael K. G."));
+			maisEstudantes.add(new Estudante("vinibpm", "senhas", "Vinícius M. P."));
+			maisEstudantes.add(new Estudante("marcos", "senhas", "Marcos G. X. O."));
+			// ...
 			
 		}
 	}
