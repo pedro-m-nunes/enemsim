@@ -103,17 +103,6 @@ public class InsertEstudantes {
 			
 			turmaRepository.saveAll(turmas);
 			
-			Set<Estudante> maisEstudantes = new LinkedHashSet<>();
-			maisEstudantes.add(new Estudante("jacque", "senhas", "Jacqueline S. R."));
-			maisEstudantes.add(new Estudante("kyobao", "senhas", "Bruno B. T."));
-			maisEstudantes.add(new Estudante("nicola", "senhas", "Nícolas M. C."));
-			maisEstudantes.add(new Estudante("kirchy", "senhas", "Rafael K. G."));
-			maisEstudantes.add(new Estudante("vinibpm", "senhas", "Vinícius M. P."));
-			maisEstudantes.add(new Estudante("marcos", "senhas", "Marcos G. X. O."));
-			// ...
-			
-			usuarioRepository.saveAll(maisEstudantes);
-			
 		}
 	}
 
