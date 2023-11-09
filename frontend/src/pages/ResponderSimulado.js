@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import NavBar from '../components/NavBar'
+import NavBarSim from '../components/NavBarSim'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
@@ -38,33 +38,50 @@ function ResponderSimulado() {
         };
     }
 
-    const enviarForm = (e) => {
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-        e.preventDefault();
-        console.log(values);
-        axios.post((requestBaseUrl + 'simulado/finalizar'), values)
-        .then(
-            navigate(
-              "/lersimulado",
-              {state: {
-                itens: itens,
-                respostas: values
-              }})
-        )
-        .catch(function (error) {
-          if (error.response) {
-            toast.error(error.response.data.message);
-          } else if (error.request) {
-            toast.error('Não foi possível se conectar ao sistema.');
-          } else {
-            toast.error('Erro: ', error.message);
-          }}
-        )
+    function onReset(index, i) {
+      values[index] = 
+      {
+          id: {
+              simuladoId: location.state.simulado.id,
+              itemId: i
+          },
+          resposta: null
+      };
+  }
+
+  const enviarForm = (e) => {
+    e.preventDefault();
+    const enviarBoolean = window.confirm("Deseja finalizar o simulado?");
+
+    if(enviarBoolean) {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      console.log(values);
+      axios.post((requestBaseUrl + 'simulado/finalizar'), values)
+      .then(
+          navigate(
+            "/lersimulado",
+            {state: {
+              itens: itens,
+              respostas: values
+            }})
+      )
+      .catch(function (error) {
+        if (error.response) {
+          toast.error(error.response.data.message);
+        } else if (error.request) {
+          toast.error('Não foi possível se conectar ao sistema.');
+        } else {
+          toast.error('Erro: ', error.message);
+        }}
+      )
+    } else {
+
     }
+  }
     
   return (
     <div>
-        <NavBar
+        <NavBarSim
         nomePagina={'Responder Simulado'}
         destino='/inicio'
         saida='VOLTAR'
@@ -72,7 +89,7 @@ function ResponderSimulado() {
         <form className="form-block" onSubmit={(e) => enviarForm(e)}>
             {
             itens.map((itens, index) => (
-                <div key={index} id='container'>
+                <form key={index} id='container'>
                     <h1>Questão {index+1}</h1>
                     <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
                     <div className='options'>
@@ -96,11 +113,14 @@ function ResponderSimulado() {
                             <input type="radio" name={"res"+index+1} id={"E"+index} value="E" onChange={()=>onRes(index, itens.id, 'E')} size='10px'/>
                             <label htmlFor={"E"+index}>E</label>
                         </div>
+                        <div className='btn-option'>
+                            <button type="reset" name="reset-btn" id="reset-btn" value={null} onClick={()=>onReset(index, itens.id)} size='10px'>Limpar</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             ))
             }
-            <button type="submit" id='btn-enviar'>ENVIAR</button>
+            <button id='btn-enviar'>ENVIAR</button>
         </form>
     </div>
   )

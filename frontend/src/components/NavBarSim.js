@@ -4,7 +4,7 @@ import logo from '../images/Logo.png';
 import logoBranco from '../images/LogoBranco.png';
 import { useNavigate } from 'react-router-dom';
 
-function NavBarInicio( props ) {
+function NavBarSim( props ) {
     const navigate = useNavigate();
 
     const[imagem,setImg]=useState(logo);
@@ -20,9 +20,8 @@ function NavBarInicio( props ) {
     }
 
     function voltar() {
-        const sairBoolean = window.confirm("Deseja sair de sua conta?");
-        if(sairBoolean) {
-            sessionStorage.removeItem('id');
+        const enviarBoolean = window.confirm("Deseja voltar à tela inicial? /n Suas respostas não serão salvas.");
+        if(enviarBoolean) {
             navigate(
                 props.destino,
                 {state:props.usuario}
@@ -39,4 +38,4 @@ function NavBarInicio( props ) {
   )
 }
 
-export default NavBarInicio
+export default NavBar

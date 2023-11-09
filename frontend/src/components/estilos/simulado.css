@@ -60,7 +60,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.7%;
+    margin: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 .btn-option input {
     accent-color: #0d92e5;
@@ -71,9 +73,6 @@
     font-size: larger;
 }
 .btn-option input:hover {
-    cursor: pointer;
-}
-.btn-option label:hover {
     cursor: pointer;
 }
 
@@ -112,6 +111,23 @@
     margin: 5vh 40% 5vh 40%;
 }
 #btn-revisao:hover{
+    background-color: black;
+    color: red;
+    cursor: pointer;
+}
+
+#reset-btn {
+    display: flex;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    padding: 10px 12px;
+    border-radius: 10vh;
+}
+#reset-btn:hover {
     background-color: black;
     color: red;
     cursor: pointer;
