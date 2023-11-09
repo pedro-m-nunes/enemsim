@@ -64,19 +64,19 @@ public class InsertEstudantes {
 			estudantesQuinta.add(new Estudante("20211SS.INF_Q0011", "20211SS.INF_Q0011", "Vitória P."));
 			
 			Set<Estudante> estudantesSegunda = new LinkedHashSet<>();
-			estudantesSegunda.add(new Estudante("079850EVEQ", "agygde", "Alanis O. H."));
-			estudantesSegunda.add(new Estudante("079680EVEQ", "cqibn4", "Amanda R."));
-			estudantesSegunda.add(new Estudante("080650EVEQ", "e29e3u", "Carolyne M. J."));
-			estudantesSegunda.add(new Estudante("075820EVEQ", "wzguo0", "Danielle F. V."));
-			estudantesSegunda.add(new Estudante("079640EVEQ", "l5bcj8", "Gabriela M. R. S."));
-			estudantesSegunda.add(new Estudante("079630EVEQ", "g5ewi5", "Larissa T. R. M."));
-			estudantesSegunda.add(new Estudante("080220EVEQ", "vjxdle", "Laura C. A."));
-			estudantesSegunda.add(new Estudante("080890EVEQ", "2ruqie", "Mariana N. P."));
-			estudantesSegunda.add(new Estudante("079810EVEQ", "ieqlj3", "Mehll R."));
-			estudantesSegunda.add(new Estudante("079690EVEQ", "sxnns6", "Raíssa O. B."));
-			estudantesSegunda.add(new Estudante("079840EVEQ", "7kowgd", "Rochelly A. S."));
-			estudantesSegunda.add(new Estudante("079730EVEQ", "6xtawr", "Samantha M. T."));
-			estudantesSegunda.add(new Estudante("079770EVEQ", "lb0l7k", "Thauane S. M."));
+			estudantesSegunda.add(new Estudante("079850EVEQ", "079850EVEQ", "Alanis O. H."));
+			estudantesSegunda.add(new Estudante("079680EVEQ", "079680EVEQ", "Amanda R."));
+			estudantesSegunda.add(new Estudante("080650EVEQ", "080650EVEQ", "Carolyne M. J."));
+			estudantesSegunda.add(new Estudante("075820EVEQ", "075820EVEQ", "Danielle F. V."));
+			estudantesSegunda.add(new Estudante("079640EVEQ", "079640EVEQ", "Gabriela M. R. S."));
+			estudantesSegunda.add(new Estudante("079630EVEQ", "079630EVEQ", "Larissa T. R. M."));
+			estudantesSegunda.add(new Estudante("080220EVEQ", "080220EVEQ", "Laura C. A."));
+			estudantesSegunda.add(new Estudante("080890EVEQ", "080890EVEQ", "Mariana N. P."));
+			estudantesSegunda.add(new Estudante("079810EVEQ", "079810EVEQ", "Mehll R."));
+			estudantesSegunda.add(new Estudante("079690EVEQ", "079690EVEQ", "Raíssa O. B."));
+			estudantesSegunda.add(new Estudante("079840EVEQ", "079840EVEQ", "Rochelly A. S."));
+			estudantesSegunda.add(new Estudante("079730EVEQ", "079730EVEQ", "Samantha M. T."));
+			estudantesSegunda.add(new Estudante("079770EVEQ", "079770EVEQ", "Thauane S. M."));
 
 			Set<Estudante> extras = new LinkedHashSet<>(); // Caso haja algum problema com algum usuário
 			extras.add(new Estudante("extra1", "111111", "Extra 1"));
