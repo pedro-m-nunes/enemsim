@@ -112,6 +112,8 @@ public class InsertEstudantes {
 			maisEstudantes.add(new Estudante("marcos", "senhas", "Marcos G. X. O."));
 			// ...
 			
+			usuarioRepository.saveAll(maisEstudantes);
+			
 		}
 	}
 
