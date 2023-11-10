@@ -22,9 +22,9 @@
     margin-top: auto;
     margin-bottom: auto;
 }
-/* #logoImg:hover {
+#logoImg:hover {
     cursor: pointer;
-} */
+}
 
 #btn {
     top: 2.5vh;

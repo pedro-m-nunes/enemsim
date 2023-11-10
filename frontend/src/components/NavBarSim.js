@@ -9,6 +9,7 @@ function NavBarSim( props ) {
 
     const[imagem,setImg]=useState(logo);
     const[val,setVal]=useState(true);
+    
     function alterarImg() {
         if(val === true) {
             setImg(logoBranco);
