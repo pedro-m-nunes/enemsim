@@ -14,8 +14,8 @@ import desempenhoImg from '../images/gerarDesempenho.png';
 export default function GerarSimulados() {
   const navigate = useNavigate();
 
-  function gerarNivelamento() {
-    axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') })
+  async function gerarNivelamento() {
+    await axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') })
     .then(response => (
         toast('Gerando simulado de nivelamento.', { icon: '🧠' }),
         toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
@@ -34,9 +34,8 @@ export default function GerarSimulados() {
       });
   }
 
-  function gerarDesempenho() {
-    console.log("Gerando novo simulado")
-    axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : sessionStorage.getItem('id') })
+  async function gerarDesempenho() {
+    await axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : sessionStorage.getItem('id') })
     .then(response => (
         toast('Gerando simulado por desempenho.', { icon: '🍎' }),
         toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
@@ -63,12 +62,12 @@ export default function GerarSimulados() {
           destino="/inicio"/>
 
         <div id='meio'>
-          <div id='bloco' onClick={() => gerarNivelamento()}>
+          <div id='bloco' onClick={async () => await gerarNivelamento()}>
             <img id='gerarSim' src={nivelamentoImg} alt='Botão de destino à página de gerar simulados'/>
             <label className='texto' htmlFor='gerarSim'>Nivelamento</label>
           </div>
 
-          <div id='bloco' onClick={() => gerarDesempenho()}>
+          <div id='bloco' onClick={async () => await gerarDesempenho()}>
             <img id='meusSim' src={desempenhoImg} alt='Botão de destino à página de Provas do Enem'/>
             <label className='texto' htmlFor='meusSim'>Por desempenho</label>
           </div>
