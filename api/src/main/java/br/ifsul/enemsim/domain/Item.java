@@ -29,7 +29,7 @@ import lombok.Setter;
 @AllArgsConstructor // ?
 @EqualsAndHashCode
 @Entity
-public class Item { // usar jakarta.validation.constraints?
+public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,9 @@ public class Item { // usar jakarta.validation.constraints?
 	
 	@NotBlank
 	@Column(nullable = false)
-	private String imagemDriveId;
+	private String imagemDriveId; // recursoDriveId? (questões em Libras...)
+	
+	// boolean libras? String videoEmLibrasDriveId?
 	
 	@Enumerated(EnumType.STRING)
 	private Resposta respostaCerta;
@@ -49,11 +51,13 @@ public class Item { // usar jakarta.validation.constraints?
 	
 //	@ManyToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Disciplina
 //	@JoinTable(name = "item_disciplina")
+//	// JsonIgnore?
 //	private Set<Disciplina> disciplinas;
 	
 //	@OneToMany(fetch = FetchType.EAGER) // desempenho? // ou mapear em Resolucao
 //	@JoinColumn(name = "item_id")
-//	private Set<Resolucao> resolucoes;
+//	// JsonIgnore?
+//	private Set<Comentario> comentarios;
 	
 	@NotNull
 	// Digits?

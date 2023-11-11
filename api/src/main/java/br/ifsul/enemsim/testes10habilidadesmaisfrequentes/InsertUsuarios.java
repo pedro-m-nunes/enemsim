@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.teste10habilidadesmaisfrequentes;
+package br.ifsul.enemsim.testes10habilidadesmaisfrequentes;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -15,7 +15,7 @@ import br.ifsul.enemsim.repositories.usuarios.UsuarioRepository;
 import jakarta.annotation.PostConstruct;
 
 @Component
-public class InsertEstudantes {
+public class InsertUsuarios {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -29,8 +29,6 @@ public class InsertEstudantes {
 	@PostConstruct
 	public void run() {
 		if(estudanteRepository.count() == 0) {
-			
-			// testar simulados e afins com os estudantes (o banco aguenta?)
 			
 			Set<Estudante> projetistas = new LinkedHashSet<>();
 			projetistas.add(new Estudante("demonstracao", "enemsim_demo", "Demonstração"));
@@ -78,7 +76,7 @@ public class InsertEstudantes {
 			estudantesSegunda.add(new Estudante("079730EVEQ", "079730EVEQ", "Samantha M. T."));
 			estudantesSegunda.add(new Estudante("079770EVEQ", "079770EVEQ", "Thauane S. M."));
 
-			Set<Estudante> extras = new LinkedHashSet<>(); // Caso haja algum problema com algum usuário
+			Set<Estudante> extras = new LinkedHashSet<>(); // Caso haja algum problema com algum usuário.
 			extras.add(new Estudante("extra1", "111111", "Extra 1"));
 			extras.add(new Estudante("extra2", "222222", "Extra 2"));
 			extras.add(new Estudante("extra3", "333333", "Extra 3"));
@@ -91,7 +89,8 @@ public class InsertEstudantes {
 			Set<Estudante> estudantesSegundaCadastrados = new LinkedHashSet<>(usuarioRepository.saveAll(estudantesSegunda));
 			usuarioRepository.saveAll(extras);
 			
-			// turmas
+			// Turmas
+			
 			Set<Professor> professores = new LinkedHashSet<>();
 			professores.add(new Professor("Prof. Roberto", "enemsim_professor", "Roberto Maurício Bokowski Sobrinho"));
 			

@@ -1,5 +1,4 @@
-package br.ifsul.enemsim.foraporenquanto;
-//package br.ifsul.enemsim.entidades;
+//package br.ifsul.enemsim.temp.foraporenquanto.domain;
 //
 //import jakarta.persistence.Column;
 //import jakarta.persistence.Entity;
@@ -16,16 +15,20 @@ package br.ifsul.enemsim.foraporenquanto;
 //@NoArgsConstructor
 //@EqualsAndHashCode
 //@Entity
-//public class Resolucao {
+//public class Comentario {
 //
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
 //	private Integer id;
 //	
 //	@Column(nullable = false)
-//	private String explicacao;
+//	private String comentario;
 //	
-//	// autor...
+////	@Column(nullable = false)
+////	private Professor autor;
+//	
+//	// nullable?
+////	private TipoComentario tipo;
 //	
 //	// construtor
 //	

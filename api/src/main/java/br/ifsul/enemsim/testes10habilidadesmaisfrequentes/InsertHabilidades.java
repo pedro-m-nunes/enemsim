@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.teste10habilidadesmaisfrequentes;
+package br.ifsul.enemsim.testes10habilidadesmaisfrequentes;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

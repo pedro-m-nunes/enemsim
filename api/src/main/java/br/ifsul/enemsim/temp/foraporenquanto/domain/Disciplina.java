@@ -1,5 +1,4 @@
-package br.ifsul.enemsim.foraporenquanto;
-//package br.ifsul.enemsim.entidades;
+//package br.ifsul.enemsim.temp.foraporenquanto.domain;
 //
 //import jakarta.persistence.Column;
 //import jakarta.persistence.Entity;

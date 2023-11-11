@@ -38,8 +38,6 @@ public class Simulado {
 	
 //	private BigDecimal escore; // "pontuacao"?
 	
-	// nullable area?
-	
 	@Enumerated(EnumType.STRING)
 	private Adaptacao adaptacao;
 	
