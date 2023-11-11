@@ -1,4 +1,4 @@
-package br.ifsul.enemsim.teste10habilidadesmaisfrequentes;
+package br.ifsul.enemsim.testes10habilidadesmaisfrequentes;
 
 import java.time.Year;
 import java.util.LinkedHashSet;
@@ -28,7 +28,7 @@ public class InsertProvas {
 			provas.add(new Prova(Year.of(2020), Cor.AMARELO)); // id = 3
 			provas.add(new Prova(Year.of(2019), Cor.AMARELO)); // id = 4
 			provas.add(new Prova(Year.of(2018), Cor.AMARELO)); // id = 5
-			// sem 2017 mesmo
+			// Nenhum item de 2017 selecionado para o teste, portanto sem a prova.
 			provas.add(new Prova(Year.of(2016), Cor.AMARELO)); // id = 6
 			provas.add(new Prova(Year.of(2015), Cor.AMARELO)); // id = 7
 			

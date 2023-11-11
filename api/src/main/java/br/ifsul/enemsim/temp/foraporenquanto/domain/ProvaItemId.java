@@ -1,5 +1,4 @@
-package br.ifsul.enemsim.foraporenquanto;
-//package br.ifsul.enemsim.tempnot;
+//package br.ifsul.enemsim.temp.foraporenquanto.domain;
 //
 //import java.io.Serializable;
 //

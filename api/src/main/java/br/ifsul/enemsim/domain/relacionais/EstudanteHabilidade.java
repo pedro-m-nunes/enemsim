@@ -37,7 +37,7 @@ public class EstudanteHabilidade { // vai ter muitos registros... (estudantes * 
 	@JoinColumn(nullable = false)
 	private Habilidade habilidade;
 
-//	private BigDecimal pontuacao;
+//	private BigDecimal pontuacao; // ?
 	
 	@Column(nullable = false)
 	private Integer tentativas = 0;
