@@ -17,7 +17,7 @@ public class Estudante extends Usuario /*implements ...?*/ { // final?
 	
 	// simulados? para poder usar cascade...
 	
-//	private boolean respondeEmLibras; // funciona como subclasse de Usuario?
+//	private boolean respondeEmLibras;
 	
 	public Estudante(Integer id) {
 		super(id);
