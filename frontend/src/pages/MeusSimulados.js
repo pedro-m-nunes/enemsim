@@ -14,14 +14,13 @@ export default function MeusSimulados() {
 
     //executa na entrada do site
     useEffect(()=>{
-        setSimulados(location.state)
+        setSimulados(location.state);
     },[]);
 
     function lerResponderSim(simuladoRecebido, id) {
-      if(simuladoRecebido.data.finalizado == false) {
+      if(simuladoRecebido.data.finalizado === false) {
         axios.get((requestBaseUrl + 'simulado/') + id + '/itens')
         .then(response => (
-          toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
           navigate(
             '/simulado',
             {
@@ -43,7 +42,6 @@ export default function MeusSimulados() {
       } else {
         axios.get((requestBaseUrl + 'simulado/') + id + '/respostas')
         .then(response => (
-          toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
           navigate(
             '/versimulado',
             {state: response.data})
@@ -62,19 +60,27 @@ export default function MeusSimulados() {
     }
 
     function abrirSimulado(id) {
-        axios.get(requestBaseUrl + 'simulado/'+ id)
-        .then(response => (
-            lerResponderSim(response, id)
-        ))
-        .catch(function (error) {
+      const abrirPromise = axios.get(requestBaseUrl + 'simulado/'+ id);
+
+      toast.promise(
+        abrirPromise,
+        {
+          loading: 'Carregando simulado...',
+          success: (response) => {
+            lerResponderSim(response, id);
+            return 'Simulado carregado com sucesso!';
+          }, 
+          error: (error) => {
             if (error.response) {
-              toast.error(error.response.data.message);
+              return error.response.data.message;
             } else if (error.request) {
-              toast.error('Não foi possível se conectar ao sistema.');
+              return 'Não foi possível conectar-se ao sistema.';
             } else {
-              toast.error('Erro: ', error.message);
+              return 'Erro:', error.message;
             }
-          })
+          },
+        }
+      )
     }
 
   return (
@@ -86,14 +92,13 @@ export default function MeusSimulados() {
         <div>
           {simulados.map((simulados, index) => {
             if(simulados.finalizado === false) {
-              return <div key={index} id='bloco-acesso'>
-                        <h1 id='nome-acesso'>{'Simulado n°' + simulados.id}</h1>
-                        <h1 id='texto-meio'>Não finalizado!</h1>
+              return <div key={index} className='bloco-acesso n-respondido' id={'bloco-acesso'+index}>
+                        <h1 id='nome-acesso'>{'Simulado ' + simulados.id + ' - Não finalizado'}</h1>
                         <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Responder</h1>
                      </div>;
             } else {
-              return <div key={index} id='bloco-acesso'>
-                        <h1 id='nome-acesso'>{'Simulado n°' + simulados.id}</h1>
+              return <div key={index} className='bloco-acesso' id={'bloco-acesso'+index}>
+                        <h1 id='nome-acesso'>{'Simulado ' + simulados.id}</h1>
                         <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Acessar</h1>
                      </div>;
             }

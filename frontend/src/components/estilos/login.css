@@ -31,7 +31,7 @@ form {
 
     color: white;
     height: 7vh;
-    width: 25vw;
+    width: 20vw;
     background-color: #0377C1;
     border: none;
     border-radius: 25vh;
@@ -80,7 +80,7 @@ form {
     color: #fff;
     font-weight: 900;
     height: 7vh;
-    width: 12vw;
+    width: 10vw;
 }
 #btn2:hover{
     background-color: black;

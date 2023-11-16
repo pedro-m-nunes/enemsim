@@ -1,28 +1,43 @@
-#bloco-acesso {
+#bloco-acesso0 {
+    margin-top: 15vh;
+}
+
+.bloco-acesso {
     display: flex;
     position: relative;
     flex-direction: row;
     background-color: #D9D9D9;
     margin-left: 10vw;
     margin-right: 10vw;
-    margin-top: 5vh;
+    margin-bottom: 5vh;
     border: none;
     border-radius: 25vh;
-    height: 12vh;
+    
+    height: 100px;
+}
+.n-respondido {
+    background-color: #ffa2a2;
 }
 
 #btn-acesso {
-    display: flex;
-    margin-right: 1vw;
     position: absolute;
     right: 0;
-    padding: 1vh 2vw 1vh 2vw;
-    margin-top: 2vh;
+
     border: none;
     border-radius: 25vh;
+    height: 60px;
+    margin: 10px;
+
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    padding-top: 17px;
+    padding-bottom: 3px;
+
+    background-color: white;
 }
 #btn-acesso:hover {
-    background-color: white;
+    background-color: #0377C1;
+    color: white;
     cursor: pointer;
 }
 
@@ -31,17 +46,20 @@
     margin-left: 1vw;
     position: absolute;
     left: 0;
-    padding: 1vh 2vw 1vh 2vw;
-    margin-top: 2vh;
+    font-size: 40px;
+    /* 53.6px */
+    margin: 23.2px 30px;
+
     border: none;
+
     border-radius: 25vh;
 }
 
-#texto-meio {
+/* #texto-meio {
     display: flex;
     margin-left: auto;
     margin-right: auto;
     color: red;
     font-size: 3.5vh;
     margin-top: 3.5vh;    
-}
+} */
