@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-// import LinkBlock from '../components/LinkBlock'
 import '../components/estilos/linkblock.css'
 import '../components/estilos/genericopage.css';
 import NavBarInicio from '../components/NavBarInicio.js';
@@ -13,45 +12,58 @@ import desempenhoImg from '../images/gerarDesempenho.png';
 
 export default function GerarSimulados() {
   const navigate = useNavigate();
+  const[erro, setErro] = useState('Erro.');
 
-  async function gerarNivelamento() {
-    await axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') })
-    .then(response => (
-        toast('Gerando simulado de nivelamento.', { icon: '🧠' }),
-        toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
-        navigate(
-          '/simulado',
-          {state:response.data})
-        ))
-    .catch(function (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        } else if (error.request) {
-          toast.error('Não foi possível se conectar ao sistema.');
-        } else {
-          toast.error('Erro:', error.message);
-        }
-      });
+  function gerarNivelamento() {
+    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') }); 
+                    
+    toast.promise(
+      simuladoPromise,
+      {
+        loading: 'Gerando simulado de nivelamento...',
+        success: (response) => {
+          navigate(
+            '/simulado',
+            {state:response.data});
+          return 'Simulado gerado!'
+        },
+        error: (error) => {
+          if (error.response) {
+            return error.response.data.message;
+          } else if (error.request) {
+            return 'Não foi possível conectar-se ao sistema.';
+          } else {
+            return 'Erro:', error.message;
+          }
+        },
+      }
+    )
   }
 
-  async function gerarDesempenho() {
-    await axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : sessionStorage.getItem('id') })
-    .then(response => (
-        toast('Gerando simulado por desempenho.', { icon: '🍎' }),
-        toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000}),
-        navigate(
-          '/simulado',
-          {state:response.data})
-        ))
-    .catch(function (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        } else if (error.request) {
-          toast.error('Não foi possível se conectar ao sistema.');
-        } else {
-          toast.error('Erro: ', error.message);
-        }
-      });
+  function gerarDesempenho() {
+    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : sessionStorage.getItem('id') });
+
+    toast.promise(
+      simuladoPromise,
+      {
+        loading: 'Analisando seu desempenho...',
+        success: (response) => {
+          navigate(
+            '/simulado',
+            {state:response.data});
+          return 'Simulado gerado!'
+        },
+        error: (error) => {
+          if (error.response) {
+            return error.response.data.message;
+          } else if (error.request) {
+            return 'Não foi possível conectar-se ao sistema.';
+          } else {
+            return 'Erro:', error.message;
+          }
+        },
+      }
+    )
   }
 
   return (
@@ -62,12 +74,12 @@ export default function GerarSimulados() {
           destino="/inicio"/>
 
         <div id='meio'>
-          <div id='bloco' onClick={async () => await gerarNivelamento()}>
+          <div id='bloco' onClick={() => gerarNivelamento()}>
             <img id='gerarSim' src={nivelamentoImg} alt='Botão de destino à página de gerar simulados'/>
             <label className='texto' htmlFor='gerarSim'>Nivelamento</label>
           </div>
 
-          <div id='bloco' onClick={async () => await gerarDesempenho()}>
+          <div id='bloco' onClick={() => gerarDesempenho()}>
             <img id='meusSim' src={desempenhoImg} alt='Botão de destino à página de Provas do Enem'/>
             <label className='texto' htmlFor='meusSim'>Por desempenho</label>
           </div>

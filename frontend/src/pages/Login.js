@@ -7,7 +7,6 @@ import logo from '../images/Logo.png';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { requestBaseUrl } from '../url';
-import audio from '../images/roblox-oof-sound-effect.mp3';
 
 const Login = () => {
 
@@ -17,25 +16,32 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if(validar()) {
-      axios.post(
-        (requestBaseUrl + 'auth/login'),
-        {username: user, senha: senha}
-      ).then(
-        response => {
-          toast.success('Seja bem vindo(a) ' + response.data.nome + '!');
-          sessionStorage.setItem('id', response.data.id);
-          navigate('/inicio')
+      const validarPromise = axios.post((requestBaseUrl + 'auth/login'), {username: user, senha: senha});
+
+      toast.promise(
+        validarPromise,
+        {
+          loading: 'Conectando ao sistema...',
+          success: (response) => {
+            navigate(
+              '/inicio',
+              {state:response.data});
+            sessionStorage.setItem('id', response.data.id);
+            return 'Seja bem vindo(a) ' + response.data.nome + '!';
+          },
+          error: (error) => {
+            if (error.response) {
+              return error.response.data.message;
+            } else if (error.request) {
+              return 'Não foi possível conectar-se ao sistema.';
+            } else {
+              return 'Erro:', error.message;
+            }
+          },
         }
-      ).catch(function (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        } else if (error.request) {
-          toast.error('Não foi possível se conectar ao sistema.');
-        } else {
-          toast.error('Erro: ', error.message);
-        }
-      });
+      )
     }
   }
 
@@ -53,14 +59,10 @@ const Login = () => {
     return validate;
   }
 
-  const playAudio = () => {
-    new Audio(audio).play();
-  }
-
   return (
     <div id='base'>
       <div id='logoTit'>
-        <img src={logo} alt="Logo do EnemSim" id='logo' onClick={()=>playAudio()}/>
+        <img src={logo} alt="Logo do EnemSim" id='logo'/>
         <h1 id='titulo'>EnemSim</h1>
       </div>
       <form onSubmit={handleSubmit}>

@@ -1,54 +1,69 @@
-#container {
+.img-frame {
+    width: 40vw;
+    height: 60vh;
+
+    background-color: rgb(199, 229, 255);
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.container {
     background-color: #b6e3ff;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 27vw;
+    margin-right: 27vw;
     margin-top: 2vh;
     border-radius: 25px;
     text-align: center;
-    width: 50vw;
-    height: 85vh;
-    padding-top: 0.5vh;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 3vw;
+    padding-right: 3vw;
 }
+#container0{
+    margin-top: 90px;
+}
+
 #container-nulo {
     background-color: #c0c0c0;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 27vw;
+    margin-right: 27vw;
     margin-top: 2vh;
     border-radius: 25px;
     text-align: center;
-    width: 50vw;
-    height: 90vh;
+    width: fit-content;
+    height: fit-content;
     padding-top: 0.5vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-bottom: 3vh;
 }
 #container-certa {
     background-color: rgb(202, 255, 182);
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 27vw;
+    margin-right: 27vw;
     margin-top: 2vh;
     border-radius: 25px;
     text-align: center;
-    width: 50vw;
-    height: 90vh;
+    width: fit-content;
+    height: fit-content;
     padding-top: 0.5vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-bottom: 3vh;
 }
 #container-errada {
     background-color: #ff8080;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 27vw;
+    margin-right: 27vw;
     margin-top: 2vh;
     border-radius: 25px;
     text-align: center;
-    width: 50vw;
-    height: 95vh;
+    width: fit-content;
+    height: fit-content;
     padding-top: 0.5vh;
-}
-
-#img-frame {
-    background-color: rgb(199, 229, 255);
-    width: 90%;
-    height: 75%;
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 20px;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    padding-bottom: 3vh;
 }
 
 .options {
@@ -130,5 +145,32 @@
 #reset-btn:hover {
     background-color: black;
     color: red;
+    cursor: pointer;
+}
+
+.buscar-google {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+    width: 35%;
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 2vh;
+
+    padding: 1vh 2.5%;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    border-radius: 25vh;
+    color: black;
+}
+.buscar-google:hover {
+    background-color: black;
+    color: red;
+    cursor: pointer;
+}
+
+.options label:hover {
     cursor: pointer;
 }

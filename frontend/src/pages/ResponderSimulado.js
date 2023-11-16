@@ -14,6 +14,7 @@ function ResponderSimulado() {
 
     useEffect(() => {
       setItens(location.state.itens);
+      toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000});
     },[])
 
     itens.map((itens, index) => (
@@ -54,25 +55,33 @@ function ResponderSimulado() {
     const enviarBoolean = window.confirm("Deseja finalizar o simulado?");
 
     if(enviarBoolean) {
+      const enviarPromise = axios.post((requestBaseUrl + 'simulado/finalizar'), values);
       document.body.scrollTop = document.documentElement.scrollTop = 0;
-      console.log(values);
-      axios.post((requestBaseUrl + 'simulado/finalizar'), values)
-      .then(
-          navigate(
-            "/lersimulado",
-            {state: {
-              itens: itens,
-              respostas: values
-            }})
-      )
-      .catch(function (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        } else if (error.request) {
-          toast.error('Não foi possível se conectar ao sistema.');
-        } else {
-          toast.error('Erro: ', error.message);
-        }}
+
+      toast.promise(
+        enviarPromise, 
+        {
+          loading: 'Enviando simulado...',
+          success: () => {
+            navigate(
+              "/lersimulado",
+              {state: {
+                itens: itens,
+                respostas: values
+            }});
+            
+            return 'Simulado finalizado com sucesso!'
+          },
+          error: (error) => {
+            if (error.response) {
+              return error.response.data.message;
+            } else if (error.request) {
+              return 'Não foi possível conectar-se ao sistema.';
+            } else {
+              return 'Erro:', error.message;
+            }
+          },
+        }
       )
     }
   }
@@ -87,9 +96,9 @@ function ResponderSimulado() {
         <form className="form-block" onSubmit={(e) => enviarForm(e)}>
             {
             itens.map((itens, index) => (
-                <form key={index} id='container'>
+                <form key={index} className='container' id={'container'+index}>
                     <h1>Questão {index+1}</h1>
-                    <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} id='img-frame'/>
+                    <iframe width='600vw' height='500vh' src={'https://drive.google.com/file/d/' + itens.imagemDriveId + '/preview'} title={'Questão' + itens.id} className='img-frame'/>
                     <div className='options'>
                         <div className='btn-option'>
                             <input type="radio" name={"res"+index+1} id={"A"+index} value="A" onChange={()=>onRes(index, itens.id, 'A')}/>
