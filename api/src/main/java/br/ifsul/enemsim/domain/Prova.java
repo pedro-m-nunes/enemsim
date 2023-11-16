@@ -31,11 +31,9 @@ public class Prova {
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
-	private Cor cor; // usar java.awt.Color?
+	private Cor cor;
 	
-	// boolean ppl?
-	
-	// boolean libras?
+	// aplicação? aplicação regular, aplicação digital, reaplicação/ppl (ppl possui itens diferentes)
 
 	public Prova(Year ano, Cor cor) {
 		super();
