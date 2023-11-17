@@ -33,7 +33,7 @@ function NavBarSim( props ) {
   return (
     <div id='nav'>
         <img src={imagem} id='logoImg' onClick={() => alterarImg()} alt='Logo do EnemSim'/>
-        <h1 id="titulo-pagina">EnemSim / {props.nomePagina}</h1>
+        <h1 id="titulo-pagina">{props.nomePagina}</h1>
         <button onClick={() => voltar()} id='btn'>{props.saida}</button>
     </div>
   )

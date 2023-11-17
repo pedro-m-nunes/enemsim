@@ -48,9 +48,9 @@ export default function PaginaInicial() {
           nomePagina={"Página Inicial"}
           saida="SAIR"
           destino="/"/>
-        <div id='meio'>
+        <div id='pag'>
 
-          <div id='bloco' onClick={() => gerarSim()}>
+          <div id='blocoA' onClick={() => gerarSim()}>
             <img id='gerarSim' src={gerarImg} alt='Botão de destino à página de gerar simulados'/>
             <label className='texto' htmlFor='gerarSim'>Gerar Simulado</label>
           </div>
