@@ -73,8 +73,8 @@ export default function GerarSimulados() {
           saida="VOLTAR"
           destino="/inicio"/>
 
-        <div id='meio'>
-          <div id='bloco' onClick={() => gerarNivelamento()}>
+        <div id='pag'>
+          <div id='blocoA' onClick={() => gerarNivelamento()}>
             <img id='gerarSim' src={nivelamentoImg} alt='Botão de destino à página de gerar simulados'/>
             <label className='texto' htmlFor='gerarSim'>Nivelamento</label>
           </div>
