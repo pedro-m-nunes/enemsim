@@ -196,7 +196,7 @@
     }
 
     #btn-revisao {
-        height: 7vh;
+        height: fit-content;
         width: 40%;
         margin-top: 5vh;
         margin-bottom: 5vh;

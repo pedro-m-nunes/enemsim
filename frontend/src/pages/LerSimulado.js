@@ -67,7 +67,7 @@ export default function LerSimulado() {
                         </div>
             }
         })}
-        <button onClick={() => sair()} id='btn-revisao'>SAIR DA REVISÂO</button>
+        <button onClick={() => sair()} id='btn-revisao'>SAIR DA REVISÃO</button>
     </>
     )
 }
