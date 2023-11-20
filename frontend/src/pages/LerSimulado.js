@@ -14,6 +14,12 @@ export default function LerSimulado() {
     const itens = arrayEnviado.itens;
 
     useEffect(() => {
+        if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+          navigate('/');
+        }
+    },[]);
+
+    useEffect(() => {
         //contagem de acertos
         let acertosTemp = 0;
         for(let i = 0; i < 10; i++) {
@@ -25,7 +31,7 @@ export default function LerSimulado() {
         }
         setAcertos(acertosTemp)
         toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000})
-    },[])
+    },[]);
 
     function sair() {
         navigate('/inicio')

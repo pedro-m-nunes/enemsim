@@ -11,6 +11,12 @@ export default function VerSimulado() {
     const[acertos, setAcertos]=useState();
 
     const dados = location.state;
+    
+    useEffect(() => {
+        if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+          navigate('/');
+        }
+      },[]);
 
     useEffect(() => {
         //contagem de respostas

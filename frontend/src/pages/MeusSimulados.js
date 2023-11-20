@@ -12,6 +12,12 @@ export default function MeusSimulados() {
     const navigate = useNavigate();
     const[simulados, setSimulados] = useState([{}]);
 
+    useEffect(() => {
+      if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+        navigate('/');
+      }
+    },[]);
+
     //executa na entrada do site
     useEffect(()=>{
         setSimulados(location.state);

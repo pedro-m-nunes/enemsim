@@ -8,16 +8,23 @@ import axios from 'axios';
 import { requestBaseUrl } from '../url';
 import gerarImg from '../images/gerarImg.png';
 import meusSim from '../images/meusSim.png';
+import { useEffect } from 'react';
 
 export default function PaginaInicial() {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+      navigate('/');
+    }
+  },[]);
+  
   function gerarSim() {
     navigate('/gerarsimulados');
   }
 
   function abrirMeusSimulados() {
-    axios.get(requestBaseUrl + 'simulado/estudante/' + sessionStorage.getItem('id'))
+    axios.get(requestBaseUrl + 'simulado/estudante/' + localStorage.getItem('id'))
     .then(response => {
       if(response.data.length) {
         navigate(
@@ -50,12 +57,12 @@ export default function PaginaInicial() {
         <div id='pag'>
 
           <div id='blocoA' onClick={() => gerarSim()}>
-            <img id='gerarSim' src={gerarImg} alt='Botão de destino à página de gerar simulados'/>
+            <img id='gerarSim' src={gerarImg} alt='Botão de destino à página de Gerar Simulados'/>
             <label className='texto' htmlFor='gerarSim'>Gerar Simulado</label>
           </div>
 
           <div id='bloco' onClick={() => abrirMeusSimulados()}>
-            <img id='meusSim' src={meusSim} alt='Botão de destino à página de Meus Simulado'/>
+            <img id='meusSim' src={meusSim} alt='Botão de destino à página de Meus Simulados'/>
             <label className='texto' htmlFor='meusSim'>Meus Simulados</label>
           </div>
 

@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../components/estilos/linkblock.css'
 import '../components/estilos/genericopage.css';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate} from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import { requestBaseUrl } from '../url';
@@ -11,9 +11,40 @@ import desempenhoImg from '../images/gerarDesempenho.png';
 
 export default function GerarSimulados() {
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+      navigate('/');
+    }
+  },[]);
+
+  function abrirMeusSimulados() {
+    axios.get(requestBaseUrl + 'simulado/estudante/' + localStorage.getItem('id'))
+    .then(response => {
+      if(response.data.length) {
+        navigate(
+          '/meussimulados',
+          {
+            state: response.data
+          }
+        )
+      } else {
+        toast.error('Nenhum simulado foi gerado até o momento.')
+      }
+    })
+    .catch(function (error) {
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else if (error.request) {
+        toast.error('Não foi possível se conectar ao sistema.');
+      } else {
+        toast.error('Erro: ', error.message);
+      }
+    });
+  }
 
   function gerarNivelamento() {
-    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') }); 
+    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : localStorage.getItem('id') }); 
                     
     toast.promise(
       simuladoPromise,
@@ -27,7 +58,12 @@ export default function GerarSimulados() {
         },
         error: (error) => {
           if (error.response) {
-            return error.response.data.message;
+            if(error.response.data.message === "Não se pode gerar um novo simulado enquanto tiver um não finalizado.") {
+              abrirMeusSimulados();
+              return error.response.data.message;
+            } else {
+              return error.response.data.message;
+            }
           } else if (error.request) {
             return 'Não foi possível conectar-se ao sistema.';
           } else {
@@ -39,7 +75,7 @@ export default function GerarSimulados() {
   }
 
   function gerarDesempenho() {
-    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : sessionStorage.getItem('id') });
+    const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/desempenho'), { id : localStorage.getItem('id') });
 
     toast.promise(
       simuladoPromise,
@@ -53,7 +89,12 @@ export default function GerarSimulados() {
         },
         error: (error) => {
           if (error.response) {
-            return error.response.data.message;
+            if(error.response.data.message === "Não se pode gerar um novo simulado enquanto tiver um não finalizado.") {
+              abrirMeusSimulados();
+              return error.response.data.message;
+            } else {
+              return error.response.data.message;
+            }
           } else if (error.request) {
             return 'Não foi possível conectar-se ao sistema.';
           } else {

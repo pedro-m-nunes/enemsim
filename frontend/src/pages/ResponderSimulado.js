@@ -13,9 +13,15 @@ function ResponderSimulado() {
     const[itens,setItens] = useState([{}]);
 
     useEffect(() => {
+      if(localStorage.getItem('id') === null || localStorage.getItem('id') === undefined) {
+        navigate('/');
+      }
+    },[]);
+
+    useEffect(() => {
       setItens(location.state.itens);
       toast.loading('Carregando imagens. Pode levar alguns segundos.', {duration: 4000});
-    },[])
+    },[]);
 
     itens.map((itens, index) => (
       values[index] = 

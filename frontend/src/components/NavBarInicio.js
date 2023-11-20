@@ -29,7 +29,7 @@ function NavBarInicio( props ) {
     function voltar() {
         const sairBoolean = window.confirm("Deseja sair de sua conta?");
         if(sairBoolean) {
-            sessionStorage.removeItem('id');
+            localStorage.removeItem('id');
             navigate(
                 props.destino,
                 {state:props.usuario}

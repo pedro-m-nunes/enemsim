@@ -1,5 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 // import Rotas from '../components/Rotas';
 import { useNavigate } from 'react-router-dom';
 import '../components/estilos/login.css'
@@ -9,7 +9,6 @@ import axios from 'axios';
 import { requestBaseUrl } from '../url';
 
 const Login = () => {
-
   const navigate = useNavigate();
   const[user, setUser] = useState('');
   const[senha, setSenha] = useState('');
@@ -28,7 +27,7 @@ const Login = () => {
             navigate(
               '/inicio',
               {state:response.data});
-            sessionStorage.setItem('id', response.data.id);
+            localStorage.setItem('id', response.data.id);
             return 'Seja bem vindo(a), ' + response.data.nome + '!';
           },
           error: (error) => {
