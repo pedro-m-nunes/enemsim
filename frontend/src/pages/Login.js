@@ -29,7 +29,7 @@ const Login = () => {
               '/inicio',
               {state:response.data});
             sessionStorage.setItem('id', response.data.id);
-            return 'Seja bem vindo(a) ' + response.data.nome + '!';
+            return 'Seja bem vindo(a), ' + response.data.nome + '!';
           },
           error: (error) => {
             if (error.response) {
