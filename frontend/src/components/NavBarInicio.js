@@ -30,6 +30,7 @@ function NavBarInicio( props ) {
         const sairBoolean = window.confirm("Deseja sair de sua conta?");
         if(sairBoolean) {
             localStorage.removeItem('id');
+            localStorage.removeItem('nome');
             navigate(
                 props.destino,
                 {state:props.usuario}

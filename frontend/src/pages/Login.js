@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 // import Rotas from '../components/Rotas';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +12,13 @@ const Login = () => {
   const navigate = useNavigate();
   const[user, setUser] = useState('');
   const[senha, setSenha] = useState('');
+
+  useEffect(() => {
+    if(localStorage.getItem('id')) {
+      navigate('/inicio');
+      toast.success('Seja bem vindo(a), ' + localStorage.getItem('nome') + '!')
+    }
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,6 +35,7 @@ const Login = () => {
               '/inicio',
               {state:response.data});
             localStorage.setItem('id', response.data.id);
+            localStorage.setItem('nome', response.data.nome);
             return 'Seja bem vindo(a), ' + response.data.nome + '!';
           },
           error: (error) => {
