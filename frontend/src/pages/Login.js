@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useState } from 'react'
 // import Rotas from '../components/Rotas';
 import { useNavigate } from 'react-router-dom';

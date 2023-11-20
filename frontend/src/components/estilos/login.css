@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+    height: 70vh;
     margin-top: 15vh;
+    margin-bottom: 15vh;
 }
 
 #logoTit {

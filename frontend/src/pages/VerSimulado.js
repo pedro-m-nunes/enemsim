@@ -18,8 +18,6 @@ export default function VerSimulado() {
         for(let i = 0; i < 10; i++) {
             if(dados[i].resposta === dados[i].item.respostaCerta) {
                 acertosTemp = acertosTemp + 1;
-            } else {
-                acertosTemp = acertosTemp;
             }
         }
         setAcertos(acertosTemp);

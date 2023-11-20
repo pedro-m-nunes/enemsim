@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import '../components/estilos/linkblock.css'
 import '../components/estilos/genericopage.css';
-import NavBarInicio from '../components/NavBarInicio.js';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import axios from 'axios';
@@ -12,7 +11,6 @@ import desempenhoImg from '../images/gerarDesempenho.png';
 
 export default function GerarSimulados() {
   const navigate = useNavigate();
-  const[erro, setErro] = useState('Erro.');
 
   function gerarNivelamento() {
     const simuladoPromise = axios.post((requestBaseUrl + 'simulado/gerar/nivelamento'), { id : sessionStorage.getItem('id') }); 
@@ -69,7 +67,7 @@ export default function GerarSimulados() {
   return (
     <>
         <NavBar
-          nomePagina={"Gerar Simulados"}
+          nomePagina={"Gerar Simulado"}
           saida="VOLTAR"
           destino="/inicio"/>
 

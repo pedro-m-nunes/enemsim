@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-// import LinkBlock from '../components/LinkBlock'
+import React  from 'react'
 import '../components/estilos/linkblock.css'
 import '../components/estilos/genericopage.css';
 import NavBarInicio from '../components/NavBarInicio.js';
