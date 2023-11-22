@@ -12,20 +12,20 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue("ADM")
-public class Administrador extends Usuario { // final?
+@DiscriminatorValue("GEST")
+public class Gestor extends Usuario { // final?
 	
-	public Administrador(Integer id) {
+	public Gestor(Integer id) {
 		super(id);
 	}
 
-	public Administrador(String username, String senha, String nome) {
+	public Gestor(String username, String senha, String nome) {
 		super(username, senha, nome);
 	}
 	
 	@Override
 	public String getPapel() {
-		return Administrador.class.getAnnotation(DiscriminatorValue.class).value();
+		return Gestor.class.getAnnotation(DiscriminatorValue.class).value();
 	}
 
 }
