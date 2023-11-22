@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Filter from './components/Filter';
 import Login from './pages/Login';
 import { Toaster } from 'react-hot-toast';
 import PaginaInicial from './pages/PaginaInicial';
@@ -9,11 +8,24 @@ import MeusSimulados from './pages/MeusSimulados';
 import LerSimulado from './pages/LerSimulado';
 import GerarSimulados from './pages/GerarSimulados';
 import VerSimulado from './pages/VerSimulado';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const[toastPosistion, setPos] = useState("top-center");
+
+  useEffect(() => {
+    const res = window.innerWidth;
+
+    if(res < 900) {
+      setPos("bottom-center");
+    } else {
+      setPos("top-center");
+    }
+  },[])
+
   return (
     <>
-    <Toaster/>
+    <Toaster position={toastPosistion}/>
     <BrowserRouter>
         <Routes>
             <Route element = { <Login/> }  path="/"/>
