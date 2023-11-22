@@ -45,7 +45,7 @@ form {
 }
 .coiso:hover {
     background-color: #0d92e5;
-    cursor: pointer;
+    cursor: text;
 }
 .coiso::placeholder {
     color: #fff;
@@ -106,12 +106,12 @@ form {
 }
 
 /* mobile */
-@media only screen and (max-width: 675px) {
+@media only screen and (max-width: 720px) {
     #base {
         display: flex;
         justify-content: center;
         flex-direction: column;
-        margin-top: 5vh;
+        padding-top: 0vh;
     }
     
     .coiso {
@@ -121,13 +121,13 @@ form {
     
         color: white;
         height: 7vh;
-        width: 70%;
+        width: 60%;
         background-color: #0377C1;
         border: none;
         border-radius: 25vh;
         margin-bottom: 2vh;
-        margin-left: 15%;
-        margin-right: 15%;
+        margin-left: 20%;
+        margin-right: 20%;
     
         font-weight: 600;
         font-size: medium;
@@ -144,9 +144,9 @@ form {
         font-weight: 900;
         height: 7vh;
 
-        width: 80vw;
-        margin-left: 10%;
-        margin-right: 10%;
+        width: 70vw;
+        margin-left: 15%;
+        margin-right: 15%;
     }
 
     #logoTit {
@@ -162,7 +162,8 @@ form {
         font-size: 10vh;
         margin: 0;
     }
+    #logo {
+        margin-right: 0;
+    }
     
 }
-
-/* tablet */
