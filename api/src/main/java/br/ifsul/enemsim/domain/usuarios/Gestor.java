@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue("GEST")
+@DiscriminatorValue("GE")
 public class Gestor extends Usuario { // final?
 	
 	public Gestor(Integer id) {

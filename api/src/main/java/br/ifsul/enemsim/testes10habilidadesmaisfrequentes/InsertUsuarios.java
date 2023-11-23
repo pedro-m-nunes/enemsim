@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 
 import br.ifsul.enemsim.domain.Turma;
 import br.ifsul.enemsim.domain.usuarios.Estudante;
+import br.ifsul.enemsim.domain.usuarios.Gestor;
 import br.ifsul.enemsim.domain.usuarios.Professor;
+import br.ifsul.enemsim.domain.usuarios.Usuario;
 import br.ifsul.enemsim.repositories.TurmaRepository;
 import br.ifsul.enemsim.repositories.usuarios.EstudanteRepository;
 import br.ifsul.enemsim.repositories.usuarios.UsuarioRepository;
@@ -30,12 +32,11 @@ public class InsertUsuarios {
 	public void run() {
 		if(estudanteRepository.count() == 0) {
 			
-			Set<Estudante> projetistas = new LinkedHashSet<>();
-			projetistas.add(new Estudante("demonstracao", "enemsim_demo", "Demonstração"));
-			projetistas.add(new Estudante("joaoguiss", "enemsim_joao", "João Guilherme Severo Schröer"));
-			projetistas.add(new Estudante("pedromn", "enemsim_pedro", "Pedro Müller Nunes"));
-			projetistas.add(new Estudante("roberto", "enemsim_roberto", "Roberto Maurício Bokowski Sobrinho"));
-			projetistas.add(new Estudante("monica", "enemsim_monica", "Mônica Xavier Py"));
+			Set<Usuario> projetistas = new LinkedHashSet<>();
+			projetistas.add(new Gestor("joaoguiss", "enemsimjoao", "João Guilherme Severo Schröer"));
+			projetistas.add(new Gestor("pedromn", "enemsimpedro", "Pedro Müller Nunes"));
+			projetistas.add(new Gestor("roberto", "enemsimroberto", "Roberto Maurício Bokowski Sobrinho"));
+			projetistas.add(new Gestor("monica", "enemsimmonica", "Mônica Xavier Py"));
 			
 			Set<Estudante> estudantesQuinta = new LinkedHashSet<>();
 			estudantesQuinta.add(new Estudante("080880EVEQ", "080880EVEQ", "Alana R. N."));
