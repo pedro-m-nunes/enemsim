@@ -7,26 +7,22 @@ import br.ifsul.enemsim.domain.usuarios.Estudante;
 import br.ifsul.enemsim.domain.usuarios.Usuario;
 import br.ifsul.enemsim.services.domain.usuarios.EstudanteCreateAndUpdateService;
 import br.ifsul.enemsim.services.domain.usuarios.EstudanteReadService;
-import br.ifsul.enemsim.services.domain.usuarios.UsuarioReadService;
 
 @Service
 public class AutenticacaoService {
 	
 	@Autowired
-	private UsuarioReadService usuarioReadService;
-	
-	@Autowired
-	private EstudanteReadService estudanteReadService;
+	private EstudanteReadService estudanteReadService; // Estudante apenas porque ainda não tem nenhuma página de outros usuários.
 	
 	@Autowired
 	private EstudanteCreateAndUpdateService estudanteCreateAndUpdateService;
 	
-	private boolean usuarioExisteComUsername(String username) {
-		return usuarioReadService.existePorUsername(username);
+	private boolean existeEstudanteComUsername(String username) {
+		return estudanteReadService.existePorUsername(username);
 	}
 	
 	public Usuario loginEstudante(UsuarioLogin possivelUsuario) throws AutenticacaoException { // ?
-		if(!usuarioExisteComUsername(possivelUsuario.username()))
+		if(!existeEstudanteComUsername(possivelUsuario.username()))
 			throw new AutenticacaoException("Não foi possível encontrar o usuário \"" + possivelUsuario.username() + "\".");
 		
 		Estudante estudante = estudanteReadService.buscarPorUsername(possivelUsuario.username()).get();
@@ -38,7 +34,7 @@ public class AutenticacaoService {
 	}
 	
 	public Usuario cadastrarEstudante(UsuarioCadastro possivelUsuario) throws AutenticacaoException {
-		if(usuarioExisteComUsername(possivelUsuario.username()))
+		if(existeEstudanteComUsername(possivelUsuario.username()))
 			throw new AutenticacaoException("O nome de usuário \"" + possivelUsuario.username() + "\" já é usado.");
 		
 		if(!possivelUsuario.senha().equals(possivelUsuario.senhaConfirmada())) // só no front?
