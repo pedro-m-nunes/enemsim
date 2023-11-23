@@ -99,12 +99,12 @@ export default function MeusSimulados() {
           {simulados.map((simulados, index) => {
             if(simulados.finalizado === false) {
               return <div key={index} className='bloco-acesso n-respondido' id={'bloco-acesso'+index}>
-                        <h1 id='nome-acesso'>{'Simulado ' + simulados.id + ' - Não finalizado'}</h1>
+                        <h1 id='nome-acesso'>{'Simulado ' + (index + 1) + ' - Não finalizado'}</h1>
                         <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Responder</h1>
                      </div>;
             } else {
               return <div key={index} className='bloco-acesso' id={'bloco-acesso'+index}>
-                        <h1 id='nome-acesso'>{'Simulado ' + simulados.id}</h1>
+                        <h1 id='nome-acesso'>{'Simulado ' + (index + 1)}</h1>
                         <h1 id='btn-acesso' onClick={() => abrirSimulado(simulados.id)}>Acessar</h1>
                      </div>;
             }

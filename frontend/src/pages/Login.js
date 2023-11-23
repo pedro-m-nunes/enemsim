@@ -34,9 +34,17 @@ const Login = () => {
             navigate(
               '/inicio',
               {state:response.data});
+
+            let nomeExibido;
+            if(response.data.nome) {
+              nomeExibido = response.data.nome;
+            } else {
+              nomeExibido = response.data.username;
+            }
+
             localStorage.setItem('id', response.data.id);
-            localStorage.setItem('nome', response.data.nome);
-            return 'Seja bem vindo(a), ' + response.data.nome + '!';
+            localStorage.setItem('nome', nomeExibido);
+            return 'Seja bem vindo(a), ' + nomeExibido + '!';
           },
           error: (error) => {
             if (error.response) {
