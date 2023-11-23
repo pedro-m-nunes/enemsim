@@ -32,7 +32,7 @@ public class Simulado {
 	private Estudante estudante; // precisa fazer estudante e usuário primeiro...
 	
 	@Column(nullable = false)
-	private Boolean finalizado = false;
+	private Boolean finalizado = false; // boolean?
 	
 	// data de criação e finalização? // tempo para finalizar? tempo levado para finalizar?
 	
