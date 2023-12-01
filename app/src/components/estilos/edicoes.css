@@ -1,0 +1,111 @@
+#btn-prova {
+    position: absolute;
+    right: 0;
+
+    border: none;
+    border-radius: 25vh;
+    height: 60px;
+    margin: 10px;
+
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    padding-top: 17px;
+    padding-bottom: 3px;
+
+    background-color: white;
+}
+#btn-prova:hover {
+    background-color: #0377C1;
+    color: white;
+    cursor: pointer;
+}
+
+#btn-gabarito {
+    position: absolute;
+    right: 5em;
+
+    border: none;
+    border-radius: 25vh;
+    height: 60px;
+    margin: 10px;
+
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
+    padding-top: 17px;
+    padding-bottom: 3px;
+
+    background-color: white;
+}
+#btn-gabarito:hover {
+    background-color: #0377C1;
+    color: white;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 940px) {
+    #bloco-acesso0 {
+        margin-top: 120px;
+    }
+
+    .bloco-acesso {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        
+        height: fit-content;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 30px;
+    }
+
+    #btn-prova {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 90%;
+
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 3%;
+        border-radius: 25px;
+    }
+
+    #btn-gabarito {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        width: 90%;
+        right: 0;
+
+        margin-top: 0;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 3%;
+        border-radius: 25px;
+    }
+
+    #nome-acesso {
+        display: flex;
+        position: relative;
+
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+
+        font-size: 40px;
+    }
+}
+
+@media only screen and (max-width: 675px) {
+    #nome-acesso {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    #nome-acesso {
+        font-size: 25px;
+    }
+}

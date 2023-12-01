@@ -8,6 +8,7 @@ import axios from 'axios';
 import { requestBaseUrl } from '../url';
 import gerarImg from '../images/gerarImg.png';
 import meusSim from '../images/meusSim.png';
+import enemLogo from '../images/enem-logo.png';
 import { useEffect } from 'react';
 
 export default function PaginaInicial() {
@@ -64,6 +65,11 @@ export default function PaginaInicial() {
           <div id='bloco' onClick={() => abrirMeusSimulados()}>
             <img id='meusSim' src={meusSim} alt='Botão de destino à página de Meus Simulados'/>
             <label className='texto' htmlFor='meusSim'>Meus Simulados</label>
+          </div>
+
+          <div id='bloco' onClick={() => navigate("/edicoes")}>
+            <img id='provasAntr' src={enemLogo} alt='Botão de destino à página de Provas Anteriores'/>
+            <label className='texto' htmlFor='provasAnt'>Provas Anteriores</label>
           </div>
 
         </div>
