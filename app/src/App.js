@@ -8,6 +8,7 @@ import LerSimulado from './pages/LerSimulado';
 import GerarSimulados from './pages/GerarSimulados';
 import VerSimulado from './pages/VerSimulado';
 import { useEffect, useState } from 'react';
+import EdicoesEnem from './pages/EdicoesEnem';
 
 function App() {
   const[toastPosistion, setPos] = useState("top-center");
@@ -33,7 +34,8 @@ function App() {
             <Route element = { <MeusSimulados/> }  path="/meussimulados" />
             <Route element = { <ResponderSimulado/> }  path="/simulado"/>
             <Route element = { <LerSimulado/>} path="/lersimulado"/>
-            <Route element = { <VerSimulado/> } path="versimulado"/>
+            <Route element = { <VerSimulado/> } path="/versimulado"/>
+            <Route element = { <EdicoesEnem/> } path="/edicoes" />
         </Routes>
     </BrowserRouter>
     </>
