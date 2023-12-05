@@ -1,0 +1,11 @@
+id,descricao,numero,competencia_id
+1,"Reconhecer, no contexto social, diferentes significados e representações dos números e operações - naturais, inteiros, racionais ou reais.",1,1
+2,Identificar padrões numéricos ou princípios de contagem.,2,1
+3,Resolver situação-problema envolvendo conhecimentos numéricos.,3,1
+4,Avaliar a razoabilidade de um resultado numérico na construção de argumentos sobre afirmações quantitativas.,4,1
+5,Identificar características de figuras planas ou espaciais.,7,2
+6,Resolver situação-problema que envolva conhecimentos geométricos de espaço e forma.,8,2
+7,Resolver situação-problema cuja modelagem envolva conhecimentos algébricos.,21,3
+8,Resolver problema com dados apresentados em tabelas ou gráficos.,25,4
+9,Analisar informações expressas em gráficos ou tabelas como recurso para a construção de argumentos.,26,4
+10,Resolver situação-problema que envolva conhecimentos de estatística e probabilidade.,28,5
