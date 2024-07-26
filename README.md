@@ -1,5 +1,7 @@
 # EnemSim
 
+Sistema para geração de simulados do Enem adaptados ao estudante. A dificuldade das questões as quais o usuário é apresentado ao gerar um simulado dependem do seu desempenho em simulados anteriormente realizados no software.
+
 Trabalho de Conclusão de Curso de Técnico em Informática - IFSul Campus Sapucaia do Sul.
 
 João Guilherme Severo Schröer e Pedro Müller Nunes, 2023.
