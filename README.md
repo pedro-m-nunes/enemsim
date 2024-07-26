@@ -1,6 +1,6 @@
 # EnemSim
 
-Sistema para geração de simulados do Enem adaptados ao estudante. A dificuldade das questões as quais o usuário é apresentado ao gerar um simulado dependem do seu desempenho em simulados anteriormente realizados no software.
+Sistema para geração de simulados do Enem adaptados ao estudante. A dificuldade das questões as quais o usuário é apresentado ao gerar um simulado depende do seu desempenho em simulados anteriormente realizados no software. A dificuldade segue o modelo da Teoria da Resposta ao Item (TRI), e estes dados são oriundos do Inep.
 
 Trabalho de Conclusão de Curso de Técnico em Informática - IFSul Campus Sapucaia do Sul.
 
